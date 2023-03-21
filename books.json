@@ -1,0 +1,54 @@
+{
+    "books": [
+      {
+        "ISBN": "9780061122415",
+        "title": "To Kill a Mockingbird",
+        "description": "The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it.",
+        "publisher": "HarperCollins",
+        "authors": [
+          {
+            "name": "Harper Lee"
+          }
+        ],
+        "status": "available",
+        "borrowerId": null,
+        "publishedDate": "July 11, 1960",
+        "borrowDate": null,
+        "returnDate": null
+      },
+      {
+        "ISBN": "9780060891541",
+        "title": "Fahrenheit 451",
+        "description": "The terrifyingly prophetic novel of a post-literate future.",
+        "publisher": "HarperCollins",
+        "authors": [
+          {
+            "name": "Ray Bradbury"
+          }
+        ],
+        "status": "borrowed",
+        "borrowerId": "123456789",
+        "publishedDate": "October 19, 1953",
+        "borrowDate": "March 21, 2023",
+        "returnDate": "April 18, 2023"
+      },
+      {
+        "ISBN": "9780735211292",
+        "title": "Little Fires Everywhere",
+        "description": "From the bestselling author of Everything I Never Told You, a riveting novel that traces the intertwined fates of the picture-perfect Richardson family and the enigmatic mother and daughter who upend their lives.",
+        "publisher": "Penguin Books",
+        "authors": [
+          {
+            "name": "Celeste Ng"
+          }
+        ],
+        "status": "available",
+        "borrowerId": null,
+        "publishedDate": "September 12, 2017",
+        "borrowDate": null,
+        "returnDate": null
+      }
+    ]
+}
+     
+  

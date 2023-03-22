@@ -1,7 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authSlice from './authentication/authSlice'
+import { AuthState } from './authentication/authSlice'
+import * as reduxThunk from 'redux-thunk/extend-redux'
 
-export type RootState = ReturnType<typeof configureStore>
+export interface RootState {
+  auth: AuthState
+}
 
 const store = configureStore({
   reducer: {

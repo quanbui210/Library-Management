@@ -1,8 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import './App.css'
+
 import Layout from './components/layout/main-layout'
 import LandingPage from './components/landing-page/landing-page'
+import MainPage from './components/main-page/main-page'
 
 const router = createBrowserRouter([
   {
@@ -11,7 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/home/admin',
-    element: <Layout><h1>Logged in as ADMIN</h1></Layout>
+    element: <Layout><MainPage/></Layout>
   }
 ])
 

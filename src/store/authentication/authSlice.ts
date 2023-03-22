@@ -1,7 +1,7 @@
 import { User } from '../../types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface AuthState {
+export interface AuthState {
   isLoggedIn: boolean | null
   isLoading: boolean
   invalid: boolean
@@ -9,18 +9,18 @@ interface AuthState {
   users: User[]
   enteredUsername: string
   enteredPassword: string
-  isAdmin: boolean
+  isAdmin: boolean | null
 }
 
 const initialState: AuthState = {
-  isLoggedIn: null,
+  isLoggedIn: false,
   isLoading: false,
   invalid: false,
   error: false,
   users: [],
   enteredUsername: '',
   enteredPassword: '',
-  isAdmin: false
+  isAdmin: null
 }
 
 const fetchUser = createAsyncThunk('authentication/fetch', async () => {
@@ -44,27 +44,23 @@ const authSlice = createSlice({
       const user = state.users.find((user) => {
         return regex.test(user.username) && user.password === enteredPassword
       })
-      console.log(user)
       if (user) {
         state.isLoggedIn = true
         state.enteredUsername = ''
         state.enteredPassword = ''
-        console.log(state.isLoggedIn)
+        if (user.role === 'admin') {
+          state.isAdmin = true
+        } else if (user.role === 'user') {
+          state.isAdmin = false
+        }
       } else {
         state.invalid = true
         state.isLoggedIn = false
-        console.log(state.isLoggedIn)
+        window.alert('invalid')
       }
     },
-    resetAuthState: (state) => {
-      state.isLoggedIn = null
-      state.isLoading = false
-      state.invalid = false
-      state.error = false
-      state.users = []
-      state.enteredUsername = ''
-      state.enteredPassword = ''
-      state.isAdmin = false
+    logout: (state) => {
+      state.isLoggedIn = false
     }
   },
   extraReducers: (builder) => {

@@ -12,14 +12,11 @@ const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn)
-  const dispatch: Dispatch = useDispatch()
+  const dispatch: Dispatch = useDispatch<any>()
   const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(authActions.fetchUser())
-    return () => {
-      dispatch(authActions.resetAuthState())
-    }
   }, [])
 
   useEffect(() => {
@@ -40,11 +37,6 @@ const LoginForm = () => {
     dispatch(
       authActions.loginUser({ enteredUsername: enteredUserName, enteredPassword: enteredPassword })
     )
-    // if (isLoggedIn) {
-    //   navigate('/home/admin')
-    // } else {
-    //   window.alert('Invalid Username or Password')
-    // }
   }
 
   return (

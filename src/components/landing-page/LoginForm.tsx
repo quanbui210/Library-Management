@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form'
-import './login-form.scss'
+import './LoginForm.scss'
 
 import { Dispatch } from '@reduxjs/toolkit'
 import { useState, useEffect } from 'react'

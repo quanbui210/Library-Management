@@ -5,7 +5,7 @@ import { RootState } from '../../store/store'
 import { authActions } from '../../store/authentication/authSlice'
 import { useEffect } from 'react'
 
-import './navigation.scss'
+import './Navigation.scss'
 
 const Navigation = () => {
   const { isLoggedIn } = useSelector((state: RootState) => state.auth)

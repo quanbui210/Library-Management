@@ -1,7 +1,6 @@
-import LoginForm from './login-form'
+import LoginForm from './LoginForm'
 import libraryImg from '../../assets/library.jpeg'
-
-import './landing-page.scss'
+import './LandingPage.scss'
 
 export default function LandingPage() {
   return (

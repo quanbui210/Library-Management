@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import { Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal } from 'react'
 import Navigation from './navigation'
-import { Outlet } from 'react-router'
+
 const Layout = (props: {
   children:
     | string

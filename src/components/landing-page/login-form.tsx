@@ -12,7 +12,7 @@ const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn)
-  const dispatch: Dispatch = useDispatch<any>()
+  const dispatch: Dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {

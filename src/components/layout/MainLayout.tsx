@@ -1,5 +1,5 @@
 import { Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal } from 'react'
-import Navigation from './navigation'
+import Navigation from './Navigation'
 
 const Layout = (props: {
   children:

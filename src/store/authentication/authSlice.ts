@@ -10,6 +10,7 @@ export interface AuthState {
   enteredUsername: string
   enteredPassword: string
   isAdmin: boolean | null
+  addUserError: boolean | null
 }
 
 const initialState: AuthState = {
@@ -20,7 +21,8 @@ const initialState: AuthState = {
   users: [],
   enteredUsername: '',
   enteredPassword: '',
-  isAdmin: null
+  isAdmin: null,
+  addUserError: null
 }
 
 const fetchUser = createAsyncThunk('authentication/fetch', async () => {
@@ -61,6 +63,17 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.isLoggedIn = false
+    },
+    addUsers: (state, action) => {
+      const { id, username } = action.payload
+      const existingUser = state.users.find((user) => user.id === id || user.username === username)
+      if (existingUser) {
+        state.addUserError = true
+        window.alert(`User with id: ${id} or username:' ${username}' already exsists`)
+      } else {
+        state.users.push(action.payload)
+        window.alert(`Successfully added "${username}"`)
+      }
     }
   },
   extraReducers: (builder) => {

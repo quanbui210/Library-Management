@@ -1,5 +1,4 @@
-{
-    "books": [
+[
       {
         "ISBN": "9780061122415",
         "title": "To Kill a Mockingbird",
@@ -49,6 +48,6 @@
         "returnDate": null
       }
     ]
-}
+
      
   

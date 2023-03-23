@@ -1,0 +1,13 @@
+.page-container {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+        img {
+            width: 800px;  
+        }
+}
+
+.login-page-title {
+    text-align: center;
+    width: 50%;
+    margin-top: 30px;
+}

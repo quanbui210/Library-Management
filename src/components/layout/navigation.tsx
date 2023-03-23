@@ -1,14 +1,15 @@
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logoo.jpeg'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/store'
 import { authActions } from '../../store/authentication/authSlice'
 import { useEffect } from 'react'
+import PersonIcon from '@mui/icons-material/Person'
 
 import './Navigation.scss'
 
 const Navigation = () => {
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth)
+  const { isLoggedIn, isAdmin } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   console.log(isLoggedIn)
@@ -30,6 +31,12 @@ const Navigation = () => {
       </Link>
       <nav>
         <ul>
+          {isLoggedIn && (
+            <li>
+              <PersonIcon className="person-icon" />
+              {isAdmin ? 'Admin' : 'User'}
+            </li>
+          )}
           {isLoggedIn && (
             <li>
               <button onClick={handleLogout}>Log Out</button>

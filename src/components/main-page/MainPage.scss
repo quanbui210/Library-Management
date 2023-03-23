@@ -1,0 +1,12 @@
+.main-page {
+    h2 {
+        text-align: center;
+        margin-top: 70px;
+    }
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-left: 90px;
+        margin-top: 80px;
+    }
+}

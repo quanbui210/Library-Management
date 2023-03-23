@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../store/authentication/authSlice'
 import { RootState } from '../../store/store'
+import KeyIcon from '@mui/icons-material/Key'
 
 const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
@@ -21,7 +22,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/home/admin')
+      navigate('/home')
     }
   }, [isLoggedIn, navigate])
 
@@ -42,9 +43,8 @@ const LoginForm = () => {
   return (
     <>
       <Form className="form" onSubmit={submitHandler}>
-        <h5>Login</h5>
         <Form.Group className="form-group" controlId="formBasicEmail">
-          <Form.Label className="form-label">Username</Form.Label>
+          <Form.Label className="form-label">Username: </Form.Label>
           <Form.Control
             className="form-control"
             placeholder="Enter username"
@@ -53,7 +53,7 @@ const LoginForm = () => {
           />
         </Form.Group>
         <Form.Group className="form-group" controlId="formBasicEmail">
-          <Form.Label className="form-label">Password</Form.Label>
+          <Form.Label className="form-label">Password: </Form.Label>
           <Form.Control
             className="form-control"
             type="password"

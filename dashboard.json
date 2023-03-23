@@ -1,0 +1,14 @@
+{
+    "books": {
+      "total": 150,
+      "returned": 120,
+      "notReturned": 30
+    },
+    "authors": {
+      "total": 50
+    },
+    "categories": {
+      "total": 10
+    }
+  }
+  

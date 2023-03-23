@@ -1,13 +1,30 @@
 .main-header {
     display: flex;
-    background-color: #ccc;
+    background-color: #f4f4f4;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
         img {
             width: 100px;
             list-style-type: none;
             margin-left: 60px;
         }
-        nav ul {
-            list-style-type: none;
+        nav {
+            ul {
+                list-style-type: none;
+                display: flex;
+                    li {
+                        margin: 10px 48px;
+                        color: #333
+                    }
+                    button {
+                        padding: 10px;
+                    }
+            }
+        }
+        .person-icon {
+            vertical-align: middle;
+            margin-right: 5px;
+            font-size: 30px;
         }
 }

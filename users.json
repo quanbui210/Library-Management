@@ -1,23 +1,57 @@
 [
     {
-      "name": "John Doe",
+      "id": 1,
+      "fullName": "John Doe",
       "username": "johndoe",
       "password": "password123",
-      "role": "admin"
+      "role": "admin",
+      "booksBorrowed": 0
     },
     {
-      "name": "Jane Smith",
+      "id": 2,
+      "fullName": "Jane Smith",
       "username": "janesmith",
       "password": "password456",
-      "role": "user"
+      "role": "user",
+      "booksBorrowed": 2
 
     },
     {
-      "name": "Bob Johnson",
+      "id": 3,
+      "fullName": "Bob Johnson",
       "username": "bobjohnson",
       "password": "password789",
-      "role": "user"
+      "role": "user",
+      "booksBorrowed": 3
+
+    },
+    {
+      "id": 4,
+      "fullName": "Mike Oxsmall",
+      "username": "mikeoxsmall",
+      "password": "password789",
+      "role": "admin",
+      "booksBorrowed": 0
+
+    },
+    {
+      "id": 5,
+      "fullName": "Billy English",
+      "username": "billyE",
+      "password": "billyenglish",
+      "role": "user",
+      "booksBorrowed": 9
+
+    },
+    {
+      "id": 6,
+      "fullName": "Johny Adam",
+      "username": "johnysins",
+      "password": "password789",
+      "role": "admin",
+      "booksBorrowed": 0
 
     }
+    
   ]
   

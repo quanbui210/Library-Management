@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { authActions } from '../../../../store/authentication/authSlice'
 import { toggleActions } from '../../../../store/toggle/toggleSlice'
 
-import './DataTable.scss'
+import './AddUserForm.scss'
 export default function DataTableForm() {
   const dispatch = useDispatch()
   const fullNameRef = useRef('')

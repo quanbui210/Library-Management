@@ -6,6 +6,8 @@ import PageCard from './card/PageCard'
 import bookImg from '../../assets/books.png'
 import usersImg from '../../assets/users.svg'
 import dashboardImg from '../../assets/dasboard.jpeg'
+import authorImg from '../../assets/authors.png'
+import categoriesImg from '../../assets/categories.png'
 
 import './MainPage.scss'
 
@@ -21,13 +23,15 @@ export default function MainPage() {
   const toUsersList = () => {
     navigate('/home/users')
   }
+  const toAuthorsList = () => {
+    navigate('/home/authors')
+  }
+  const toCategories = () => {
+    navigate('/home/categories')
+  }
   return (
     <div className="main-page">
-      <h2>
-        {isAdmin
-          ? 'Welcom to E-Library (Admin)'
-          : 'Welcome to E-Library, Explore and Borrow thousands of books'}
-      </h2>
+      <h2>{isAdmin ? 'Welcom to E-Library (Admin)' : 'Welcome to E-Library (User)'}</h2>
       <div className="card-container">
         <PageCard
           title="Dasboard"
@@ -51,25 +55,25 @@ export default function MainPage() {
           index="third"
         />
         <PageCard
-          title="Users"
-          imageURL={usersImg}
+          title="Categories"
+          imageURL={categoriesImg}
           description="Manage List of Users"
-          onClick={toUsersList}
-          index="third"
+          onClick={toCategories}
+          index="fourth"
         />
         <PageCard
-          title="Books"
-          imageURL={bookImg}
+          title="Authors"
+          imageURL={authorImg}
           description="Explore List of Books"
-          onClick={toBooks}
-          index="second"
+          onClick={toAuthorsList}
+          index="five"
         />
         <PageCard
           title="Dasboard"
           imageURL={dashboardImg}
           description="View DashBoard"
           onClick={toDasboard}
-          index="first"
+          index="six"
         />
       </div>
     </div>

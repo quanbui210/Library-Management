@@ -9,6 +9,7 @@ import Dashboard from './components/main-page/dashboard/Dashboard'
 import MainPage from './components/main-page/MainPage'
 import Books from './components/main-page/book-list/Books'
 import UsersList from './components/main-page/user-table/UsersList'
+import Authors from './components/main-page/authors/Authors'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
   {
     path: '/home/users',
     element: <Layout><UsersList/></Layout>
+  },
+  {
+    path: '/home/authors',
+    element: <Layout><Authors/></Layout>
+  },
+  {
+    path: '/home/categories',
+    element: <Layout><h1>Categories</h1></Layout>
   },
 ])
 

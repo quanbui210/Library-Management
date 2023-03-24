@@ -4,6 +4,7 @@ import { AuthState } from './authentication/authSlice'
 import booksSlice from './books/booksSlice'
 import { BookState } from './books/booksSlice'
 import toggleSlice from './toggle/toggleSlice'
+import authorsSlice from './authors/authorsSlice'
 
 import * as reduxThunk from 'redux-thunk/extend-redux'
 
@@ -16,7 +17,8 @@ const store = configureStore({
   reducer: {
     auth: authSlice,
     book: booksSlice,
-    toggle: toggleSlice
+    toggle: toggleSlice,
+    author: authorsSlice
   }
 })
 

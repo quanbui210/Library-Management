@@ -7,12 +7,18 @@ import { booksActions } from '../../../store/books/booksSlice'
 export default function Books() {
   const dispatch = useDispatch()
   const books = useSelector((state: RootState) => state.book.items)
+  console.log(books)
   useEffect(() => {
     dispatch(booksActions.fetchBooksThunk())
   }, [])
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Books</h1>
+      <ul>
+        {books.map((book) => (
+          <li key={book.ISBN}>{book.title}</li>
+        ))}
+      </ul>
     </div>
   )
 }

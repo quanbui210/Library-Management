@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DataGrid } from '@mui/x-data-grid'
 import { useSelector } from 'react-redux'
-import DataTableForm from '../form/DataTableForm'
+import DataTableForm from '../form/AddUserForm'
 import './Table.scss'
 
 const columns = [
@@ -26,6 +26,7 @@ export default function DataTable() {
   const users =
     useSelector((state) => (Array.isArray(state.auth.users) ? state.auth.users : [])) || []
   const showTable = useSelector((state) => state.toggle.show)
+  const isAdmin = useSelector((state) => state.auth.isAdmin)
   console.log(showTable)
 
   const tableRow = []
@@ -36,15 +37,15 @@ export default function DataTable() {
 
   return (
     <>
-      {showTable && <DataTableForm />}
-      <div style={{ height: 420 }} className="tabel">
+      {showTable && isAdmin && <DataTableForm />}
+      <div style={{ height: 440 }} className="table">
         <DataGrid
           rows={tableRow}
           columns={columns}
-          pageSize={6}
+          pageSize={8}
           className="data-table"
           // checkboxSelection
-          style={{ backgroundColor: '#ccc' }}
+          style={{ backgroundColor: 'transparent' }}
         />
       </div>
     </>

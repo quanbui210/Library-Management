@@ -1,0 +1,38 @@
+.authors-list {
+    h1 {
+        color: #c8c3c3;
+        text-align: center;
+        margin: 60px 0;
+    }
+    h2 {
+        color: aqua;
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+    }
+    ul {
+        list-style-type: none;
+        .author-card {
+            margin: 30px 0;
+            min-height: 400px;
+        }
+            img {
+                width: 250px;
+                height: 300px;
+                object-fit: cover;
+                height: auto;
+                border-radius: 3px;
+                overflow: hidden;
+            }
+    }
+}
+
+.famous-books {
+    color: rgb(216, 98, 155);
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+}
+

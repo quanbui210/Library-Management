@@ -2,7 +2,10 @@ import DataTable from './table/Table'
 import { Button } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleActions } from '../../../store/toggle/toggleSlice'
+import GoBackBtn from '../../btn/GoBackBtn'
+
 import './UsersList.scss'
+
 export default function UsersList() {
   const { isAdmin } = useSelector((state) => state.auth)
   const show = useSelector((state) => state.toggle.show)
@@ -17,7 +20,8 @@ export default function UsersList() {
     }
   }
   return (
-    <div className="table" style={{ textAlign: 'center' }}>
+    <div className="table">
+      <GoBackBtn />
       <h1>List of All Users</h1>
       {isAdmin && (
         <Button className="show-form-btn" onClick={showAddUserForm}>

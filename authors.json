@@ -1,0 +1,154 @@
+[
+    {
+      "name": "Harper Lee",
+      "dateOfBirth": "April 28, 1926",
+      "shortSummary": "Harper Lee was an American novelist best known for her 1960 Pulitzer Prize-winning novel To Kill a Mockingbird.",
+      "image": "https://media.npr.org/assets/img/2016/02/19/ap_844183792565_custom-2eaad7c41a5ffb8a78675aacbeca542c5761dfba-s1100-c50.jpg",
+      "books": [
+        {
+          "ISBN": "9780061122415",
+          "title": "To Kill a Mockingbird"
+        }
+      ]
+    },
+    {
+      "name": "Ray Bradbury",
+      "dateOfBirth": "August 22, 1920",
+      "shortSummary": "Ray Bradbury was an American author and screenwriter known for his dystopian and science fiction works, including Fahrenheit 451.",
+      "image": "https://images.gr-assets.com/authors/1445955959p8/1630.jpg",
+      "books": [
+        {
+          "ISBN": "9780060891541",
+          "title": "Fahrenheit 451"
+        }
+      ]
+    },
+    {
+      "name": "Celeste Ng",
+      "dateOfBirth": "July 30, 1980",
+      "shortSummary": "Celeste Ng is an American author known for her best-selling novels Everything I Never Told You and Little Fires Everywhere.",
+      "image": "https://api.time.com/wp-content/uploads/2022/09/celeste-ng-author.jpg",
+      "books": [
+        {
+          "ISBN": "9780735211292",
+          "title": "Little Fires Everywhere"
+        }
+      ]
+    },
+    {
+      "name": "J.K. Rowling",
+      "dateOfBirth": "July 31, 1965",
+      "shortSummary": "J.K. Rowling is a British author and philanthropist, best known for writing the Harry Potter series.",
+      "image": "https://article-imgs.scribdassets.com/5rxvjrrh8g99bri7/images/fileH85WZNA9.jpg",
+      "books": [
+        {
+          "ISBN": "9780590353427",
+          "title": "Harry Potter and the Philosopher's Stone",
+          "categories": ["fantasy", "children's literature"],
+          "publishedDate": "June 26, 1997"
+        },
+        {
+          "ISBN": "9780747532743",
+          "title": "Harry Potter and the Chamber of Secrets",
+          "categories": ["fantasy", "children's literature"],
+          "publishedDate": "July 2, 1998"
+        },
+        {
+          "ISBN": "9780439139595",
+          "title": "Harry Potter and the Prisoner of Azkaban",
+          "categories": ["fantasy", "children's literature"],
+          "publishedDate": "July 8, 1999"
+        },
+        {
+          "ISBN": "9780439554930",
+          "title": "Harry Potter and the Goblet of Fire",
+          "categories": ["fantasy", "children's literature"],
+          "publishedDate": "July 8, 2000"
+        }]
+    },
+    {
+        "name": "Dan Brown",
+        "dateOfBirth": "June 22, 1964",
+        "shortSummary": "Dan Brown is an American author best known for his thriller novels, which often feature symbology and codes. His books have sold over 200 million copies worldwide.",
+        "image": "https://st4.depositphotos.com/40901176/41442/i/600/depositphotos_414424410-stock-photo-italy-milan-january-2018-dan.jpg",
+        "books": [
+          {
+            "ISBN": "9780385504201",
+            "title": "The Da Vinci Code",
+            "category": "Mystery",
+            "publisher": "Doubleday",
+            "publishedDate": "2003"
+          },
+          {
+            "ISBN": "9780552161275",
+            "title": "Angels & Demons",
+            "category": "Thriller",
+            "publisher": "Corgi Books",
+            "publishedDate": "2000"
+          }
+        ]
+      },
+      {
+        "name": "J.D. Salinger",
+        "dateOfBirth": "January 1, 1919",
+        "dateOfDeath": "January 27, 2010",
+        "shortSummary": "J.D. Salinger was an American writer known for his novel The Catcher in the Rye. He was known for being reclusive and rarely granting interviews.",
+        "image": "https://cdn.britannica.com/83/8583-050-9E759F7A/JD-Salinger.jpg",
+        "books": [
+          {
+            "ISBN": "9780316769174",
+            "title": "The Catcher in the Rye",
+            "category": "Fiction",
+            "publisher": "Little, Brown and Company",
+            "publishedDate": "1951"
+          }
+        ]
+      },
+      {
+        "name": "John Steinbeck",
+        "dateOfBirth": "February 27, 1902",
+        "dateOfDeath": "December 20, 1968",
+        "shortSummary": "John Steinbeck was an American writer known for his realistic and imaginative portrayals of American life. He won the Pulitzer Prize for Fiction in 1940 and the Nobel Prize in Literature in 1962.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d7/John_Steinbeck_1939_%28cropped%29.jpg",
+        "books": [
+          {
+            "ISBN": "9780140177398",
+            "title": "East of Eden",
+            "category": "Fiction",
+            "publisher": "Penguin Books",
+            "publishedDate": "1952"
+          },
+          {
+            "ISBN": "9780143039433",
+            "title": "The Grapes of Wrath",
+            "category": "Fiction",
+            "publisher": "Penguin Classics",
+            "publishedDate": "1939"
+          }
+        ]
+      },
+      {
+        "name": "Margaret Atwood",
+        "dateOfBirth": "November 18, 1939",
+        "shortSummary": "Margaret Atwood is a Canadian author known for her feminist and dystopian works. She has won numerous awards, including the Booker Prize and the Arthur C. Clarke Award.",
+        "image": "https://thegentlewoman.co.uk/img/YWJOYkVodmFUNHM5bTArbWhuY1pHdz09/margaret-2.jpg",
+        "books": [
+          {
+            "ISBN": "9780385474542",
+            "title": "The Handmaid's Tale",
+            "category": "Dystopian fiction",
+            "publisher": "Anchor Books",
+            "publishedDate": "1985"
+          },
+          {
+            "ISBN": "9780385660530",
+            "title": "The Year of the Flood",
+            "category": "Dystopian fiction",
+            "publisher": "McClelland & Stewart",
+            "publishedDate": "2009"
+          }
+        ]
+      }
+]
+
+        

@@ -2,7 +2,7 @@ import { Card, CardContent, Grid, Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn'
-
+import GoBackBtn from '../../btn/GoBackBtn'
 import axios from 'axios'
 
 import './Dasboard.scss'
@@ -58,9 +58,7 @@ export default function Dashboard() {
   console.log(dashboardData)
   return (
     <div className="dasboard-container">
-      <Link to="..">
-        <KeyboardReturnIcon className="return-icon" />
-      </Link>
+      <GoBackBtn />
       <Typography variant="h4" component="h1" mb={4}>
         Dashboard
       </Typography>

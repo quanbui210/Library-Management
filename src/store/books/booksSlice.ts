@@ -13,7 +13,7 @@ const initialState: BookState = {
   items: [],
   isLoading: false,
   error: null,
-  favourites: [],
+  favourites: JSON.parse(localStorage.getItem('favourites') || '[]'),
   message: ''
 }
 
@@ -32,13 +32,14 @@ const booksSlice = createSlice({
     addToFavourite: (state, action) => {
       const { ISBN } = action.payload
       const addedBook = state.items.find((book) => book.ISBN === ISBN)
-      console.log(addedBook)
       if (addedBook) {
         const existingFavBook = state.favourites.find((book) => book.ISBN === addedBook.ISBN)
         if (existingFavBook) {
-          window.alert('Already Added to Favourite')
+          return
         } else {
+          addedBook.isFav = true // Set the isFavourite flag to true
           state.favourites.push(addedBook)
+          localStorage.setItem('favourites', JSON.stringify(state.favourites))
         }
       }
     },
@@ -46,7 +47,9 @@ const booksSlice = createSlice({
       const { ISBN } = action.payload
       const removedBook = state.items.find((book) => book.ISBN === ISBN)
       if (removedBook) {
-        state.favourites.filter((book) => book.ISBN !== removedBook.ISBN)
+        removedBook.isFav = false // Set the isFavourite flag to false
+        state.favourites = state.favourites.filter((book) => book.ISBN !== removedBook.ISBN)
+        localStorage.setItem('favourites', JSON.stringify(state.favourites))
       }
     }
   },

@@ -24,7 +24,11 @@ const store = configureStore({
     book: booksSlice,
     toggle: toggleSlice,
     author: authorsSlice
-  }
+  },
+  preloadedState: JSON.parse(localStorage.getItem('reduxState')) || undefined
+})
+store.subscribe(() => {
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
 })
 
 export default store

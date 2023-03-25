@@ -8,7 +8,7 @@ import usersImg from '../../assets/users.svg'
 import dashboardImg from '../../assets/dasboard.jpeg'
 import authorImg from '../../assets/authors.png'
 import categoriesImg from '../../assets/categories.png'
-import favImg from '../../assets/fav.jpeg'
+import favImg from '../../assets/fav.svg'
 
 import './MainPage.scss'
 

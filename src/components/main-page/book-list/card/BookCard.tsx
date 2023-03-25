@@ -11,23 +11,31 @@ import { Book } from '../../../../types'
 import bookImg from '../../../../assets/book.png'
 
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { booksActions } from '../../../../store/books/booksSlice'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { RootState } from '../../../../store/store'
 
-const BookCard = (props: { book: Book }) => {
-  const [isFavourite, setIsFavourite] = useState(false)
+const BookCard = (props: { book: Book; disabled: boolean }) => {
   const dispatch = useDispatch()
-  const { book } = props
+  const { book, disabled } = props
+  const favourites = useSelector((state: RootState) => state.book.favourites)
+  const [isFav, setIsFav] = useState(favourites.find((favBook) => favBook.ISBN === book.ISBN))
 
-  const addToFav = () => {
-    dispatch(booksActions.addToFavourite({ ISBN: book.ISBN }))
-    setIsFavourite(true)
+  const handleFavClick = () => {
+    if (isFav) {
+      dispatch(booksActions.removeFavourite({ ISBN: book.ISBN }))
+    } else {
+      dispatch(booksActions.addToFavourite({ ISBN: book.ISBN }))
+    }
   }
-  const removeFromFav = () => {
-    dispatch(booksActions.removeFavourite({ ISBN: book.ISBN }))
-    setIsFavourite(false)
-  }
+
+  useEffect(() => {
+    const updatedIsFav = favourites.find((favBook) => favBook.ISBN === book.ISBN)
+    if (updatedIsFav !== isFav) {
+      setIsFav(updatedIsFav)
+    }
+  }, [favourites])
   return (
     <Card sx={{ maxWidth: 345 }}>
       <h3>{book.title}</h3>
@@ -44,9 +52,10 @@ const BookCard = (props: { book: Book }) => {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton
-          color={isFavourite ? 'error' : 'default'}
+          disabled={disabled}
+          color={isFav ? 'error' : 'default'}
           aria-label="add to favorites"
-          onClick={isFavourite ? removeFromFav : addToFav}>
+          onClick={handleFavClick}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="view">

@@ -7,14 +7,18 @@ export function FavouriteBooks() {
   console.log(favBooks)
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>Favourites</h1>
-      <ul className="book-list">
-        {favBooks.map((book) => (
-          <li key={book.ISBN}>
-            <BookCard book={book} />
-          </li>
-        ))}
-      </ul>
+      <h1 style={{ textAlign: 'center' }}>Favourites Books</h1>
+      {favBooks.length > 0 ? (
+        <ul className="book-list">
+          {favBooks.map((book) => (
+            <li key={book.ISBN}>
+              <BookCard book={book} disabled={true} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <h3 style={{ textAlign: 'center', color: 'red' }}>No Favourite Book Added Yet</h3>
+      )}
     </div>
   )
 }

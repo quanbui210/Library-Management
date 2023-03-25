@@ -19,7 +19,7 @@ export default function Books() {
       <ul className="book-list">
         {books.map((book: Book) => (
           <li key={book.ISBN}>
-            <BookCard book={book} />
+            <BookCard book={book} disabled={false} />
           </li>
         ))}
       </ul>

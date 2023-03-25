@@ -16,7 +16,6 @@ type Author = {
 export interface Book {
   publisher: ReactNode
   category: string
-  id: Key | null | undefined
   ISBN: string
   title: string
   authors: Author[]
@@ -25,6 +24,7 @@ export interface Book {
   publishedDate: string
   borrowDate: null | string
   returnDate: null | string
+  isFav: boolean
 }
 
 interface AuthorBook {

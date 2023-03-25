@@ -74,6 +74,12 @@ const authSlice = createSlice({
         state.users.push(action.payload)
         window.alert(`Successfully added "${username}"`)
       }
+    },
+    deleteUser: (state, action) => {
+      const { id } = action.payload
+      console.log(id)
+      const updatedUsers = state.users.filter((user) => user.id !== id)
+      state.users = updatedUsers
     }
   },
   extraReducers: (builder) => {

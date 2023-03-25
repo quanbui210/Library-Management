@@ -8,7 +8,7 @@ import './SearchAuthors.scss'
 type Props = {
   searchTerm: string
   setSearchTerm: Dispatch<SetStateAction<string>>
-  filterAuthors: () => []
+  filterAuthors: () => void
 }
 
 export default function SearchAuthors(props: Props) {

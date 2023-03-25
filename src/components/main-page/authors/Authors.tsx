@@ -16,6 +16,8 @@ import { RootState } from '../../../store/store'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import SearchAuthors from '../../input/SearchAuthors'
+import { Link } from 'react-router-dom'
+import { booksActions } from '../../../store/books/booksSlice'
 
 import './Authors.scss'
 
@@ -26,6 +28,7 @@ export default function Authors() {
   const [authorList, setAuthorList] = useState(authors)
   useEffect(() => {
     dispatch(authorsActions.fetchAuthorsThunk())
+    dispatch(booksActions.fetchBooksThunk())
   }, [])
 
   const filterAuthors = () => {
@@ -88,7 +91,9 @@ export default function Authors() {
                       <span>
                         <i>{author.dateOfBirth}</i>
                       </span>
-                      <p>{author.shortSummary}</p>
+                      <p className="author-summary">
+                        <i>{author.shortSummary}</i>
+                      </p>
                       <p>Famous book(s): </p>
                       <ul>
                         {author.books.map(
@@ -105,7 +110,9 @@ export default function Authors() {
                               | undefined
                           }) => (
                             <li className="famous-books" key={book.ISBN}>
-                              <a>{book.title}</a>
+                              <Link to={`/home/books/${book.ISBN}`}>
+                                <a>{book.title}</a>
+                              </Link>
                             </li>
                           )
                         )}

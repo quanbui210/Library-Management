@@ -10,6 +10,10 @@ import MainPage from './components/main-page/MainPage'
 import Books from './components/main-page/book-list/Books'
 import UsersList from './components/main-page/user-table/UsersList'
 import Authors from './components/main-page/authors/Authors'
+import Categories from './components/main-page/categories/Categories'
+import BookPage from './components/main-page/book-list/BookPage'
+import BooksErrorElement from './components/error-page/BooksErrorElement'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -43,7 +47,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/home/categories',
-    element: <Layout><h1>Categories</h1></Layout>
+    element: <Layout><Categories/></Layout>
+  },
+  {
+    path: '/home/books/:ISBN',
+    element: <Layout><BookPage/></Layout>,
+    errorElement: <Layout><BooksErrorElement/></Layout>
   },
 ])
 

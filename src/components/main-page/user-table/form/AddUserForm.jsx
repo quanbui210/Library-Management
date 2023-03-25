@@ -38,6 +38,7 @@ export default function DataTableForm() {
     passwordRef.current.value = ''
     idRef.current.value = ''
     roleRef.current.value = ''
+    dispatch(toggleActions.hide())
   }
 
   return (

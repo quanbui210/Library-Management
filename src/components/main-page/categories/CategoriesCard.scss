@@ -1,0 +1,27 @@
+.categories {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    list-style-type: none !important;
+        .category-list {
+            margin: 60px 0;
+            background-color: transparent;
+            border: 1px solid #ccc;
+            padding: 50px;
+    
+            width: 60%;
+        }
+}
+
+.categories-card {
+    h2 {
+        color: rgb(69, 213, 174);
+    }
+    li > a{
+        text-decoration: none !important;
+        color: rgb(203, 87, 145);
+        &:hover {
+            text-decoration: underline !important;
+            color: #ccc;
+        }
+    }
+}

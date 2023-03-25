@@ -1,3 +1,5 @@
+import { Key } from 'react'
+
 export interface User {
   fullName: string
   id: number
@@ -12,6 +14,8 @@ type Author = {
 }
 
 export interface Book {
+  category: string
+  id: Key | null | undefined
   ISBN: string
   title: string
   authors: Author[]

@@ -31,7 +31,7 @@ export default function MainPage() {
   }
   return (
     <div className="main-page">
-      <h2>{isAdmin ? 'Welcom to E-Library (Admin)' : 'Welcome to E-Library (User)'}</h2>
+      <h2>{isAdmin ? 'Welcome to E-Library (Admin)' : 'Welcome to E-Library (User)'}</h2>
       <div className="card-container">
         <PageCard
           title="Dasboard"

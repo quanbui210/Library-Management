@@ -13,7 +13,8 @@
         "borrowerId": null,
         "publishedDate": "July 11, 1960",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Classic Literature"
       },
       {
         "ISBN": "9780060891541",
@@ -29,7 +30,8 @@
         "borrowerId": "123456789",
         "publishedDate": "October 19, 1953",
         "borrowDate": "March 21, 2023",
-        "returnDate": "April 18, 2023"
+        "returnDate": "April 18, 2023",
+        "category": "Science Fiction"
       },
       {
         "ISBN": "9780735211292",
@@ -45,7 +47,8 @@
         "borrowerId": null,
         "publishedDate": "September 12, 2017",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Contemporary Fiction"
       },
       {
         "ISBN": "9781984822185",
@@ -61,7 +64,8 @@
         "borrowerId": null,
         "publishedDate": "September 10, 2019",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Classic Literature"
       },
       {
         "ISBN": "9780385544334",
@@ -77,7 +81,8 @@
         "borrowerId": null,
         "publishedDate": "July 16, 2019",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Inspirational Fiction"
       },
       {
         "ISBN": "9780804173189",
@@ -93,7 +98,8 @@
         "borrowerId": "987654321",
         "publishedDate": "January 13, 2015",
         "borrowDate": "March 18, 2023",
-        "returnDate": "April 15, 2023"
+        "returnDate": "April 15, 2023",
+        "category": "Classic Literature"
       },
       {
         "ISBN": "9780735224315",
@@ -109,7 +115,8 @@
         "borrowerId": null,
         "publishedDate": "December 31, 2019",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Inspirational Fiction"
       },
       {
         "ISBN": "9780525536611",
@@ -125,7 +132,8 @@
         "borrowerId": null,
         "publishedDate": "February 5, 2019",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Mystery and Thriller"
       },
       {
         "ISBN": "9780525657680",
@@ -141,7 +149,8 @@
         "borrowerId": null,
         "publishedDate": "January 5, 2021",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Psychological Thriller"
 },
 {
         "ISBN": "9780593356735",
@@ -157,7 +166,9 @@
         "borrowerId": "456789012",
         "publishedDate": "August 13, 2020",
         "borrowDate": "March 23, 2023",
-        "returnDate": "April 20, 2023"
+        "returnDate": "April 20, 2023",
+        "category": "Psychological Thriller"
+
         },
         {
         "ISBN": "9780735224384",
@@ -189,7 +200,8 @@
 "borrowerId": null,
 "publishedDate": "September 24, 2019",
 "borrowDate": null,
-"returnDate": null
+"returnDate": null,
+"category": "Science Fiction"
 },
 {
 "ISBN": "9780593295852",
@@ -205,7 +217,8 @@
 "borrowerId": null,
 "publishedDate": "October 6, 2020",
 "borrowDate": null,
-"returnDate": null
+"returnDate": null,
+"category": "Historical Fiction"
 },
 {
 "ISBN": "9781982154599",
@@ -221,7 +234,8 @@
 "borrowerId": null,
 "publishedDate": "May 4, 2021",
 "borrowDate": null,
-"returnDate": null
+"returnDate": null,
+"category": "Science Fiction"
 }
     ]
 

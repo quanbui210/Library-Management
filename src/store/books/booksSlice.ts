@@ -5,12 +5,16 @@ export interface BookState {
   items: Book[]
   isLoading: boolean
   error: null | boolean
+  favourites: Book[]
+  message: string
 }
 
 const initialState: BookState = {
   items: [],
   isLoading: false,
-  error: null
+  error: null,
+  favourites: [],
+  message: ''
 }
 
 const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
@@ -24,7 +28,28 @@ const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
 const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    addToFavourite: (state, action) => {
+      const { ISBN } = action.payload
+      const addedBook = state.items.find((book) => book.ISBN === ISBN)
+      console.log(addedBook)
+      if (addedBook) {
+        const existingFavBook = state.favourites.find((book) => book.ISBN === addedBook.ISBN)
+        if (existingFavBook) {
+          window.alert('Already Added to Favourite')
+        } else {
+          state.favourites.push(addedBook)
+        }
+      }
+    },
+    removeFavourite: (state, action) => {
+      const { ISBN } = action.payload
+      const removedBook = state.items.find((book) => book.ISBN === ISBN)
+      if (removedBook) {
+        state.favourites.filter((book) => book.ISBN !== removedBook.ISBN)
+      }
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchBooksThunk.pending, (state) => {
       return {

@@ -1,0 +1,9 @@
+.book-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    list-style-type: none;
+        >li {
+            margin: 50px 0;
+            text-align: center;
+        }
+}

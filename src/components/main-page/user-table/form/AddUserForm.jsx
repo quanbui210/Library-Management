@@ -8,7 +8,7 @@ import { authActions } from '../../../../store/authentication/authSlice'
 import { toggleActions } from '../../../../store/toggle/toggleSlice'
 
 import './AddUserForm.scss'
-export default function DataTableForm() {
+export default function AddUserForm() {
   const dispatch = useDispatch()
   const fullNameRef = useRef('')
   const passwordRef = useRef('')
@@ -38,7 +38,7 @@ export default function DataTableForm() {
     passwordRef.current.value = ''
     idRef.current.value = ''
     roleRef.current.value = ''
-    dispatch(toggleActions.hide())
+    dispatch(toggleActions.hideForm())
   }
 
   return (

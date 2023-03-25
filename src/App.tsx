@@ -11,8 +11,9 @@ import Books from './components/main-page/book-list/Books'
 import UsersList from './components/main-page/user-table/UsersList'
 import Authors from './components/main-page/authors/Authors'
 import Categories from './components/main-page/categories/Categories'
-import BookPage from './components/main-page/book-list/BookPage'
+import BookPage from './components/main-page/book-list/page/BookPage'
 import BooksErrorElement from './components/error-page/BooksErrorElement'
+import { FavouriteBooks } from './components/main-page/favourite/FavouriteBooks'
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
   {
     path: '/home/books/:ISBN',
     element: <Layout><BookPage/></Layout>,
+    errorElement: <Layout><BooksErrorElement/></Layout>
+  },
+  {
+    path: '/home/favourites',
+    element: <Layout><FavouriteBooks/></Layout>,
     errorElement: <Layout><BooksErrorElement/></Layout>
   },
 ])

@@ -3,8 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DataGrid } from '@mui/x-data-grid'
 import { useSelector, useDispatch } from 'react-redux'
-import DataTableForm from '../form/AddUserForm'
-import { useState } from 'react'
+import AddUserForm from '../form/AddUserForm'
 import { authActions } from '../../../../store/authentication/authSlice'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
@@ -58,7 +57,7 @@ export default function DataTable() {
 
   return (
     <>
-      {showTable && isAdmin && <DataTableForm />}
+      {showTable && isAdmin && <AddUserForm />}
       <div className="table">
         <DataGrid
           rows={tableRow}

@@ -1,17 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+export interface ToggleState {
+  show: boolean
+  showSnackBar: boolean
+}
+
 const initialState = {
-  show: false
+  show: false,
+  showSnackBar: false
 }
 
 const toggleSlice = createSlice({
   name: 'toggle',
   initialState,
   reducers: {
-    show: (state) => {
+    showForm: (state) => {
       state.show = true
     },
-    hide: (state) => {
+    hideForm: (state) => {
       state.show = false
     }
   }

@@ -60,7 +60,7 @@
             "name": "Margaret Atwood"
           }
         ],
-        "status": "available",
+        "status": "borrowed",
         "borrowerId": null,
         "publishedDate": "September 10, 2019",
         "borrowDate": null,
@@ -184,7 +184,8 @@
         "borrowerId": null,
         "publishedDate": "March 10, 2015",
         "borrowDate": null,
-        "returnDate": null
+        "returnDate": null,
+        "category": "Classic Literature"
 },
 {
 "ISBN": "9780385543764",
@@ -213,7 +214,7 @@
 "name": "V.E. Schwab"
 }
 ],
-"status": "available",
+"status": "borrowed",
 "borrowerId": null,
 "publishedDate": "October 6, 2020",
 "borrowDate": null,

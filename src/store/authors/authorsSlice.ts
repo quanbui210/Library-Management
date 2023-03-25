@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import booksSlice from '../books/booksSlice'
+import { AuthorData } from '../../types'
 
-interface AuthorsState {
-  items: []
+export interface AuthorsState {
+  items: AuthorData[]
   isLoading: boolean
   query: string
   searchResults: []
 }
 
-const initialState = {
+const initialState: AuthorsState = {
   items: [],
   isLoading: false,
   query: '',

@@ -1,4 +1,4 @@
-import { Key } from 'react'
+import { Dispatch, Key, ReactNode, SetStateAction } from 'react'
 
 export interface User {
   fullName: string
@@ -14,6 +14,7 @@ type Author = {
 }
 
 export interface Book {
+  publisher: ReactNode
   category: string
   id: Key | null | undefined
   ISBN: string
@@ -24,4 +25,22 @@ export interface Book {
   publishedDate: string
   borrowDate: null | string
   returnDate: null | string
+}
+
+interface AuthorBook {
+  ISBN: string
+  title: string
+}
+
+export interface AuthorData {
+  name: string
+  books: AuthorBook[]
+  dateOfBirth: string
+  shortSummary: string
+  image: string
+}
+
+export type SearchProps = {
+  searchTerm: string
+  setSearchTerm: Dispatch<SetStateAction<string>>
 }

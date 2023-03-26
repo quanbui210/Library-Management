@@ -70,11 +70,11 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
           onClick={handleFavClick}>
           <FavoriteIcon />
         </IconButton>
-        {/* <IconButton aria-label="view">
+        <IconButton aria-label="view">
           <Link to={`/home/books/${book.ISBN}`}>
             <SearchIcon />
           </Link>
-        </IconButton> */}
+        </IconButton>
       </CardActions>
     </Card>
   )

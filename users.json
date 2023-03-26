@@ -30,7 +30,7 @@
       "fullName": "Mike Oxsmall",
       "username": "mikeoxsmall",
       "password": "password789",
-      "role": "admin",
+      "role": "user",
       "booksBorrowed": 0
 
     },
@@ -48,9 +48,32 @@
       "fullName": "Johny Adam",
       "username": "johnysins",
       "password": "password789",
+      "role": "user",
+      "booksBorrowed": 0
+    },
+    {
+      "id": 7,
+      "fullName": "Admin",
+      "username": "admin",
+      "password": "password",
       "role": "admin",
       "booksBorrowed": 0
-
+    },
+    {
+      "id": 8,
+      "fullName": "Adoma Alai",
+      "username": "admo",
+      "password": "password",
+      "role": "user",
+      "booksBorrowed": 0
+    },
+    {
+      "id": 9,
+      "fullName": "Captain Obvious",
+      "username": "cap",
+      "password": "password",
+      "role": "user",
+      "booksBorrowed": 0
     }
     
   ]

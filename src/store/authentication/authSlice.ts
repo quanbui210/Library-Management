@@ -76,10 +76,14 @@ const authSlice = createSlice({
       }
     },
     deleteUser: (state, action) => {
-      const { id } = action.payload
-      console.log(id)
-      const updatedUsers = state.users.filter((user) => user.id !== id)
-      state.users = updatedUsers
+      const { id, role } = action.payload
+      console.log(role)
+      if (role === 'user') {
+        const updatedUsers = state.users.filter((user) => user.id !== id)
+        state.users = updatedUsers
+      } else {
+        window.alert('Cannot delete admin')
+      }
     }
   },
   extraReducers: (builder) => {

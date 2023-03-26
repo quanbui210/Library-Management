@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import AddUserForm from '../form/AddUserForm'
 import { authActions } from '../../../../store/authentication/authSlice'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import { IconButton } from '@mui/material'
 
 import './Table.scss'
 
@@ -25,21 +26,30 @@ const columns = [
     headerName: '',
     sortable: false,
     width: 100,
-    renderCell: (params) => <DeleteButton userId={params.row.id} />
+    renderCell: (params) => {
+      if (params.row.role === 'user') {
+        return <DeleteButton userId={params.row.id} role={params.row.role} />
+      } else {
+        return null
+      }
+    }
   }
 ]
 
-function DeleteButton({ userId }) {
+function DeleteButton({ userId, role }) {
   const dispatch = useDispatch()
-
   const handleDelete = () => {
     const confirmed = window.confirm('Are you sure you want to delete this user?')
     if (confirmed) {
-      dispatch(authActions.deleteUser({ id: userId }))
+      dispatch(authActions.deleteUser({ id: userId, role: role }))
     }
   }
 
-  return <DeleteForeverIcon onClick={handleDelete}>Delete</DeleteForeverIcon>
+  return (
+    <IconButton onClick={handleDelete}>
+      <DeleteForeverIcon className="delete-user-icon" />
+    </IconButton>
+  )
 }
 
 export default function DataTable() {

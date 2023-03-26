@@ -95,3 +95,10 @@
       }
     }
   }
+
+  .delete-user-icon {
+    color: #ccc;
+      &:hover {
+        color: #555454
+      }
+  }

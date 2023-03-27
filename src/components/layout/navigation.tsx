@@ -9,13 +9,17 @@ import PersonIcon from '@mui/icons-material/Person'
 import './Navigation.scss'
 
 const Navigation = () => {
-  const { isLoggedIn, isAdmin } = useSelector((state: RootState) => state.auth)
+  const { isLoggedIn, isAdmin, loggedInUserName, googleUser } = useSelector(
+    (state: RootState) => state.auth
+  )
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  console.log(isLoggedIn)
-
+  console.log(googleUser)
   const handleLogout = () => {
     dispatch(authActions.logout())
+  }
+  const handleGoogleLogout = () => {
+    dispatch(authActions.logoutGoogle())
   }
 
   useEffect(() => {
@@ -31,21 +35,49 @@ const Navigation = () => {
       </Link>
       <nav>
         <ul>
-          {isLoggedIn && (
-            <li>
-              <PersonIcon className="person-icon" />
-              {isAdmin ? 'Admin' : 'User'}
-            </li>
-          )}
-          {isLoggedIn && (
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
-          )}
+          {isLoggedIn &&
+            (googleUser !== null ? (
+              <li>
+                <PersonIcon className="person-icon" />
+                {googleUser && googleUser.name}
+              </li>
+            ) : (
+              <li>
+                <PersonIcon className="person-icon" />
+                {isAdmin ? `${loggedInUserName} (Admin)` : `${loggedInUserName} (User)`}
+              </li>
+            ))}
+          {isLoggedIn &&
+            (googleUser !== null ? (
+              <li>
+                <button onClick={handleLogout}>Log Out</button>
+              </li>
+            ) : (
+              <li>
+                <button onClick={handleGoogleLogout}>Log Out</button>
+              </li>
+            ))}
         </ul>
       </nav>
     </header>
   )
 }
+{
+  /* <li>
+<button onClick={handleLogout}>Log Out</button>
+</li> */
+}
 
 export default Navigation
+
+// {isLoggedIn && googleUser !== null ? (
+//   <li>
+//     <PersonIcon className="person-icon" />
+//     {googleUser && googleUser.name}
+//   </li>
+// ) : (
+//   <li>
+//     <PersonIcon className="person-icon" />
+//     {isAdmin ? `${loggedInUserName} (Admin)` : `${loggedInUserName} (User)`}
+//   </li>
+// )}

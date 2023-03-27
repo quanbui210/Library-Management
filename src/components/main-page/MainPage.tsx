@@ -13,7 +13,8 @@ import favImg from '../../assets/fav.svg'
 import './MainPage.scss'
 
 export default function MainPage() {
-  const { isAdmin } = useSelector((state: RootState) => state.auth)
+  const { isAdmin, loggedInUserName, googleUser } = useSelector((state: RootState) => state.auth)
+  console.log(googleUser)
   const navigate = useNavigate()
   const toDasboard = () => {
     navigate('/home/dashboard')
@@ -35,7 +36,13 @@ export default function MainPage() {
   }
   return (
     <div className="main-page">
-      <h2>{isAdmin ? 'Welcome to E-Library (Admin)' : 'Welcome to E-Library (User)'}</h2>
+      <h2>
+        {isAdmin
+          ? googleUser !== null
+            ? `Welcome to E-Library, ${loggedInUserName} (admin)`
+            : `Welcome to E-Library, ${loggedInUserName}`
+          : `Welcome to E-Library, ${googleUser && googleUser?.name}`}
+      </h2>
       <div className="card-container">
         <PageCard
           title="Dasboard"

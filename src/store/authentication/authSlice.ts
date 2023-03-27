@@ -1,5 +1,8 @@
-import { User } from '../../types'
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { User, GoogleUser } from '../../types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+// import { GoogleLoginResponse } from 'google-auth-library'
+import { googleLogout } from '@react-oauth/google'
 
 export interface AuthState {
   isLoggedIn: boolean | null
@@ -11,6 +14,19 @@ export interface AuthState {
   enteredPassword: string
   isAdmin: boolean | null
   addUserError: boolean | null
+  loggedInUserName: string
+  googleUser: GoogleUser | null
+  profile: any | null
+}
+
+interface AddUserPayload {
+  id: number
+  fullName: string
+  email: string
+  role: 'user' | 'admin'
+  password: string
+  username: string
+  booksBorrowed: number | undefined
 }
 
 const initialState: AuthState = {
@@ -22,7 +38,10 @@ const initialState: AuthState = {
   enteredUsername: '',
   enteredPassword: '',
   isAdmin: null,
-  addUserError: null
+  addUserError: null,
+  loggedInUserName: '',
+  googleUser: null,
+  profile: null
 }
 
 const fetchUser = createAsyncThunk('authentication/fetch', async () => {
@@ -49,7 +68,8 @@ const authSlice = createSlice({
       if (user) {
         state.isLoggedIn = true
         state.enteredUsername = ''
-        state.enteredPassword = ''
+        state.loggedInUserName = user.fullName
+        state.googleUser = null
         if (user.role === 'admin') {
           state.isAdmin = true
         } else if (user.role === 'user') {
@@ -58,13 +78,12 @@ const authSlice = createSlice({
       } else {
         state.invalid = true
         state.isLoggedIn = false
-        window.alert('invalid')
       }
     },
     logout: (state) => {
       state.isLoggedIn = false
     },
-    addUsers: (state, action) => {
+    addUsers: (state, action: PayloadAction<AddUserPayload>) => {
       const { id, username } = action.payload
       const existingUser = state.users.find((user) => user.id === id || user.username === username)
       if (existingUser) {
@@ -84,6 +103,26 @@ const authSlice = createSlice({
       } else {
         window.alert('Cannot delete admin')
       }
+    },
+    setGoogleProfile: (state, action) => {
+      const { profile } = action.payload
+      const newGoogleUser = {
+        id: profile.id,
+        fullName: profile.email,
+        email: profile.email,
+        role: state.isAdmin ? 'admin' : 'user',
+        password: 'password',
+        username: profile.given_name,
+        booksBorrowed: 4
+      }
+      state.googleUser = profile // Set Google user data on Google login
+      state.isLoggedIn = true
+      state.users.push(newGoogleUser) // Set regular user data to null on Google login
+      state.isAdmin = true
+    },
+    logoutGoogle: (state) => {
+      googleLogout()
+      state.googleUser = null
     }
   },
   extraReducers: (builder) => {

@@ -69,8 +69,8 @@
     },
     {
       "id": 9,
-      "fullName": "Captain Obvious",
-      "username": "cap",
+      "fullName": "User :)",
+      "username": "user",
       "password": "password",
       "role": "user",
       "booksBorrowed": 0

@@ -1,12 +1,26 @@
 import { Dispatch, Key, ReactNode, SetStateAction } from 'react'
 
+export interface GoogleUser {
+  name: string
+  accessToken: string
+  expiresIn: number
+  idToken: string
+  scope: string
+  tokenType: string
+  id: number
+  username: string
+  password: string
+  role: 'user'
+  booksBorrowed: number | undefined
+}
+
 export interface User {
   fullName: string
   id: number
   username: string
   password: string
   role: 'user' | 'admin'
-  booksBorrowed: number
+  booksBorrowed: number | undefined
 }
 
 type Author = {

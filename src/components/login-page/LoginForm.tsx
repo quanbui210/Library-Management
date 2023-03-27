@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../store/authentication/authSlice'
 import { RootState } from '../../store/store'
-import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
 
 const LoginForm = () => {
@@ -95,6 +95,10 @@ const LoginForm = () => {
           <button type="submit">Login</button>
           <button onClick={() => login()}>Sign in with Google 🚀 </button>
         </Form.Group>
+        <div className="instruction">
+          <p>Login: Username: 'admin'(+features) or 'user'. Pw: password</p>
+          <p>With Google: Demo project, so all users login with google are admin</p>
+        </div>
       </Form>
     </>
   )

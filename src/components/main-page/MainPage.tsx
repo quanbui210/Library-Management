@@ -15,6 +15,7 @@ import './MainPage.scss'
 export default function MainPage() {
   const { isAdmin, loggedInUserName, googleUser } = useSelector((state: RootState) => state.auth)
   console.log(googleUser)
+  console.log(loggedInUserName)
   const navigate = useNavigate()
   const toDasboard = () => {
     navigate('/home/dashboard')
@@ -39,9 +40,9 @@ export default function MainPage() {
       <h2>
         {isAdmin
           ? googleUser !== null
-            ? `Welcome to E-Library, ${loggedInUserName} (admin)`
-            : `Welcome to E-Library, ${loggedInUserName}`
-          : `Welcome to E-Library, ${googleUser && googleUser?.name}`}
+            ? `Welcome to E-Library, ${googleUser && googleUser?.name}`
+            : `Welcome to E-Library, ${loggedInUserName} (admin)`
+          : `Welcome to E-Library, ${loggedInUserName} (user)`}
       </h2>
       <div className="card-container">
         <PageCard

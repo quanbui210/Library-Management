@@ -119,10 +119,6 @@ const authSlice = createSlice({
       state.isLoggedIn = true
       state.users.push(newGoogleUser) // Set regular user data to null on Google login
       state.isAdmin = true
-    },
-    logoutGoogle: (state) => {
-      googleLogout()
-      state.googleUser = null
     }
   },
   extraReducers: (builder) => {

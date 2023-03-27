@@ -19,7 +19,7 @@ const Navigation = () => {
     dispatch(authActions.logout())
   }
   const handleGoogleLogout = () => {
-    dispatch(authActions.logoutGoogle())
+    dispatch(authActions.logout())
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Navigation = () => {
             (googleUser !== null ? (
               <li>
                 <PersonIcon className="person-icon" />
-                {googleUser && googleUser.name}
+                {googleUser && googleUser.name} (Admin)
               </li>
             ) : (
               <li>
@@ -47,16 +47,11 @@ const Navigation = () => {
                 {isAdmin ? `${loggedInUserName} (Admin)` : `${loggedInUserName} (User)`}
               </li>
             ))}
-          {isLoggedIn &&
-            (googleUser !== null ? (
-              <li>
-                <button onClick={handleLogout}>Log Out</button>
-              </li>
-            ) : (
-              <li>
-                <button onClick={handleGoogleLogout}>Log Out</button>
-              </li>
-            ))}
+          {isLoggedIn && (
+            <li>
+              <button onClick={handleLogout}>Log Out</button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

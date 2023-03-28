@@ -58,19 +58,12 @@ export default function DataTable() {
   const showTable = useSelector((state) => state.toggle.show)
   const isAdmin = useSelector((state) => state.auth.isAdmin)
   console.log(showTable)
-
-  const tableRow = []
-
-  users.forEach((user) => {
-    return tableRow.push(user)
-  })
-
   return (
     <>
       {showTable && isAdmin && <AddUserForm />}
       <div className="table">
         <DataGrid
-          rows={tableRow}
+          rows={users}
           columns={columns}
           pageSize={8}
           className="data-table"

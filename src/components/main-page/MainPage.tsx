@@ -13,9 +13,10 @@ import favImg from '../../assets/fav.svg'
 import './MainPage.scss'
 
 export default function MainPage() {
-  const { isAdmin, loggedInUserName, googleUser } = useSelector((state: RootState) => state.auth)
-  console.log(googleUser)
-  console.log(loggedInUserName)
+  const { isAdmin, loggedInUserName, googleUser, isLoading } = useSelector(
+    (state: RootState) => state.auth
+  )
+  console.log(isLoading)
   const navigate = useNavigate()
   const toDasboard = () => {
     navigate('/home/dashboard')
@@ -35,6 +36,15 @@ export default function MainPage() {
   const toFavourite = () => {
     navigate('/home/favourites')
   }
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
+
   return (
     <div className="main-page">
       <h2>

@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Dispatch, SetStateAction } from 'react'
 import { SearchProps } from '../../types'
-
 import './SearchInput.scss'
 
 export default function SearchInput(props: SearchProps) {

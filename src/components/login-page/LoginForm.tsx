@@ -7,16 +7,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../store/authentication/authSlice'
 import { RootState } from '../../store/store'
-import { useGoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin, TokenResponse } from '@react-oauth/google'
 import axios from 'axios'
 
 const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn)
-  const dispatch: Dispatch = useDispatch()
+
+  const dispatch = useDispatch<Dispatch>()
   const navigate = useNavigate()
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState<Omit<
+    TokenResponse,
+    'error' | 'error_description' | 'error_uri'
+  > | null>(null)
   const googleUser = useSelector((state: RootState) => state.auth.googleUser)
   console.log(googleUser)
   const login = useGoogleLogin({
@@ -37,9 +41,8 @@ const LoginForm = () => {
         .then((res) => {
           const profile = res.data
           dispatch(authActions.setGoogleProfile({ profile: profile }))
-          console.log(profile)
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log('aaa'))
     }
   }, [user])
 
@@ -93,10 +96,12 @@ const LoginForm = () => {
         </Form.Group>
         <Form.Group className="form-group">
           <button type="submit">Login</button>
-          <button onClick={() => login()}>Sign in with Google 🚀 </button>
+          <button onClick={() => login()}>
+            Sign in with Google <i className="devicon-google-plain"></i>
+          </button>
         </Form.Group>
         <div className="instruction">
-          <p>Login: Username: 'admin'(+features) or 'user'. Pw: password</p>
+          <p>Login: Username: &#39;admin&#39; (+features) or &#39;user&#39;. Pw: password</p>
           <p>With Google: Demo project, so all users login with google are admin</p>
         </div>
       </Form>
@@ -105,3 +110,5 @@ const LoginForm = () => {
 }
 
 export default LoginForm
+
+// 🚀

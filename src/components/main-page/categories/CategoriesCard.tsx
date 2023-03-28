@@ -1,6 +1,6 @@
-import * as React from 'react'
 import Card from 'react-bootstrap/Card'
 import { Book } from '../../../types'
+
 import { Link } from 'react-router-dom'
 
 import './CategoriesCard.scss'
@@ -25,9 +25,7 @@ export default function BasicCard(props: Props) {
               .filter((book) => book.category && book.category.includes(category))
               .map((book) => (
                 <li key={book.ISBN} className="books-by-category">
-                  <Link to={`/home/books/${book.ISBN}`}>
-                    <a>{book.title}</a>
-                  </Link>
+                  <Link to={`/home/books/${book.ISBN}`}>{book.title}</Link>
                 </li>
               ))}
           </ul>

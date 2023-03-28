@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+
 import { booksActions } from '../../../store/books/booksSlice'
 import { RootState } from '../../../store/store'
 import BasicCard from './CategoriesCard'
 import GoBackBtn from '../../btn/GoBackBtn'
-import { useEffect, useState } from 'react'
 import SearchInput from '../../input/SearchInput'
 
 export default function Categories() {
@@ -30,7 +31,7 @@ export default function Categories() {
   }, [])
   useEffect(() => {
     filterCategories()
-  }, [searchTerm, categories])
+  }, [searchTerm])
   return (
     <div>
       <GoBackBtn />

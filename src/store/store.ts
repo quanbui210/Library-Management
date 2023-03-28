@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { configureStore } from '@reduxjs/toolkit'
 import authSlice from './authentication/authSlice'
-import { AuthState } from './authentication/authSlice'
+import { AuthState } from '../types'
 import booksSlice from './books/booksSlice'
 import { BookState } from './books/booksSlice'
 import toggleSlice from './toggle/toggleSlice'

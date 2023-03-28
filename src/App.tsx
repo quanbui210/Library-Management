@@ -14,6 +14,7 @@ import Categories from './components/main-page/categories/Categories'
 import BookPage from './components/main-page/book-list/page/BookPage'
 import BooksErrorElement from './components/error-page/BooksErrorElement'
 import { FavouriteBooks } from './components/main-page/favourite/FavouriteBooks'
+import EditAuthor from './components/main-page/authors/form/EditAuthor'
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
   {
     path: '/home/favourites',
     element: <Layout><FavouriteBooks/></Layout>,
+    errorElement: <Layout><BooksErrorElement/></Layout>
+  },
+  {
+    path: '/home/actions/:authorId',
+    element: <Layout><EditAuthor/></Layout>,
     errorElement: <Layout><BooksErrorElement/></Layout>
   },
 ])

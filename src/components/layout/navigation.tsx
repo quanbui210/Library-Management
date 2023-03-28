@@ -1,10 +1,12 @@
-import logo from '../../assets/logoo.jpeg'
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
+import PersonIcon from '@mui/icons-material/Person'
+
 import { RootState } from '../../store/store'
 import { authActions } from '../../store/authentication/authSlice'
-import { useEffect } from 'react'
-import PersonIcon from '@mui/icons-material/Person'
+import logo from '../../assets/logoo.jpeg'
 
 import './Navigation.scss'
 
@@ -14,11 +16,7 @@ const Navigation = () => {
   )
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  console.log(googleUser)
   const handleLogout = () => {
-    dispatch(authActions.logout())
-  }
-  const handleGoogleLogout = () => {
     dispatch(authActions.logout())
   }
 

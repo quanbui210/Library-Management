@@ -23,9 +23,10 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
   const navigate = useNavigate()
   const { book, disabled } = props
   const favourites = useSelector((state: RootState) => state.book.favourites)
-  const [isFav, setIsFav] = useState(favourites.find((favBook) => favBook.ISBN === book.ISBN))
+  // const [isFav, setIsFav] = useState(favourites.find((favBook) => favBook.ISBN === book.ISBN))
 
   const handleFavClick = () => {
+    const isFav = favourites.find((favBook) => favBook.ISBN === book.ISBN)
     if (isFav) {
       dispatch(booksActions.removeFavourite({ ISBN: book.ISBN }))
     } else {
@@ -33,12 +34,6 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
     }
   }
 
-  useEffect(() => {
-    const updatedIsFav = favourites.find((favBook) => favBook.ISBN === book.ISBN)
-    if (updatedIsFav !== isFav) {
-      setIsFav(updatedIsFav)
-    }
-  }, [favourites])
   return (
     <Card className="book-card" sx={{ maxWidth: 345 }}>
       <h2>{book.title}</h2>
@@ -52,11 +47,11 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
         image={bookImg}
         alt="book"
       />
-      <CardContent onClick={() => navigate(`/home/books/${book.ISBN}`)}>
+      <CardContent className="card-content" onClick={() => navigate(`/home/books/${book.ISBN}`)}>
         <h4>{book.authors.map((author) => author.name)}</h4>
         <ul>
           <li>ISBN: {book.ISBN}</li>
-          <li>Published on: {book.publishedDate}</li>
+          <li>Published: {book.publishedDate}</li>
           <li>
             Publisher: <i style={{ color: '#2b5cb7', fontWeight: 'bold' }}>{book.publisher}</i>
           </li>
@@ -65,7 +60,7 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
       <CardActions disableSpacing>
         <IconButton
           disabled={disabled}
-          color={isFav ? 'error' : 'default'}
+          color={favourites.find((favBook) => favBook.ISBN === book.ISBN) ? 'error' : 'default'}
           aria-label="add to favorites"
           onClick={handleFavClick}>
           <FavoriteIcon />

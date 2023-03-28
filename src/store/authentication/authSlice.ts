@@ -1,33 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { User, GoogleUser } from '../../types'
+import { User, GoogleUser, AddUserPayload, AuthState } from '../../types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 // import { GoogleLoginResponse } from 'google-auth-library'
-import { googleLogout } from '@react-oauth/google'
-
-export interface AuthState {
-  isLoggedIn: boolean | null
-  isLoading: boolean
-  invalid: boolean
-  error: boolean
-  users: User[]
-  enteredUsername: string
-  enteredPassword: string
-  isAdmin: boolean | null
-  addUserError: boolean | null
-  loggedInUserName: string
-  googleUser: GoogleUser | null
-  profile: any | null
-}
-
-interface AddUserPayload {
-  id: number
-  fullName: string
-  email: string
-  role: 'user' | 'admin'
-  password: string
-  username: string
-  booksBorrowed: number | undefined
-}
 
 const initialState: AuthState = {
   isLoggedIn: false,
@@ -109,7 +83,6 @@ const authSlice = createSlice({
       const newGoogleUser = {
         id: profile.id,
         fullName: profile.email,
-        email: profile.email,
         role: state.isAdmin ? 'admin' : 'user',
         password: 'password',
         username: profile.given_name,

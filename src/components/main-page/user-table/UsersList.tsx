@@ -1,6 +1,7 @@
-import DataTable from './table/Table'
 import { Button } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
+
+import DataTable from './table/Table'
 import { toggleActions } from '../../../store/toggle/toggleSlice'
 import GoBackBtn from '../../btn/GoBackBtn'
 import { RootState } from '../../../store/store'

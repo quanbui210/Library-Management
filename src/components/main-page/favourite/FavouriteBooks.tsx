@@ -1,7 +1,8 @@
-import { Book } from '../../../types'
 import { useSelector } from 'react-redux'
+
 import { RootState } from '../../../store/store'
 import BookCard from '../book-list/card/BookCard'
+
 export function FavouriteBooks() {
   const favBooks = useSelector((state: RootState) => state.book.favourites)
   console.log(favBooks)

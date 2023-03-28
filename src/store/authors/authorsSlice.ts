@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import booksSlice from '../books/booksSlice'
 import { AuthorData } from '../../types'
 
 export interface AuthorsState {
@@ -27,7 +26,30 @@ const fetchAuthorsThunk = createAsyncThunk('authors/fetch', async () => {
 const authorsSlice = createSlice({
   name: 'authors',
   initialState,
-  reducers: {},
+  reducers: {
+    removeAuthor: (state, action) => {
+      const { id } = action.payload
+      console.log(id)
+      const updatedAuthorList = state.items.filter((author) => author.id !== id)
+      return { ...state, items: updatedAuthorList } // Return new state object
+    },
+    editAuthor: (state, action) => {
+      const { id, value } = action.payload
+      console.log('Edited Value of Author: ' + value)
+      return {
+        ...state,
+        items: state.items.map((author) => {
+          if (author.id === id) {
+            return {
+              ...author,
+              shortSummary: value
+            }
+          }
+          return author
+        })
+      }
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAuthorsThunk.pending, (state) => {
       return {

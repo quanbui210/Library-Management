@@ -1,17 +1,7 @@
-import { Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactPortal } from 'react'
+import { Fragment, ReactNode } from 'react'
 import Navigation from './Navigation'
 
-const Layout = (props: {
-  children:
-    | string
-    | number
-    | boolean
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | ReactFragment
-    | ReactPortal
-    | null
-    | undefined
-}) => {
+const Layout = (props: { children: ReactNode }) => {
   return (
     <Fragment>
       <Navigation />

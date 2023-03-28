@@ -9,7 +9,8 @@
           "ISBN": "9780061122415",
           "title": "To Kill a Mockingbird"
         }
-      ]
+      ],
+      "id": 1
     },
     {
       "name": "Ray Bradbury",
@@ -21,7 +22,8 @@
           "ISBN": "9780060891541",
           "title": "Fahrenheit 451"
         }
-      ]
+      ],
+      "id": 2
     },
     {
       "name": "Celeste Ng",
@@ -33,7 +35,8 @@
           "ISBN": "9780735211292",
           "title": "Little Fires Everywhere"
         }
-      ]
+      ],
+      "id": 3
     },
     {
       "name": "J.K. Rowling",
@@ -64,7 +67,8 @@
           "title": "Harry Potter and the Goblet of Fire",
           "categories": ["fantasy", "children's literature"],
           "publishedDate": "July 8, 2000"
-        }]
+        }],
+        "id": 4
     },
     {
         "name": "Dan Brown",
@@ -86,7 +90,8 @@
             "publisher": "Corgi Books",
             "publishedDate": "2000"
           }
-        ]
+        ],
+        "id": 5
       },
       {
         "name": "J.D. Salinger",
@@ -102,7 +107,8 @@
             "publisher": "Little, Brown and Company",
             "publishedDate": "1951"
           }
-        ]
+        ],
+        "id": 6
       },
       {
         "name": "John Steinbeck",
@@ -125,7 +131,8 @@
             "publisher": "Penguin Classics",
             "publishedDate": "1939"
           }
-        ]
+        ],
+        "id": 7
       },
       {
         "name": "Margaret Atwood",
@@ -147,7 +154,8 @@
             "publisher": "McClelland & Stewart",
             "publishedDate": "2009"
           }
-        ]
+        ],
+        "id": 8
       }
 ]
 

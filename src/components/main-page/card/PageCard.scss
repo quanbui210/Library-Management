@@ -4,7 +4,8 @@
     margin: 60px 0;
     border-radius: 4px;
     border: 1px solid #252525;
-            box-shadow:  2px 4px rgba(71, 71, 71, 0.704) !important;    transition: all 0.3s ease-in-out;
+    box-shadow:  2px 4px rgba(71, 71, 71, 0.704) !important;
+    transition: all 0.3s ease-in-out;
     overflow: hidden;
         &:hover {
             transform: translateY(-10px) !important;
@@ -12,7 +13,11 @@
         &:hover .page-card-img {
             transform: scale(1.1);
             transition: transform 0.3s ease-in-out;
+            // filter: blur(10px);
+            // display: none;
         }
+
+
         h2 {
             padding: 16px;
             border-bottom: 1px solid #464545;

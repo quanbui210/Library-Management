@@ -52,9 +52,35 @@ export interface AuthorData {
   dateOfBirth: string
   shortSummary: string
   image: string
+  id: number
 }
 
 export type SearchProps = {
   searchTerm: string
   setSearchTerm: Dispatch<SetStateAction<string>>
+}
+
+export interface AddUserPayload {
+  id: number
+  fullName: string
+  email: string
+  role: 'user' | 'admin'
+  password: string
+  username: string
+  booksBorrowed: number | undefined
+}
+
+export interface AuthState {
+  isLoggedIn: boolean | null
+  isLoading: boolean
+  invalid: boolean
+  error: boolean
+  users: User[]
+  enteredUsername: string
+  enteredPassword: string
+  isAdmin: boolean | null
+  addUserError: boolean | null
+  loggedInUserName: string
+  googleUser: GoogleUser | null
+  profile: any | null
 }

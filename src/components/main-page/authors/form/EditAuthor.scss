@@ -1,0 +1,15 @@
+.authors-form-container {
+    text-align: center;
+    >img {
+        width: 300px;
+        height: 320px;
+        object-fit: contain;
+        margin-bottom: 60px;
+     }
+}
+
+.authors-action-form {
+    textarea {
+        padding: 20px 130px;
+    }
+}

@@ -2,10 +2,11 @@
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useState, useRef } from 'react'
+import { useState, useRef, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { RootState } from '../../../../store/store'
+import GoBackBtn from '../../../btn/GoBackBtn'
 import { authorsActions } from '../../../../store/authors/authorsSlice'
 import './EditAuthor.scss'
 
@@ -21,18 +22,22 @@ export default function EditAuthor() {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const inputValue = inputRef.current?.value
-    dispatch(authorsActions.editAuthor({ id: authorId, value: inputValue }))
-    const updatedAuthor = {
-      ...author,
-      shortSummary: inputValue
-    }
-    localStorage.setItem(`author-${authorId}`, JSON.stringify(updatedAuthor))
+    dispatch(authorsActions.editAuthor({ id: parseInt(authorId as string), value: inputValue }))
+    // const updatedAuthor = {
+    //   ...author,
+    //   shortSummary: inputValue
+    // }
+    // localStorage.setItem(`author-${authorId}`, JSON.stringify(updatedAuthor))
+    // dispatch(authorsActions.updateAuthor(updatedAuthor))
     navigate('/home/authors')
   }
+
   return (
     <div className="authors-form-container">
+      <GoBackBtn />
       <h2>{author && author.name}</h2>
       <p>{author && author.dateOfBirth}</p>
+      <p>{author?.shortSummary}</p>
       <img src={author?.image} alt="" />
       <Form className="authors-action-form" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">

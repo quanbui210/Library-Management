@@ -16,7 +16,9 @@ export default function Authors() {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('')
   const authors = useSelector((state: RootState) => state.author.items)
-  const [authorList, setAuthorList] = useState(authors)
+  const [authorList, setAuthorList] = useState([...authors])
+  console.log(authors[0])
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function Authors() {
 
   const filterAuthors = () => {
     if (searchTerm.trim() === '') {
-      setAuthorList(authors)
+      setAuthorList([...authors])
     } else {
       const filteredAuthors = authors.filter((author: { name: string }) => {
         return author.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -34,9 +36,14 @@ export default function Authors() {
       setAuthorList([...filteredAuthors])
     }
   }
+
   useEffect(() => {
     filterAuthors()
-  }, [searchTerm, authors])
+  }, [searchTerm])
+
+  // useEffect(() => {
+  //   console.log(authors)
+  // }, [authors])
 
   return (
     <div className="authors-list">
@@ -44,75 +51,61 @@ export default function Authors() {
       <SearchInput setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       <h1>Authors</h1>
       <ul>
-        {authorList.map((author) => (
-          <li key={author.id} className="author-card">
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={5}>
-                  <img src={author.image} alt="" />
-                </Grid>
-                <Grid item xs={5}>
-                  <div>
-                    <h2>
-                      {author.name}
-                      {/* <IconButton
-                        aria-label="more"
-                        aria-controls="author-menu"
-                        aria-haspopup="true"
-                        onClick={handleClick}>
-                        <MoreVertIcon />
-                      </IconButton>
-                      <Menu
-                        id="author-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}>
-                        <MenuItem>Edit</MenuItem>
-                        <MenuItem>
+        {Array.isArray(authors) &&
+          authorList
+            .filter((author: { name: string }) => {
+              return author.name.toLowerCase().includes(searchTerm.toLowerCase())
+            })
+            .map((author) => (
+              <li key={author.id} className="author-card">
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={5}>
+                      <img src={author.image} alt="" />
+                    </Grid>
+                    <Grid item xs={5}>
+                      <div>
+                        <h2>
+                          {author.name}
                           <button
                             onClick={() =>
                               dispatch(authorsActions.removeAuthor({ id: author.id }))
                             }>
                             Delete
                           </button>
-                        </MenuItem>
-                      </Menu> */}
-                      <button
-                        onClick={() => dispatch(authorsActions.removeAuthor({ id: author.id }))}>
-                        Delete
-                      </button>
-                      <button onClick={() => navigate(`/home/actions/${author.id}`)}>Edit</button>
-                    </h2>
+                          <button onClick={() => navigate(`/home/actions/${author.id}`)}>
+                            Edit
+                          </button>
+                        </h2>
 
-                    <span>
-                      <i>{author.dateOfBirth}</i>
-                    </span>
-                    <p className="author-summary">
-                      <i>{author.shortSummary}</i>
-                    </p>
-                    {/* <button
+                        <span>
+                          <i>{author.dateOfBirth}</i>
+                        </span>
+                        <p className="author-summary">
+                          <i>{author.shortSummary}</i>
+                        </p>
+                        {/* <button
                       onClick={() => {
                         dispatch(authorsActions.removeAuthor({ name: author.name }))
                       }}>
                       Delete
                     </button> */}
-                    <p>Famous book(s): </p>
-                    <ul>
-                      {author.books.map((book) => (
-                        <li className="famous-books" key={book.ISBN}>
-                          <Link to={`/home/books/${book.ISBN}`}>
-                            <p>{book.title}</p>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Grid>
-              </Grid>
-            </Box>
-          </li>
-        ))}
+                        <p>Famous book(s): </p>
+                        <ul>
+                          {author.books.map((book) => (
+                            <li className="famous-books" key={book.ISBN}>
+                              <Link to={`/home/books/${book.ISBN}`}>
+                                <p>{book.title}</p>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </li>
+            ))}
       </ul>
     </div>
   )

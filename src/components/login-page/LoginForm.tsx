@@ -102,7 +102,10 @@ const LoginForm = () => {
         </Form.Group>
         <div className="instruction">
           <p>Login: Username: &#39;admin&#39; (+features) or &#39;user&#39;. Pw: password</p>
-          <p>With Google: Demo project, so all users login with google are admin</p>
+          <p>
+            Admin can modify data, while user can borrow, return, and add book to favourite list
+          </p>
+          <p>Make sure to try both! *Login as user with Google</p>
         </div>
       </Form>
     </>

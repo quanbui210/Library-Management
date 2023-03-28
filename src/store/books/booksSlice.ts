@@ -1,5 +1,6 @@
 import { Book } from '../../types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import nextId from 'react-id-generator'
 
 export interface BookState {
   items: Book[]
@@ -50,6 +51,30 @@ const booksSlice = createSlice({
         removedBook.isFav = false // Set the isFavourite flag to false
         state.favourites = state.favourites.filter((book) => book.ISBN !== removedBook.ISBN)
         localStorage.setItem('favourites', JSON.stringify(state.favourites))
+      }
+    },
+    borrowedBook: (state, action) => {
+      const ISBN = action.payload
+      const borrowedBook = state.items.find((book) => book.ISBN === ISBN)
+      if (borrowedBook) {
+        const borrowedDate = new Date()
+        borrowedBook.borrowDate = borrowedDate.toISOString()
+        borrowedBook.status = 'borrowed'
+        borrowedBook.borrowedId = nextId()
+        window.alert(`You have successfully borrowed ${borrowedBook.title}`)
+      }
+    },
+    returnBook: (state, action) => {
+      const ISBN = action.payload
+      const returnedBook = state.items.find(
+        (book) => book.ISBN === ISBN && book.status === 'borrowed'
+      )
+      if (returnedBook) {
+        const returnedDate = new Date()
+        returnedBook.status = 'available'
+        returnedBook.returnDate = returnedDate.toISOString()
+        returnedBook.borrowedId = null
+        window.alert(`You have successfully return "${returnedBook.title}"`)
       }
     }
   },

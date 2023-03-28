@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { AuthorData } from '../../types'
 
 export interface AuthorsState {
@@ -35,19 +35,26 @@ const authorsSlice = createSlice({
     },
     editAuthor: (state, action) => {
       const { id, value } = action.payload
-      console.log('Edited Value of Author: ' + value)
-      return {
-        ...state,
-        items: state.items.map((author) => {
-          if (author.id === id) {
-            return {
-              ...author,
-              shortSummary: value
-            }
-          }
-          return author
-        })
-      }
+      const editedUser = state.items.map((user) => {
+        console.log(user.id, id)
+        if (user.id === id) {
+          user.shortSummary = value
+        }
+        return user
+      })
+
+      // const editedAuthor = state.items.find((user) => user.id === id)
+      // if (editedAuthor) {
+      //   editedAuthor.shortSummary = value
+      //   console.log(JSON.stringify(editedAuthor))
+
+      state.items = editedUser
+    },
+    updateAuthor: (state, action) => {
+      const updatedAuthor = action.payload
+      state.items = state.items.map((author) =>
+        author.id === updatedAuthor.id ? updatedAuthor : author
+      )
     }
   },
   extraReducers: (builder) => {

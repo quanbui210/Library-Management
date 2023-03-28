@@ -39,6 +39,7 @@ export interface Book {
   borrowDate: null | string
   returnDate: null | string
   isFav: boolean
+  description: string
 }
 
 interface AuthorBook {

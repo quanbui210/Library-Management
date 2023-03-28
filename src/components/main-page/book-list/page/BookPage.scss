@@ -1,0 +1,40 @@
+.book-page {
+    display: flex !important;
+    margin-top: 100px;
+    .book-img {
+        width: 800px;
+    }
+    h1 {
+        color: #ee6a18;
+    }
+    .category {
+        font-size: 16px;
+        color: #d13f68;
+    }
+    h3 {
+        color: rgba(243, 115, 252, 0.735);
+        font-weight: normal;
+    }
+    button {
+        border: 1px solid #2f2f2f;
+        border-radius: 4px;
+        padding: 12px;
+    }
+    .disabled {
+        color: #807e7e !important;
+        margin-top: 20px;
+    }
+    .avail {
+        color: #ddd9d9 !important;
+        margin-top: 20px;
+        background-color: #4840be;
+    }
+    .note {
+        font-style: italic;
+        font-size: 13px;
+        color: rgb(231, 40, 15);
+    }
+    li {
+        color: #23d5b4;
+    }
+}

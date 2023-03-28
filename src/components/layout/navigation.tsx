@@ -37,7 +37,7 @@ const Navigation = () => {
             (googleUser !== null ? (
               <li>
                 <PersonIcon className="person-icon" />
-                {googleUser && googleUser.name} (Admin)
+                {googleUser && googleUser.name} (User)
               </li>
             ) : (
               <li>

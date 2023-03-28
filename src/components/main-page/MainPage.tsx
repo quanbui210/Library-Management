@@ -48,11 +48,9 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <h2>
-        {isAdmin
-          ? googleUser !== null
-            ? `Welcome to E-Library, ${googleUser && googleUser?.name}`
-            : `Welcome to E-Library, ${loggedInUserName} (admin)`
-          : `Welcome to E-Library, ${loggedInUserName} (user)`}
+        {googleUser !== null
+          ? `Welcome to E-Library, ${googleUser?.name}`
+          : `Welcome to E-Library, ${loggedInUserName} (${isAdmin ? 'admin' : 'user'})`}
       </h2>
       <div className="card-container">
         <PageCard

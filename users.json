@@ -69,7 +69,7 @@
     },
     {
       "id": 9,
-      "fullName": "User :)",
+      "fullName": "User",
       "username": "user",
       "password": "password",
       "role": "user",

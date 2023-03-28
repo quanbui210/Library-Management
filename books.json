@@ -26,7 +26,7 @@
             "name": "Ray Bradbury"
           }
         ],
-        "status": "borrowed",
+        "status": "available",
         "borrowerId": "123456789",
         "publishedDate": "October 19, 1953",
         "borrowDate": "March 21, 2023",
@@ -60,7 +60,7 @@
             "name": "Margaret Atwood"
           }
         ],
-        "status": "borrowed",
+        "status": "available",
         "borrowerId": null,
         "publishedDate": "September 10, 2019",
         "borrowDate": null,
@@ -94,7 +94,7 @@
             "name": "Paula Hawkins"
           }
         ],
-        "status": "borrowed",
+        "status": "available",
         "borrowerId": "987654321",
         "publishedDate": "January 13, 2015",
         "borrowDate": "March 18, 2023",
@@ -162,7 +162,7 @@
         "name": "Matt Haig"
         }
         ],
-        "status": "borrowed",
+        "status": "available",
         "borrowerId": "456789012",
         "publishedDate": "August 13, 2020",
         "borrowDate": "March 23, 2023",
@@ -214,7 +214,7 @@
 "name": "V.E. Schwab"
 }
 ],
-"status": "borrowed",
+"status": "available",
 "borrowerId": null,
 "publishedDate": "October 6, 2020",
 "borrowDate": null,

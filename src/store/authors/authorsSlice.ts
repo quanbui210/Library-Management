@@ -15,8 +15,6 @@ const initialState: AuthorsState = {
   searchResults: []
 }
 
-const apiUrl = `${process.env.PUBLIC_URL}/api`
-
 const addAuthorsThunk = createAsyncThunk('authors/add', async (newAuthor: Partial<AuthorData>) => {
   return {
     author: newAuthor,

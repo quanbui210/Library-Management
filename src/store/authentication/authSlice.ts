@@ -18,8 +18,6 @@ const initialState: AuthState = {
   profile: null
 }
 
-const apiUrl = `${process.env.PUBLIC_URL}/api/`
-
 const fetchUser = createAsyncThunk('authentication/fetch', async () => {
   const response = await fetch('../public/data/users.json')
   const usersData = await response.json()

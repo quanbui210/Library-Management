@@ -43,6 +43,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true
         state.enteredUsername = ''
         state.loggedInUserName = user.fullName
+        console.log(user.fullName, state.loggedInUserName)
         state.googleUser = undefined
         if (user.role === 'admin') {
           state.isAdmin = true

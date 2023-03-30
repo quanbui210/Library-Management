@@ -20,8 +20,7 @@ const LoginForm = () => {
     TokenResponse,
     'error' | 'error_description' | 'error_uri'
   > | null>(null)
-  const googleUser = useSelector((state: RootState) => state.auth.googleUser)
-  console.log(googleUser)
+
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser(codeResponse)

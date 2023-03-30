@@ -16,6 +16,7 @@ export default function MainPage() {
   const { isAdmin, loggedInUserName, googleUser, isLoading } = useSelector(
     (state: RootState) => state.auth
   )
+  console.log(loggedInUserName)
   console.log(isLoading)
   const navigate = useNavigate()
   const toDasboard = () => {
@@ -47,11 +48,21 @@ export default function MainPage() {
 
   return (
     <div className="main-page">
-      <h2>
-        {googleUser !== null
-          ? `Welcome to E-Library, ${googleUser?.name}`
-          : `Welcome to E-Library, ${loggedInUserName} (${isAdmin ? 'admin' : 'user'})`}
-      </h2>
+      {loggedInUserName || googleUser !== undefined ? (
+        <h2>
+          Welcome to E-Library{' '}
+          {googleUser !== null ? (
+            <span>{googleUser?.name}</span>
+          ) : (
+            <span>
+              {loggedInUserName} ({isAdmin ? 'admin' : 'user'})
+            </span>
+          )}
+        </h2>
+      ) : (
+        <h2>Loading...</h2>
+      )}
+
       <div className="card-container">
         <PageCard
           title="Dasboard"

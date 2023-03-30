@@ -2,7 +2,7 @@ import { Form } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useRef, FormEvent } from 'react'
-import auImg from '../../../../assets/authors.png'
+import auImg from '../../../../assets/authors-image/siuu.png'
 import nextId from 'react-id-generator'
 
 import { authorsActions } from '../../../../store/authors/authorsSlice'
@@ -63,9 +63,9 @@ export default function AddAuthorForm() {
             <Form.Label>Author Description</Form.Label>
             <Form.Control ref={descriptionRef} as="textarea" rows={3} />
           </Form.Group>
+          <button>Submit</button>
         </Form>
       </div>
-      <button>Submit</button>
     </div>
   )
 }

@@ -2,10 +2,10 @@
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useState, useRef, SetStateAction } from 'react'
+import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { RootState } from '../../../../store/store'
+import { AppDispatch, RootState } from '../../../../store/store'
 import GoBackBtn from '../../../btn/GoBackBtn'
 import { authorsActions } from '../../../../store/authors/authorsSlice'
 import './EditAuthor.scss'
@@ -13,7 +13,7 @@ import './EditAuthor.scss'
 export default function EditAuthor() {
   const { authorId } = useParams()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const authors = useSelector((state: RootState) => state.author.items)
   const author = authors.find((a) => {
     return a.id === parseInt(authorId as string)

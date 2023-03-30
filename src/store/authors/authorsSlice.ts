@@ -15,6 +15,13 @@ const initialState: AuthorsState = {
   searchResults: []
 }
 
+const addAuthorsThunk = createAsyncThunk('authors/add', async (newAuthor: Partial<AuthorData>) => {
+  return {
+    author: newAuthor,
+    error: null
+  }
+})
+
 const fetchAuthorsThunk = createAsyncThunk('authors/fetch', async () => {
   const response = await fetch('/authors.json')
   const authorsData = await response.json()
@@ -30,31 +37,33 @@ const authorsSlice = createSlice({
     removeAuthor: (state, action) => {
       const { id } = action.payload
       console.log(id)
-      const updatedAuthorList = state.items.filter((author) => author.id !== id)
-      return { ...state, items: updatedAuthorList } // Return new state object
+      const confirmDelete = window.confirm('Are you sure you want to delete this author?')
+      if (confirmDelete) {
+        const updatedAuthorList = state.items.filter((author) => author.id !== id)
+        state.items = updatedAuthorList
+      }
+      return state // Return the current state if the user cancels the delete action
     },
     editAuthor: (state, action) => {
       const { id, value } = action.payload
-      const editedUser = state.items.map((user) => {
-        console.log(user.id, id)
-        if (user.id === id) {
-          user.shortSummary = value
+      const editedAuthor = state.items.map((author) => {
+        if (author.id === id) {
+          return { ...author, shortSummary: value }
         }
-        return user
+        return author
       })
 
-      // const editedAuthor = state.items.find((user) => user.id === id)
-      // if (editedAuthor) {
-      //   editedAuthor.shortSummary = value
-      //   console.log(JSON.stringify(editedAuthor))
-
-      state.items = editedUser
+      state.items = editedAuthor
     },
-    updateAuthor: (state, action) => {
-      const updatedAuthor = action.payload
-      state.items = state.items.map((author) =>
-        author.id === updatedAuthor.id ? updatedAuthor : author
-      )
+    addAuthor: (state, action) => {
+      const { author, id } = action.payload
+      console.log(author, id)
+      const existingAuthor = state.items.find((au) => au.id === id || au.name === author.name)
+      if (existingAuthor) {
+        window.alert('Author already exists')
+      } else {
+        state.items = [...state.items, author]
+      }
     }
   },
   extraReducers: (builder) => {
@@ -77,6 +86,10 @@ const authorsSlice = createSlice({
         isLoading: false
       }
     })
+    // builder.addCase(addAuthorsThunk, (state, action) => {
+    //   state.isLoading = false
+    //   state.items = [action.payload.book, ...state.items]
+    // })
   }
 })
 

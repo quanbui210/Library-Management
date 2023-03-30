@@ -32,9 +32,6 @@
         .author-summary {
             font-style: italic !important;
         }
-        button {
-            margin: 0 6px;
-        }
     }
 }
 
@@ -47,3 +44,23 @@
         }
 }
 
+.author-actions {
+    color: #ccc !important;
+    margin-left: 17px;
+    font-size: 18px !important;
+        &:hover {
+            background-color: #ccc;
+            color: #333 !important;
+        }
+}
+
+.add-new-btn {
+    margin-top: 30px !important;
+    border: 1px solid #ccc !important;
+    background-color: #ccc !important;
+    color: #333 !important;
+     &:hover {
+        background-color: #333 !important;
+        color: #ccc !important
+     }
+}

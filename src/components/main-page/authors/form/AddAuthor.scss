@@ -1,0 +1,22 @@
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+
+    .form-control {
+        width: 590px;
+        text-align: center;
+        margin-left: 30px;
+        margin-bottom: 30px;
+    }
+    .form-label {
+        width: 90px;
+    }
+    button {
+        width: 300px;
+        margin-top: 40px;
+    }
+}

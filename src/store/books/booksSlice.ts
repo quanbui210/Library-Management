@@ -8,6 +8,7 @@ export interface BookState {
   error: null | boolean
   favourites: Book[]
   message: string
+  filterArr: Book[] | []
 }
 
 const initialState: BookState = {
@@ -15,7 +16,8 @@ const initialState: BookState = {
   isLoading: false,
   error: null,
   favourites: JSON.parse(localStorage.getItem('favourites') || '[]'),
-  message: ''
+  message: '',
+  filterArr: []
 }
 
 const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
@@ -75,6 +77,53 @@ const booksSlice = createSlice({
         returnedBook.returnDate = returnedDate.toISOString()
         returnedBook.borrowedId = null
         window.alert(`You have successfully return "${returnedBook.title}"`)
+      }
+    },
+    editBook: (state, action) => {
+      const { ISBN, selectedBook } = action.payload
+      console.log(ISBN)
+      state.items = state.items.map((book) => {
+        if (book.ISBN === ISBN) {
+          return {
+            ...book,
+            ...selectedBook
+          }
+        }
+        return book
+      })
+      localStorage.setItem('books', JSON.stringify(state.items))
+    },
+    addNewBook: (state, action) => {
+      const { newBook } = action.payload
+      const existingBook = state.items.find(
+        (book) => book.ISBN === newBook.ISBN || book.title === newBook.title
+      )
+      if (existingBook) {
+        window.alert('book already existed')
+      } else {
+        state.items = [...state.items, newBook]
+        window.alert('Successfully add new book')
+        localStorage.setItem('books', JSON.stringify(state.items))
+      }
+    },
+    removeBook: (state, action) => {
+      const ISBN = action.payload
+      const selectedBook = state.items.find((book) => book.ISBN === ISBN)
+      if (selectedBook) {
+        const confirm = window.confirm('Do you want to delete this book FOREVERRRRR?')
+        if (confirm) {
+          state.items = state.items.filter((book) => book.ISBN !== selectedBook.ISBN)
+        }
+      }
+    },
+    filterBook: (state, action) => {
+      const searchTerm = action.payload.trim().toLowerCase()
+      const filteredBooks = searchTerm
+        ? state.items.filter((book) => book.title.toLowerCase().includes(searchTerm))
+        : []
+      return {
+        ...state,
+        filterArr: filteredBooks
       }
     }
   },

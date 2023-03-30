@@ -1,12 +1,11 @@
 import Form from 'react-bootstrap/Form'
 import './LoginForm.scss'
 
-import { Dispatch } from '@reduxjs/toolkit'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../store/authentication/authSlice'
-import { RootState } from '../../store/store'
+import { AppDispatch, RootState } from '../../store/store'
 import { useGoogleLogin, TokenResponse } from '@react-oauth/google'
 import axios from 'axios'
 
@@ -15,7 +14,7 @@ const LoginForm = () => {
   const [enteredPassword, setEnteredPassword] = useState('')
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn)
 
-  const dispatch = useDispatch<Dispatch>()
+  const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const [user, setUser] = useState<Omit<
     TokenResponse,
@@ -71,42 +70,51 @@ const LoginForm = () => {
       authActions.loginUser({ enteredUsername: enteredUserName, enteredPassword: enteredPassword })
     )
   }
+  const loginGoogle = () => {
+    login()
+  }
 
   return (
     <>
-      <Form className="form" onSubmit={submitHandler}>
+      <Form className="form" onSubmit={submitHandler} autoComplete="off">
         <Form.Group className="form-group" controlId="formBasicEmail">
           <Form.Label className="form-label">Username: </Form.Label>
           <Form.Control
+            autoComplete="off"
             className="form-control"
             placeholder="Enter username"
             value={enteredUserName}
             onChange={userNameHandler}
+            name="form-username"
+            id="form-username"
           />
         </Form.Group>
         <Form.Group className="form-group" controlId="formBasicEmail">
           <Form.Label className="form-label">Password: </Form.Label>
           <Form.Control
+            autoComplete="off"
             className="form-control"
             type="password"
             placeholder="Enter password"
             value={enteredPassword}
             onChange={passwordHandler}
+            name="form-password"
+            id="form-password"
           />
         </Form.Group>
         <Form.Group className="form-group">
           <button type="submit">Login</button>
-          <button onClick={() => login()}>
+          <button onClick={loginGoogle}>
             Sign in with Google <i className="devicon-google-plain"></i>
           </button>
         </Form.Group>
-        <div className="instruction">
+        {/* <div className="instruction">
           <p>Login: Username: &#39;admin&#39; (+features) or &#39;user&#39;. Pw: password</p>
           <p>
             Admin can modify data, while user can borrow, return, and add book to favourite list
           </p>
           <p>Make sure to try both! *Login as user with Google</p>
-        </div>
+        </div> */}
       </Form>
     </>
   )

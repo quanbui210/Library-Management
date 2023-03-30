@@ -79,7 +79,7 @@ export interface AuthState {
   users: User[]
   enteredUsername: string
   enteredPassword: string
-  isAdmin: boolean | null
+  isAdmin: boolean | null | undefined
   addUserError: boolean | null
   loggedInUserName: string
   googleUser: GoogleUser | null

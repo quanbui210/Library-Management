@@ -1,30 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector, useDispatch } from 'react-redux'
-import { authorsActions } from '../../../store/authors/authorsSlice'
 import { useEffect, useState } from 'react'
-import GoBackBtn from '../../btn/GoBackBtn'
-import { RootState } from '../../../store/store'
+import { Link, useNavigate } from 'react-router-dom'
+
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+
+import GoBackBtn from '../../btn/GoBackBtn'
+import { RootState } from '../../../store/store'
 import SearchInput from '../../input/SearchInput'
-import { Link, useNavigate } from 'react-router-dom'
 import { booksActions } from '../../../store/books/booksSlice'
+import { authorsActions } from '../../../store/authors/authorsSlice'
 
 import './Authors.scss'
+import { Button } from '@mui/material'
 
 export default function Authors() {
   const dispatch = useDispatch()
-  const [searchTerm, setSearchTerm] = useState('')
+  const isAdmin = useSelector((state: RootState) => state.auth.isAdmin)
   const authors = useSelector((state: RootState) => state.author.items)
   const [authorList, setAuthorList] = useState([...authors])
-  console.log(authors[0])
-
+  const [searchTerm, setSearchTerm] = useState('')
+  const [deleteTrigger, setDeleteTrigger] = useState(false) // new state variable
+  console.log(authorList)
   const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(authorsActions.fetchAuthorsThunk())
     dispatch(booksActions.fetchBooksThunk())
   }, [])
+
+  useEffect(() => {
+    setAuthorList([...authors])
+  }, [deleteTrigger])
 
   const filterAuthors = () => {
     if (searchTerm.trim() === '') {
@@ -41,17 +51,20 @@ export default function Authors() {
     filterAuthors()
   }, [searchTerm])
 
-  // useEffect(() => {
-  //   console.log(authors)
-  // }, [authors])
-
   return (
     <div className="authors-list">
       <GoBackBtn />
-      <SearchInput setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+      <div style={{ textAlign: 'center' }}>
+        <SearchInput setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+        {isAdmin && (
+          <Button className="add-new-btn" onClick={() => navigate('/home/authors/add')}>
+            Add Author
+          </Button>
+        )}
+      </div>
       <h1>Authors</h1>
       <ul>
-        {Array.isArray(authors) &&
+        {Array.isArray(authorList) &&
           authorList
             .filter((author: { name: string }) => {
               return author.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -67,29 +80,33 @@ export default function Authors() {
                       <div>
                         <h2>
                           {author.name}
-                          <button
-                            onClick={() =>
-                              dispatch(authorsActions.removeAuthor({ id: author.id }))
-                            }>
-                            Delete
-                          </button>
-                          <button onClick={() => navigate(`/home/actions/${author.id}`)}>
-                            Edit
-                          </button>
+                          <span>
+                            {isAdmin && (
+                              <DeleteIcon
+                                className="author-actions"
+                                onClick={() => {
+                                  dispatch(authorsActions.removeAuthor({ id: author.id }))
+                                  setDeleteTrigger(!deleteTrigger)
+                                }}
+                              />
+                            )}
+                          </span>
+                          <span>
+                            {isAdmin && (
+                              <EditIcon
+                                className="author-actions"
+                                onClick={() => navigate(`/home/authors/edit/${author.id}`)}
+                              />
+                            )}
+                          </span>
                         </h2>
-
                         <span>
                           <i>{author.dateOfBirth}</i>
                         </span>
                         <p className="author-summary">
                           <i>{author.shortSummary}</i>
                         </p>
-                        {/* <button
-                      onClick={() => {
-                        dispatch(authorsActions.removeAuthor({ name: author.name }))
-                      }}>
-                      Delete
-                    </button> */}
+
                         <p>Famous book(s): </p>
                         <ul>
                           {author.books.map((book) => (

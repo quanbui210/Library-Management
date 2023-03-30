@@ -15,6 +15,10 @@ import BookPage from './components/main-page/book-list/page/BookPage'
 import BooksErrorElement from './components/error-page/BooksErrorElement'
 import { FavouriteBooks } from './components/main-page/favourite/FavouriteBooks'
 import EditAuthor from './components/main-page/authors/form/EditAuthor'
+import AddAuthorForm from './components/main-page/authors/form/AddAuthorForm'
+import AddBookForm from './components/main-page/book-list/form/add/AddBookForm'
+import EditBookForm from './components/main-page/book-list/form/edit/EditBookForm'
+
 
 const router = createBrowserRouter([
   {
@@ -24,12 +28,6 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Layout><MainPage/></Layout>,
-    // children: [
-    //   {
-    //     path: '/home/dashboard',
-    //     element: <Layout><Dashboard/></Layout>
-    //   }
-    // ]
   },
   {
     path: '/home/dashboard',
@@ -54,17 +52,26 @@ const router = createBrowserRouter([
   {
     path: '/home/books/:ISBN',
     element: <Layout><BookPage/></Layout>,
-    errorElement: <Layout><BooksErrorElement/></Layout>
+  },
+  {
+    path: '/home/books/add',
+    element: <Layout><AddBookForm/></Layout>,
+  },
+  {
+    path: '/home/books/edit/:ISBN',
+    element: <Layout><EditBookForm/></Layout>,
   },
   {
     path: '/home/favourites',
     element: <Layout><FavouriteBooks/></Layout>,
-    errorElement: <Layout><BooksErrorElement/></Layout>
   },
   {
-    path: '/home/actions/:authorId',
+    path: '/home/authors/edit/:authorId',
     element: <Layout><EditAuthor/></Layout>,
-    errorElement: <Layout><BooksErrorElement/></Layout>
+  },
+  {
+    path: '/home/authors/add',
+    element: <Layout><AddAuthorForm/></Layout>,
   },
 ])
 

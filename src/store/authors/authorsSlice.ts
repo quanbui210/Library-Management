@@ -23,7 +23,7 @@ const addAuthorsThunk = createAsyncThunk('authors/add', async (newAuthor: Partia
 })
 
 const fetchAuthorsThunk = createAsyncThunk('authors/fetch', async () => {
-  const response = await fetch(`../public/data/authors.json`)
+  const response = await fetch(`./data/authors.json`)
   const authorsData = await response.json()
   return {
     authorsData

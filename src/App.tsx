@@ -18,45 +18,49 @@ import EditAuthor from './components/main-page/authors/form/EditAuthor'
 import AddAuthorForm from './components/main-page/authors/form/AddAuthorForm'
 import AddBookForm from './components/main-page/book-list/form/add/AddBookForm'
 import EditBookForm from './components/main-page/book-list/form/edit/EditBookForm'
-import path from 'path'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout><LoginPage/></Layout>,
-    children: [
-      {
-        path: "home",
-        element: <Layout><MainPage/></Layout>,
-        children: [
-          {
-            path: "dashboard",
-            element: <Layout><Dashboard/></Layout>
-          },
-          {
-            path: "books",
-            element: <Layout><Books/></Layout>
-          },
-          {
-            path: "users",
-            element: <Layout><UsersList/></Layout>
-          },
-          {
-            path: "authors",
-            element: <Layout><Authors/></Layout>
-          },
-          {
-            path: "favourites",
-            element: <Layout><FavouriteBooks/></Layout>
-          },
-          {
-            path: "categories",
-            element: <Layout><Categories/></Layout>
-          }
-        ]
-      }
-    ]
+    // children: [
+    //   {
+    //     path: "home",
+    //     element: <Layout><MainPage/></Layout>,
+    //     children: [
+    //       {
+    //         path: "dashboard",
+    //         element: <Layout><Dashboard/></Layout>
+    //       },
+    //       {
+    //         path: "books",
+    //         element: <Layout><Books/></Layout>,
+    //         children: [
+    //           {
+    //             path: "add"
+    //           }
+    //         ]
+    //       },
+    //       {
+    //         path: "users",
+    //         element: <Layout><UsersList/></Layout>
+    //       },
+    //       {
+    //         path: "authors",
+    //         element: <Layout><Authors/></Layout>
+    //       },
+    //       {
+    //         path: "favourites",
+    //         element: <Layout><FavouriteBooks/></Layout>
+    //       },
+    //       {
+    //         path: "categories",
+    //         element: <Layout><Categories/></Layout>
+    //       }
+    //     ]
+    //   }
+    // ]
   },
   {
     path: '/home',

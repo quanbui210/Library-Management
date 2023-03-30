@@ -86,7 +86,6 @@ const LoginForm = () => {
             value={enteredUserName}
             onChange={userNameHandler}
             name="form-username"
-            id="form-username"
           />
         </Form.Group>
         <Form.Group className="form-group" controlId="formBasicEmail">
@@ -99,22 +98,21 @@ const LoginForm = () => {
             value={enteredPassword}
             onChange={passwordHandler}
             name="form-password"
-            id="form-password"
           />
         </Form.Group>
         <Form.Group className="form-group">
           <button type="submit">Login</button>
-          <button onClick={loginGoogle}>
+          <button type="button" onClick={loginGoogle}>
             Sign in with Google <i className="devicon-google-plain"></i>
           </button>
         </Form.Group>
-        {/* <div className="instruction">
+        <div className="instruction">
           <p>Login: Username: &#39;admin&#39; (+features) or &#39;user&#39;. Pw: password</p>
           <p>
             Admin can modify data, while user can borrow, return, and add book to favourite list
           </p>
           <p>Make sure to try both! *Login as user with Google</p>
-        </div> */}
+        </div>
       </Form>
     </>
   )

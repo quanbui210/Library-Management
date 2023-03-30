@@ -26,12 +26,12 @@ export default function AddBookForm() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const title = inputRefs[0].current?.value
-    const category = inputRefs[0].current?.value
-    const description = inputRefs[0].current?.value
-    const publisher = inputRefs[0].current?.value
-    const publishedDate = inputRefs[0].current?.value
-    const ISBN = inputRefs[0].current?.value
-    const author = inputRefs[0].current?.value
+    const category = inputRefs[1].current?.value
+    const description = inputRefs[2].current?.value
+    const publisher = inputRefs[3].current?.value
+    const publishedDate = inputRefs[4].current?.value
+    const ISBN = inputRefs[5].current?.value
+    const author = inputRefs[6].current?.value
     const newBook: Book = {
       title: title ?? '',
       category: category ?? '',
@@ -55,7 +55,7 @@ export default function AddBookForm() {
   return (
     <div>
       <GoBackBtn />
-      <h1 style={{ textAlign: 'center', marginTop: '110px' }}>Add New User</h1>
+      <h1 style={{ textAlign: 'center', marginTop: '110px' }}>Add Book</h1>
       <Form onSubmit={handleSubmit} className="add-book-form">
         <div>
           <Form.Group className="mb-3 form-group">
@@ -72,7 +72,7 @@ export default function AddBookForm() {
           </Form.Group>
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">ISBN</Form.Label>
-            <Form.Control ref={inputRefs[6]} type="text" placeholder="ISBN" />
+            <Form.Control ref={inputRefs[5]} type="text" placeholder="ISBN" />
           </Form.Group>
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Author</Form.Label>

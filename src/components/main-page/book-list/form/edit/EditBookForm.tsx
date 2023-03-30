@@ -56,7 +56,6 @@ export default function EditBookForm() {
       isFav: false
     }
     dispatch(booksActions.editBook({ ISBN: book?.ISBN, selectedBook: selectedBook }))
-    dispatch(booksActions.fetchBooksThunk())
     navigate('/home/books')
   }
   return (

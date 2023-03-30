@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, SetStateAction, useMemo } from 'react'
 import { Button, Pagination } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { RootState } from '../../../store/store'
 import { booksActions } from '../../../store/books/booksSlice'
+import BookCard from './card/BookCard'
 import './Books.scss'
+import { Book } from '../../../types'
 import SearchInput from '../../input/SearchInput'
 import { AppDispatch } from '../../../store/store'
 import handleRender from './render/handleBookRender'
@@ -14,34 +16,27 @@ import GoBackBtn from '../../btn/GoBackBtn'
 export default function Books() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const [page, setPage] = useState(1)
-  const [searchTerm, setSearchTerm] = useState('')
-  const perPage = 8
-
   const books = useSelector((state: RootState) => state.book.items)
-  const filteredBooks = useSelector((state: RootState) => state.book.filterArr)
+  const [bookList, setBookList] = useState(books)
+  const [searchTerm, setSearchTerm] = useState('')
+  // const [page, setPage] = useState(4)
+  // const perPage = 8
+  // const pagedBook = books.slice((page - 1) * perPage, page * perPage)
+  // const filteredBooks = useSelector((state: RootState) => state.book.filterArr)
   const isAdmin = useSelector((state: RootState) => state.auth.isAdmin)
-  const isSearching = searchTerm !== '' && filteredBooks.length > 0
-  console.log(isSearching)
+  // const isSearching = searchTerm.length !== 0 && filteredBooks.length > 0
 
-  const pagedBooks = isSearching
-    ? filteredBooks.slice((page - 1) * perPage, page * perPage)
-    : books.slice((page - 1) * perPage, page * perPage)
-  const pageCount = isSearching
-    ? Math.ceil(filteredBooks.length / perPage)
-    : Math.ceil(books.length / perPage)
-
-  console.log(pagedBooks)
-
-  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value)
-  }
-
+  // const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  //   setPage(value)
+  // }
   const filterBooks = () => {
     if (searchTerm.trim() === '') {
-      dispatch(booksActions.filterBook(''))
+      setBookList([...books])
     } else {
-      dispatch(booksActions.filterBook(searchTerm))
+      const filteredBooks = books.filter((book) => {
+        return book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      })
+      setBookList([...filteredBooks])
     }
   }
 
@@ -63,17 +58,15 @@ export default function Books() {
             Add Book
           </Button>
         )}
-        {isSearching && filteredBooks.length > 0
-          ? handleRender(filteredBooks)
-          : handleRender(pagedBooks)}
+        {handleRender(bookList)}
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Pagination
+        {/* <Pagination
           className="pagination"
-          count={pageCount}
+          count={Math.ceil(books.length / perPage)}
           page={page}
           onChange={handlePageChange}
-        />
+        /> */}
       </div>
     </div>
   )

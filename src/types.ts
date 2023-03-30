@@ -1,26 +1,26 @@
 import { Dispatch, Key, ReactNode, SetStateAction } from 'react'
 
 export interface GoogleUser {
-  name?: string
-  accessToken?: string
-  expiresIn?: number
-  idToken?: string
-  scope?: string
-  tokenType?: string
-  id?: number
-  username?: string
-  password?: string
-  role?: 'user'
-  booksBorrowed?: number | undefined
+  name: string
+  accessToken: string
+  expiresIn: number
+  idToken: string
+  scope: string
+  tokenType: string
+  id: number
+  username: string
+  password: string
+  role: 'user'
+  booksBorrowed: number | undefined
 }
 
 export interface User {
-  fullName?: string
-  id?: number
-  username?: string
-  password?: string
-  role?: 'user' | 'admin'
-  booksBorrowed?: number | undefined
+  fullName: string
+  id: number
+  username: string
+  password: string
+  role: 'user' | 'admin'
+  booksBorrowed: number | undefined
 }
 
 type Author = {
@@ -82,6 +82,6 @@ export interface AuthState {
   isAdmin: boolean | null | undefined
   addUserError: boolean | null
   loggedInUserName: string
-  googleUser: GoogleUser | null
+  googleUser: GoogleUser | undefined
   profile: any | null
 }

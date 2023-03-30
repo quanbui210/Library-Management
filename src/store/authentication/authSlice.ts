@@ -14,7 +14,7 @@ const initialState: AuthState = {
   isAdmin: null,
   addUserError: null,
   loggedInUserName: '',
-  googleUser: null,
+  googleUser: undefined,
   profile: null
 }
 
@@ -43,7 +43,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true
         state.enteredUsername = ''
         state.loggedInUserName = user.fullName
-        state.googleUser = null
+        state.googleUser = undefined
         if (user.role === 'admin') {
           state.isAdmin = true
         } else if (user.role === 'user') {
@@ -83,7 +83,7 @@ const authSlice = createSlice({
       const newGoogleUser = {
         id: profile.id,
         fullName: profile.email,
-        role: state.isAdmin ? 'admin' : 'user',
+        role: state.isAdmin ? 'admin' : ('user' as 'user' | 'admin'),
         password: 'password',
         username: profile.given_name,
         booksBorrowed: 4

@@ -21,7 +21,7 @@ const initialState: BookState = {
 }
 
 const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
-  const response = await fetch('../public/data/books.json')
+  const response = await fetch('/data/books.json')
   const booksData = await response.json()
   return {
     booksData

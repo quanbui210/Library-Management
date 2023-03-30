@@ -19,7 +19,7 @@ const initialState: AuthState = {
 }
 
 const fetchUser = createAsyncThunk('authentication/fetch', async () => {
-  const response = await fetch('../public/data/users.json')
+  const response = await fetch('/data/users.json')
   const usersData = await response.json()
   return {
     usersData

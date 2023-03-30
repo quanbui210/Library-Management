@@ -15,6 +15,8 @@ const initialState: AuthorsState = {
   searchResults: []
 }
 
+const apiUrl = `${process.env.PUBLIC_URL}/api`
+
 const addAuthorsThunk = createAsyncThunk('authors/add', async (newAuthor: Partial<AuthorData>) => {
   return {
     author: newAuthor,
@@ -23,7 +25,7 @@ const addAuthorsThunk = createAsyncThunk('authors/add', async (newAuthor: Partia
 })
 
 const fetchAuthorsThunk = createAsyncThunk('authors/fetch', async () => {
-  const response = await fetch('/authors.json')
+  const response = await fetch(`../public/data/authors.json`)
   const authorsData = await response.json()
   return {
     authorsData

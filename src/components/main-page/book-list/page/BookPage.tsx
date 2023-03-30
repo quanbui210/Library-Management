@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Grid } from '@mui/material'
-import { Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +9,6 @@ import { AppDispatch, RootState } from '../../../../store/store'
 import './BookPage.scss'
 import bookImg from '../../../../assets/book.png'
 import { booksActions } from '../../../../store/books/booksSlice'
-import { authActions } from '../../../../store/authentication/authSlice'
 import GoBackBtn from '../../../btn/GoBackBtn'
 
 export default function BookPage() {
@@ -65,7 +63,7 @@ export default function BookPage() {
             <span className="category">
               <i>Category: {book?.category}</i>
             </span>
-            <h3>Author:{book?.authors.map((a) => a.name)}</h3>
+            <h3>Author:{book?.authors && book?.authors.map((a) => a.name)}</h3>
             <p>{book && book.description}</p>
             <ul>
               <li>ISBN: {book?.ISBN}</li>

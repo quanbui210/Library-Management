@@ -1,38 +1,38 @@
 import { Dispatch, Key, ReactNode, SetStateAction } from 'react'
 
 export interface GoogleUser {
-  name: string
-  accessToken: string
-  expiresIn: number
-  idToken: string
-  scope: string
-  tokenType: string
-  id: number
-  username: string
-  password: string
-  role: 'user'
-  booksBorrowed: number | undefined
+  name?: string
+  accessToken?: string
+  expiresIn?: number
+  idToken?: string
+  scope?: string
+  tokenType?: string
+  id?: number
+  username?: string
+  password?: string
+  role?: 'user'
+  booksBorrowed?: number | undefined
 }
 
 export interface User {
-  fullName: string
-  id: number
-  username: string
-  password: string
-  role: 'user' | 'admin'
-  booksBorrowed: number | undefined
+  fullName?: string
+  id?: number
+  username?: string
+  password?: string
+  role?: 'user' | 'admin'
+  booksBorrowed?: number | undefined
 }
 
 type Author = {
-  name: string
+  name?: string | undefined
 }
 
 export interface Book {
-  publisher: ReactNode
+  publisher: string
   category: string
   ISBN: string
   title: string
-  authors: Author[]
+  authors?: Author[]
   status: string
   borrowedId: null | string
   publishedDate: string

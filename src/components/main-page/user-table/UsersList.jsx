@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import DataTable from './table/Table'
 import { toggleActions } from '../../../store/toggle/toggleSlice'
 import GoBackBtn from '../../btn/GoBackBtn'
-import { RootState } from '../../../store/store'
 
 import './UsersList.scss'
 
 export default function UsersList() {
-  const { isAdmin } = useSelector((state: RootState) => state.auth)
-  const show = useSelector((state: RootState) => state.toggle.show)
+  const { isAdmin } = useSelector((state) => state.auth)
+  const show = useSelector((state) => state.toggle.show)
   console.log(show)
   const dispatch = useDispatch()
 

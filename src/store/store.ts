@@ -17,6 +17,8 @@ export interface RootState {
   author: AuthorsState
   toggle: ToggleState
 }
+const storedState = localStorage.getItem('reduxState')
+const preloadedState = storedState ? JSON.parse(storedState) : undefined
 
 const store = configureStore({
   reducer: {
@@ -25,7 +27,7 @@ const store = configureStore({
     toggle: toggleSlice,
     author: authorsSlice
   },
-  preloadedState: JSON.parse(localStorage.getItem('reduxState')) || undefined
+  preloadedState: storedState ? JSON.parse(storedState) : undefined
 })
 store.subscribe(() => {
   localStorage.setItem('reduxState', JSON.stringify(store.getState()))

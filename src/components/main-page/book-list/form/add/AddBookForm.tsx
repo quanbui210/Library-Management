@@ -1,8 +1,8 @@
 import { Form } from 'react-bootstrap'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { useRef, useState, useEffect, FormEvent } from 'react'
-import nextId from 'react-id-generator'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useRef, FormEvent } from 'react'
+// import nextId from 'react-id-generator'
 
 import { booksActions } from '../../../../../store/books/booksSlice'
 import { Book } from '../../../../../types'
@@ -21,7 +21,7 @@ export default function AddBookForm() {
     'publishedDate',
     'ISBN',
     'author'
-  ].map((refName) => useRef<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(null))
+  ].map((refName) => useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -84,7 +84,7 @@ export default function AddBookForm() {
           </Form.Group>
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Book Description</Form.Label>
-            <Form.Control ref={inputRefs[2]} as="textarea" rows={3} />
+            <Form.Control ref={inputRefs[2]} className="textarea" />
           </Form.Group>
         </div>
         <button>Submit</button>

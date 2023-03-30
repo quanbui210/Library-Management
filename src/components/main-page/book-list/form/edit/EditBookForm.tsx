@@ -22,7 +22,7 @@ export default function EditBookForm() {
         publisher: book?.publisher,
         publishedDate: book?.publishedDate,
         ISBN: book?.ISBN,
-        author: book?.authors.map((a) => a.name)
+        author: (book.authors && book?.authors.map((a) => a.name)) || ''
       }
     : {
         title: '',
@@ -37,7 +37,6 @@ export default function EditBookForm() {
   const handleChange = useCallback((e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target
     setFormData((prevState) => ({ ...prevState, [name]: value }))
-    console.log('triggerredd')
   }, [])
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -48,7 +47,7 @@ export default function EditBookForm() {
       publisher: formData.publisher,
       publishedDate: formData.publishedDate,
       ISBN: formData.ISBN,
-      authors: [{ name: formData.author }],
+      authors: [],
       status: '',
       borrowedId: null,
       borrowDate: null,
@@ -88,7 +87,7 @@ export default function EditBookForm() {
             <Form.Label className="form-label">Publisher</Form.Label>
             <Form.Control
               onChange={handleChange}
-              value={formData.publisher}
+              value={formData.publisher || ''}
               type="text"
               placeholder="Publisher"
               name="publisher"
@@ -106,13 +105,7 @@ export default function EditBookForm() {
           </Form.Group>
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Author</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={formData.author}
-              type="text"
-              placeholder="Author"
-              name="author"
-            />
+            <Form.Control onChange={handleChange} type="text" placeholder="Author" name="author" />
           </Form.Group>
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Published Date</Form.Label>

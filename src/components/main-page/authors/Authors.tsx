@@ -21,6 +21,7 @@ export default function Authors() {
   const dispatch = useDispatch()
   const isAdmin = useSelector((state: RootState) => state.auth.isAdmin)
   const authors = useSelector((state: RootState) => state.author.items)
+  const isLoading = useSelector((state: RootState) => state.author.isLoading)
   const [authorList, setAuthorList] = useState([...authors])
   const [searchTerm, setSearchTerm] = useState('')
   const [deleteTrigger, setDeleteTrigger] = useState(false) // new state variable
@@ -50,6 +51,10 @@ export default function Authors() {
   useEffect(() => {
     filterAuthors()
   }, [searchTerm])
+
+  if (isLoading || authorList.length < 1) {
+    return <h2>Loading....</h2>
+  }
 
   return (
     <div className="authors-list">

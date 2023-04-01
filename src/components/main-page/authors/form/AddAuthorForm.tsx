@@ -2,7 +2,7 @@ import { Form } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useRef, FormEvent } from 'react'
-import auImg from '../../../../assets/authors-image/siuu.png'
+import auImg from '../../../../assets/authors-image/me.png'
 import nextId from 'react-id-generator'
 
 import { authorsActions } from '../../../../store/authors/authorsSlice'

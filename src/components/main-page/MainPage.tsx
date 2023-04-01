@@ -16,8 +16,7 @@ export default function MainPage() {
   const { isAdmin, loggedInUserName, googleUser, isLoading } = useSelector(
     (state: RootState) => state.auth
   )
-  console.log(loggedInUserName)
-  console.log(isLoading)
+  console.log(isAdmin)
   const navigate = useNavigate()
   const toDasboard = () => {
     navigate('/home/dashboard')
@@ -51,12 +50,10 @@ export default function MainPage() {
       {loggedInUserName || googleUser !== undefined ? (
         <h2>
           Welcome to E-Library{' '}
-          {googleUser !== null ? (
+          {googleUser !== undefined ? (
             <span>{googleUser?.name}</span>
           ) : (
-            <span>
-              {loggedInUserName} ({isAdmin ? 'admin' : 'user'})
-            </span>
+            <span>{loggedInUserName}</span>
           )}
         </h2>
       ) : (

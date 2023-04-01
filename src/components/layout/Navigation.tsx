@@ -14,6 +14,7 @@ const Navigation = () => {
   const { isLoggedIn, isAdmin, loggedInUserName, googleUser } = useSelector(
     (state: RootState) => state.auth
   )
+  console.log(isAdmin)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogout = () => {
@@ -34,10 +35,10 @@ const Navigation = () => {
       <nav>
         <ul>
           {isLoggedIn &&
-            (googleUser !== null ? (
+            (googleUser !== undefined ? (
               <li>
                 <PersonIcon className="person-icon" />
-                {googleUser && googleUser.name} (User)
+                {googleUser && googleUser.name}
               </li>
             ) : (
               <li>

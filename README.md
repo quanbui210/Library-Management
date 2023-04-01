@@ -23,7 +23,8 @@ User:
 - View books, authors, categories
 - Borrow and return books
 - Add books to favourite
-- Search for books
+- Search for books / authors / categories
+- View favourite books
 
 Admin: 
 - Add new books / users / authors

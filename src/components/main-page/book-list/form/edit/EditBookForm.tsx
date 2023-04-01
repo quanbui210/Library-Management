@@ -47,7 +47,7 @@ export default function EditBookForm() {
       publisher: formData.publisher,
       publishedDate: formData.publishedDate,
       ISBN: formData.ISBN,
-      authors: [{ name: formData.author }],
+      authors: [],
       status: '',
       borrowedId: null,
       borrowDate: null,
@@ -105,13 +105,7 @@ export default function EditBookForm() {
           </Form.Group>
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Author</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={formData.author}
-              type="text"
-              placeholder="Author"
-              name="author"
-            />
+            <Form.Control onChange={handleChange} type="text" placeholder="Author" name="author" />
           </Form.Group>
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Published Date</Form.Label>

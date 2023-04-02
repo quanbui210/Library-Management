@@ -3,7 +3,7 @@
 
 ## Summary: A Library Management project (frontend, built in 2 weeks). Including separated user and admin functionalities (CRUD operations). Built mainly with React, ReduxToolkit and TypeScript(first project with TS)
 
-##Live Demo: https://library-management-quanbui.vercel.app/
+##Live Demo: https://library-management-quanbui.vercel.app/  ||   https://library-quanbui.netlify.app/
 
 
 

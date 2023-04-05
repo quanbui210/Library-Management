@@ -105,13 +105,13 @@ const LoginForm = () => {
             Sign in with Google <i className="devicon-google-plain"></i>
           </button>
         </Form.Group>
-        {/* <div className="instruction">
+        <div className="instruction">
           <p>Login: Username: &#39;admin&#39; (+features) or &#39;user&#39;. Pw: password</p>
           <p>
             Admin can modify data, while user can borrow, return, and add book to favourite list
           </p>
           <p>Make sure to try both! *Login as user with Google</p>
-        </div> */}
+        </div>
       </Form>
     </>
   )

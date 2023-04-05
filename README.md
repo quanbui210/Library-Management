@@ -1,4 +1,4 @@
-#Library-Management Frontend Project
+#Library-Management Frontend Project (not finished yet)
 
 
 ## Summary: A Library Management project (frontend, built in 2 weeks). Including separated user and admin functionalities (CRUD operations). Built mainly with React, ReduxToolkit and TypeScript(first project with TS)
@@ -30,4 +30,11 @@ Admin:
 - Add new books / users / authors
 - Edit books / users / authors
 - Delete books / user / authors
+
+##To be completed:
+- Improve UI
+- Responsive Design
+- View borrowed books page
+- Build Backend with Java, Spring boot
+
 

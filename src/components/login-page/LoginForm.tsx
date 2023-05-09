@@ -1,11 +1,12 @@
 import Form from 'react-bootstrap/Form'
+import { AppDispatch, RootState } from '../../store/store'
+
 import './LoginForm.scss'
 
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../store/authentication/authSlice'
-import { AppDispatch, RootState } from '../../store/store'
 import { useGoogleLogin, TokenResponse } from '@react-oauth/google'
 import axios from 'axios'
 
@@ -105,13 +106,13 @@ const LoginForm = () => {
             Sign in with Google <i className="devicon-google-plain"></i>
           </button>
         </Form.Group>
-        <div className="instruction">
+        {/* <div className="instruction">
           <p>Login: Username: &#39;admin&#39; (+features) or &#39;user&#39;. Pw: password</p>
           <p>
             Admin can modify data, while user can borrow, return, and add book to favourite list
           </p>
           <p>Make sure to try both! *Login as user with Google</p>
-        </div>
+        </div> */}
       </Form>
     </>
   )

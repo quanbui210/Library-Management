@@ -22,12 +22,18 @@ const initialState: BookState = {
 
 const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
   const response = await fetch('/data/books.json')
+  const res = await fetch('http://localhost:8080/api/v1/books')
+  const books = await res.json()
   const booksData = await response.json()
+  console.log(books)
   return {
-    booksData
+    booksData,
+    books
   }
 })
-
+const addBooksThunk = createAsyncThunk('books/add', async () => {
+  return
+})
 const booksSlice = createSlice({
   name: 'books',
   initialState,

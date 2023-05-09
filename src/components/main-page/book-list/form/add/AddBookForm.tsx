@@ -1,18 +1,24 @@
 import { Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { useRef, FormEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRef, FormEvent, useState, ChangeEvent } from 'react'
+import TextField from '@mui/material/TextField'
+import Autocomplete from '@mui/material/Autocomplete'
+import { Box } from '@mui/material'
 // import nextId from 'react-id-generator'
 
 import { booksActions } from '../../../../../store/books/booksSlice'
-import { Book } from '../../../../../types'
+import { Book, Author, AuthorData } from '../../../../../types'
 import './AddBookForm.scss'
 import GoBackBtn from '../../../../btn/GoBackBtn'
+import { RootState } from '../../../../../store/store'
 
 export default function AddBookForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  //   const [newAuthor, setNewAuthor] = useState<Partial<AuthorData> | undefined>()
+  const authors = useSelector((state: RootState) => state.author.items)
+  const [authorId, setAuthorId] = useState<string | null>('')
+  console.log(authors)
   const inputRefs = [
     'title',
     'category',
@@ -21,7 +27,7 @@ export default function AddBookForm() {
     'publishedDate',
     'ISBN',
     'author'
-  ].map((refName) => useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>)
+  ].map(() => useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -39,7 +45,8 @@ export default function AddBookForm() {
       publisher: publisher ?? '',
       publishedDate: publishedDate ?? '',
       ISBN: ISBN ?? '',
-      authors: [{ name: author ?? '' }],
+      authors: [{ name: author ?? '', id: '' }],
+      //author_id: ...
       borrowedId: null,
       borrowDate: null,
       status: 'available',
@@ -52,6 +59,26 @@ export default function AddBookForm() {
       navigate('/home/books')
     }
   }
+  const handleAuthorChange = (event: React.ChangeEvent<any>, value: Author | null) => {
+    if (value) {
+      const selectedAuthor = authors.find((author) => author.name === value.name)
+      if (selectedAuthor) {
+        const authorData: AuthorData = {
+          // create AuthorData object
+          id: selectedAuthor.id.toString(),
+          name: selectedAuthor.name,
+          books: [],
+          dateOfBirth: '',
+          shortSummary: '',
+          image: ''
+        }
+        setAuthorId(authorData.id)
+      }
+    } else {
+      setAuthorId(null)
+    }
+  }
+  console.log(authorId)
   return (
     <div>
       <GoBackBtn />
@@ -74,10 +101,20 @@ export default function AddBookForm() {
             <Form.Label className="form-label">ISBN</Form.Label>
             <Form.Control ref={inputRefs[5]} type="text" placeholder="ISBN" />
           </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Author</Form.Label>
-            <Form.Control ref={inputRefs[6]} type="text" placeholder="Author" />
-          </Form.Group>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={authors}
+            getOptionLabel={(option) => option.name} // specify the label for the options
+            sx={{ width: 300 }}
+            onChange={handleAuthorChange}
+            renderInput={(params) => <TextField {...params} label="Author" />}
+            renderOption={(props, option) => (
+              <Box component="li" {...props}>
+                <div>{option.name}</div>
+              </Box>
+            )}
+          />
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Published Date</Form.Label>
             <Form.Control ref={inputRefs[4]} type="date" placeholder="Published Date" />

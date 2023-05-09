@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { User, GoogleUser, AddUserPayload, AuthState } from '../../types'
+import { AddUserPayload, AuthState } from '../../types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-// import { GoogleLoginResponse } from 'google-auth-library'
 
 const initialState: AuthState = {
   isLoggedIn: false,

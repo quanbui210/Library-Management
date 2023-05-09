@@ -23,7 +23,8 @@ export interface User {
   booksBorrowed: number | undefined
 }
 
-type Author = {
+export type Author = {
+  id: string
   name?: string | undefined
 }
 
@@ -53,7 +54,7 @@ export interface AuthorData {
   dateOfBirth: string
   shortSummary: string
   image: string
-  id: number
+  id: string
 }
 
 export type SearchProps = {

@@ -6,6 +6,10 @@
 ##Live Demo: https://library-management-quanbui.vercel.app/  ||   https://library-quanbui.netlify.app/
 
 
+# login as admin: 
+username: admin
+password: password
+
 
 ## Tech-Stacks:
 - React 

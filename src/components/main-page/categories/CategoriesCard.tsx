@@ -21,13 +21,13 @@ export default function BasicCard(props: Props) {
         </Card.Body>
         <Card.Body>
           <ul>
-            {books
+            {/* {books
               .filter((book) => book.category && book.category.includes(category))
               .map((book) => (
-                <li key={book.ISBN} className="books-by-category">
-                  <Link to={`/home/books/${book.ISBN}`}>{book.title}</Link>
+                <li key={book.isbn} className="books-by-category">
+                  <Link to={`/home/books/${book.isbn}`}>{book.title}</Link>
                 </li>
-              ))}
+              ))} */}
           </ul>
         </Card.Body>
       </Card>

@@ -14,31 +14,24 @@ export default function AddAuthorForm() {
   const dispatch = useDispatch()
   //   const [newAuthor, setNewAuthor] = useState<Partial<AuthorData> | undefined>()
   const nameRef = useRef<HTMLInputElement>(null)
-  const dobRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const authorName = nameRef.current?.value
-    const dob = dobRef.current?.value
     const description = descriptionRef.current?.value
     const newAuthor = {
-      name: authorName,
-      dateOfBirth: dob,
-      shortSummary: description,
-      image: auImg,
-      books: [{}],
-      id: nextId()
+      name: authorName ?? '',
+      description: description ?? ''
     }
-    console.log(newAuthor)
     dispatch(
-      authorsActions.addAuthor({
-        author: newAuthor,
-        id: newAuthor.id
+      authorsActions.addAuthorThunk({
+        author: newAuthor
       })
-    )
-    console.log('submitted, dispatched', newAuthor)
-    navigate('/home/authors')
+    ).then(() => {
+      dispatch(authorsActions.fetchAuthorsThunk())
+      navigate('/home/authors')
+    })
   }
   return (
     <div className="container">
@@ -55,10 +48,10 @@ export default function AddAuthorForm() {
               placeholder="Author's Name"
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
             <Form.Label>Author DOB</Form.Label>
             <Form.Control ref={dobRef} type="date" placeholder="Author's DOB" />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="mb-3">
             <Form.Label>Author Description</Form.Label>
             <Form.Control ref={descriptionRef} as="textarea" rows={3} />

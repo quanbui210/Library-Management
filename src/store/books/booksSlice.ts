@@ -1,5 +1,6 @@
 import { Book } from '../../types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { create } from 'domain'
 import nextId from 'react-id-generator'
 
 export interface BookState {
@@ -9,6 +10,8 @@ export interface BookState {
   favourites: Book[]
   message: string
   filterArr: Book[] | []
+  editing: boolean
+  adding: boolean
 }
 
 const initialState: BookState = {
@@ -17,32 +20,96 @@ const initialState: BookState = {
   error: null,
   favourites: JSON.parse(localStorage.getItem('favourites') || '[]'),
   message: '',
-  filterArr: []
+  filterArr: [],
+  editing: false,
+  adding: false
+}
+
+interface AddBookPayload {
+  book: {
+    isbn: number
+    title: string
+    publishedDate: string
+    description: string
+    status: string
+    publishers: string
+    authorId: string
+    categoryId: string
+  }
+}
+
+interface EditBookPayload {
+  isbn: number
+  book: {
+    isbn: number
+    title: string
+    publishedDate: string
+    description: string
+    status: string
+    publishers: string
+    authorId: string
+    categoryId: string
+  }
 }
 
 const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
-  const response = await fetch('/data/books.json')
-  const res = await fetch('http://localhost:8080/api/v1/books')
+  const res = await fetch(`http://localhost:8080/api/v1/books`)
   const books = await res.json()
-  const booksData = await response.json()
-  console.log(books)
   return {
-    booksData,
     books
   }
 })
-const addBooksThunk = createAsyncThunk('books/add', async () => {
-  return
+const addBooksThunk = createAsyncThunk('books/add', async (payload: AddBookPayload) => {
+  const response = await fetch('http://localhost:8080/api/v1/books', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload.book)
+  })
+  const newBook = await response.json()
+  return newBook
+})
+const deleteBookByISBNThunk = createAsyncThunk(
+  'books/deleteBookById',
+  async (isbn: number, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/books/${isbn}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      if (!response.ok) {
+        throw new Error('Failed to delete book')
+      }
+      return isbn
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+const editBookThunk = createAsyncThunk('books/edit', async (payload: EditBookPayload) => {
+  console.log(payload.book.isbn)
+  const response = await fetch(`http://localhost:8080/api/v1/books/${payload.book.isbn}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload.book)
+  })
+  const newBook = await response.json()
+  return newBook
 })
 const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
     addToFavourite: (state, action) => {
-      const { ISBN } = action.payload
-      const addedBook = state.items.find((book) => book.ISBN === ISBN)
+      const { isbn } = action.payload
+      const addedBook = state.items.find((book) => book.isbn === isbn)
       if (addedBook) {
-        const existingFavBook = state.favourites.find((book) => book.ISBN === addedBook.ISBN)
+        const existingFavBook = state.favourites.find((book) => book.isbn === addedBook.isbn)
         if (existingFavBook) {
           return
         } else {
@@ -52,18 +119,26 @@ const booksSlice = createSlice({
         }
       }
     },
+    editing: (state) => {
+      state.editing = true
+      state.adding = false
+    },
+    adding: (state) => {
+      state.editing = false
+      state.adding = true
+    },
     removeFavourite: (state, action) => {
-      const { ISBN } = action.payload
-      const removedBook = state.items.find((book) => book.ISBN === ISBN)
+      const { isbn } = action.payload
+      const removedBook = state.items.find((book) => book.isbn === isbn)
       if (removedBook) {
         removedBook.isFav = false // Set the isFavourite flag to false
-        state.favourites = state.favourites.filter((book) => book.ISBN !== removedBook.ISBN)
+        state.favourites = state.favourites.filter((book) => book.isbn !== removedBook.isbn)
         localStorage.setItem('favourites', JSON.stringify(state.favourites))
       }
     },
     borrowedBook: (state, action) => {
-      const ISBN = action.payload
-      const borrowedBook = state.items.find((book) => book.ISBN === ISBN)
+      const isbn = action.payload
+      const borrowedBook = state.items.find((book) => book.isbn === isbn)
       if (borrowedBook) {
         const borrowedDate = new Date()
         borrowedBook.borrowDate = borrowedDate.toISOString()
@@ -73,9 +148,9 @@ const booksSlice = createSlice({
       }
     },
     returnBook: (state, action) => {
-      const ISBN = action.payload
+      const isbn = action.payload
       const returnedBook = state.items.find(
-        (book) => book.ISBN === ISBN && book.status === 'borrowed'
+        (book) => book.isbn === isbn && book.status === 'borrowed'
       )
       if (returnedBook) {
         const returnedDate = new Date()
@@ -83,43 +158,6 @@ const booksSlice = createSlice({
         returnedBook.returnDate = returnedDate.toISOString()
         returnedBook.borrowedId = null
         window.alert(`You have successfully return "${returnedBook.title}"`)
-      }
-    },
-    editBook: (state, action) => {
-      const { ISBN, selectedBook } = action.payload
-      console.log(ISBN)
-      state.items = state.items.map((book) => {
-        if (book.ISBN === ISBN) {
-          return {
-            ...book,
-            ...selectedBook
-          }
-        }
-        return book
-      })
-      localStorage.setItem('books', JSON.stringify(state.items))
-    },
-    addNewBook: (state, action) => {
-      const { newBook } = action.payload
-      const existingBook = state.items.find(
-        (book) => book.ISBN === newBook.ISBN || book.title === newBook.title
-      )
-      if (existingBook) {
-        window.alert('book already existed')
-      } else {
-        state.items = [...state.items, newBook]
-        window.alert('Successfully add new book')
-        localStorage.setItem('books', JSON.stringify(state.items))
-      }
-    },
-    removeBook: (state, action) => {
-      const ISBN = action.payload
-      const selectedBook = state.items.find((book) => book.ISBN === ISBN)
-      if (selectedBook) {
-        const confirm = window.confirm('Do you want to delete this book FOREVERRRRR?')
-        if (confirm) {
-          state.items = state.items.filter((book) => book.ISBN !== selectedBook.ISBN)
-        }
       }
     },
     filterBook: (state, action) => {
@@ -145,7 +183,7 @@ const booksSlice = createSlice({
         ...state,
         isLoading: false,
         error: false,
-        items: action.payload.booksData
+        items: action.payload.books
       }
     })
     builder.addCase(fetchBooksThunk.rejected, (state) => {
@@ -155,8 +193,37 @@ const booksSlice = createSlice({
         error: true
       }
     })
+    builder.addCase(addBooksThunk.pending, (state, action) => {
+      return {
+        ...state,
+        isLoading: true
+      }
+    })
+    builder.addCase(addBooksThunk.fulfilled, (state, action) => {
+      return {
+        ...state,
+        isLoading: true,
+        items: [...state.items, action.payload]
+      }
+    })
+    builder.addCase(deleteBookByISBNThunk.pending, (state) => {
+      return {
+        ...state
+      }
+    })
+    builder.addCase(deleteBookByISBNThunk.fulfilled, (state) => {
+      return {
+        ...state
+      }
+    })
   }
 })
 
-export const booksActions = { ...booksSlice.actions, fetchBooksThunk }
+export const booksActions = {
+  ...booksSlice.actions,
+  fetchBooksThunk,
+  addBooksThunk,
+  deleteBookByISBNThunk,
+  editBookThunk
+}
 export default booksSlice.reducer

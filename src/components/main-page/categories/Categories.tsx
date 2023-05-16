@@ -6,32 +6,36 @@ import { RootState } from '../../../store/store'
 import BasicCard from './CategoriesCard'
 import GoBackBtn from '../../btn/GoBackBtn'
 import SearchInput from '../../input/SearchInput'
+import { categoryActions } from '../../../store/category/categorySlice'
 
 export default function Categories() {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('')
   const [categoriesList, setCategoriesList] = useState<string[]>([])
   const books = useSelector((state: RootState) => state.book.items)
-  const categories: string[] = [
-    ...new Set(books.map((book) => book.category).filter((category) => category !== undefined))
-  ]
+  const categories = useSelector((state: RootState) => state.category.items)
 
-  const filterCategories = () => {
-    if (searchTerm.trim() === '') {
-      setCategoriesList(categories)
-    } else {
-      const filteredCategories = categories.filter((category: string) => {
-        return category.toLowerCase().includes(searchTerm.toLowerCase())
-      })
-      setCategoriesList(filteredCategories)
-    }
-  }
   useEffect(() => {
-    dispatch(booksActions.fetchBooksThunk())
-  }, [])
-  useEffect(() => {
-    filterCategories()
-  }, [searchTerm])
+    dispatch(categoryActions.fetchCategoriesThunk())
+    console.log(categories)
+  }, [dispatch])
+
+  // const filterCategories = () => {
+  //   if (searchTerm.trim() === '') {
+  //     setCategoriesList(categories)
+  //   } else {
+  //     const filteredCategories = categories.filter((category: string) => {
+  //       return category.toLowerCase().includes(searchTerm.toLowerCase())
+  //     })
+  //     setCategoriesList(filteredCategories)
+  //   }
+  // }
+  // useEffect(() => {
+  //   dispatch(booksActions.fetchBooksThunk())
+  // }, [])
+  // useEffect(() => {
+  //   filterCategories()
+  // }, [searchTerm])
   return (
     <div>
       <GoBackBtn />

@@ -8,7 +8,7 @@ const handleRender = (books: Book[]) => {
   return (
     <ul className="book-list">
       {books.map((book: Book) => (
-        <li key={book.ISBN}>
+        <li key={book.isbn}>
           <BookCard book={book} disabled={false} />
         </li>
       ))}

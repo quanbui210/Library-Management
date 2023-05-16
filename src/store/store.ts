@@ -10,12 +10,14 @@ import { AuthorsState } from './authors/authorsSlice'
 import { ToggleState } from './toggle/toggleSlice'
 
 import * as reduxThunk from 'redux-thunk/extend-redux'
+import categorySlice, { CategoryState } from './category/categorySlice'
 
 export interface RootState {
   auth: AuthState
   book: BookState
   author: AuthorsState
   toggle: ToggleState
+  category: CategoryState
 }
 const storedState = localStorage.getItem('reduxState')
 const preloadedState = storedState ? JSON.parse(storedState) : undefined
@@ -25,7 +27,8 @@ const store = configureStore({
     auth: authSlice,
     book: booksSlice,
     toggle: toggleSlice,
-    author: authorsSlice
+    author: authorsSlice,
+    category: categorySlice
   },
   preloadedState: storedState ? JSON.parse(storedState) : undefined
 })

@@ -16,11 +16,7 @@ const initialState: AuthorsState = {
 }
 
 interface AddAuthorPayload {
-  author: {
-    name: string
-    description: string
-    image?: string
-  }
+  author: AuthorData
 }
 
 const addAuthorThunk = createAsyncThunk('authors/add', async (payload: AddAuthorPayload) => {
@@ -121,5 +117,5 @@ const authorsSlice = createSlice({
   }
 })
 
-export const authorsActions = { ...authorsSlice.actions, fetchAuthorsThunk, addAuthorThunk }
+export const authorsActions = { ...authorsSlice.actions, fetchAuthorsThunk }
 export default authorsSlice.reducer

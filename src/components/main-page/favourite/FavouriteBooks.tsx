@@ -12,7 +12,7 @@ export function FavouriteBooks() {
       {favBooks.length > 0 ? (
         <ul className="book-list">
           {favBooks.map((book) => (
-            <li key={book.ISBN}>
+            <li key={book.isbn}>
               <BookCard book={book} disabled={true} />
             </li>
           ))}

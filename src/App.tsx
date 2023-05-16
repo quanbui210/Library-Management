@@ -86,7 +86,7 @@ const router = createBrowserRouter([
     element: <Layout><Categories/></Layout>
   },
   {
-    path: '/home/books/:ISBN',
+    path: '/home/books/:isbn',
     element: <Layout><BookPage/></Layout>,
   },
   {
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
     element: <Layout><AddBookForm/></Layout>,
   },
   {
-    path: '/home/books/edit/:ISBN',
+    path: '/home/books/edit/:isbn',
     element: <Layout><EditBookForm/></Layout>,
   },
   {

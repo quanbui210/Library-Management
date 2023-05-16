@@ -46,7 +46,7 @@ export default function Books() {
 
   useEffect(() => {
     dispatch(booksActions.fetchBooksThunk())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="books-container">
@@ -54,7 +54,12 @@ export default function Books() {
       <div>
         <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         {isAdmin && (
-          <Button className="add-btn" onClick={() => navigate('/home/books/add')}>
+          <Button
+            className="add-btn"
+            onClick={() => {
+              navigate('/home/books/add')
+              dispatch(booksActions.adding())
+            }}>
             Add Book
           </Button>
         )}

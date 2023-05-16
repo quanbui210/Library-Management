@@ -12,20 +12,21 @@ import { booksActions } from '../../../../store/books/booksSlice'
 import GoBackBtn from '../../../btn/GoBackBtn'
 
 export default function BookPage() {
-  const { ISBN } = useParams<{ ISBN: string }>()
+  const { isbn } = useParams<{ isbn: string }>()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book.items)
   const isAdmin = useSelector((state: RootState) => state.auth.isAdmin || undefined)
-  const book = books.find((book) => book.ISBN === ISBN)
-  console.log(book)
+  const book = books.find((book) => {
+    return book.isbn.toString() === isbn
+  })
   const isBorrowed = book && book.status === 'borrowed'
   const navigate = useNavigate()
 
   const handleBorrow = () => {
     if (isBorrowed) {
-      dispatch(booksActions.returnBook(ISBN))
+      dispatch(booksActions.returnBook(isbn))
     } else {
-      dispatch(booksActions.borrowedBook(ISBN))
+      dispatch(booksActions.borrowedBook(isbn))
     }
   }
 
@@ -44,9 +45,13 @@ export default function BookPage() {
                 {isAdmin && (
                   <DeleteIcon
                     className="author-actions"
-                    onClick={() => {
-                      dispatch(booksActions.removeBook(ISBN))
-                      navigate('/home/books')
+                    onClick={async () => {
+                      const confirmed = window.confirm('Delete this book?')
+                      if (confirmed) {
+                        await dispatch(booksActions.deleteBookByISBNThunk(Number(isbn)))
+                        await dispatch(booksActions.fetchBooksThunk())
+                        navigate('/home/books')
+                      }
                     }}
                   />
                 )}
@@ -55,20 +60,23 @@ export default function BookPage() {
                 {isAdmin && (
                   <EditIcon
                     className="author-actions"
-                    onClick={() => navigate(`/home/books/edit/${book?.ISBN}`)}
+                    onClick={() => {
+                      dispatch(booksActions.editing())
+                      navigate(`/home/books/edit/${book?.isbn}`)
+                    }}
                   />
                 )}
               </span>
             </h1>
             <span className="category">
-              <i>Category: {book?.category}</i>
+              <i>Category: {book?.categoryName}</i>
             </span>
-            <h3>Author:{book?.authors && book?.authors.map((a) => a.name)}</h3>
+            <h3>Author: {book?.authorName}</h3>
             <p>{book && book.description}</p>
             <ul>
-              <li>ISBN: {book?.ISBN}</li>
+              <li>isbn: {book?.isbn}</li>
               <li>Pubslished Date: {book?.publishedDate}</li>
-              <li>Publisher: {book?.publisher}</li>
+              <li>Publisher: {book?.publishers}</li>
               <li>Borrowed Date: {book?.borrowDate && book.borrowDate}</li>
               <li>Return Date: {book?.returnDate && book.returnDate}</li>
             </ul>

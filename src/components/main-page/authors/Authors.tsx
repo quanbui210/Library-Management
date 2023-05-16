@@ -25,7 +25,6 @@ export default function Authors() {
   const [authorList, setAuthorList] = useState([...authors])
   const [searchTerm, setSearchTerm] = useState('')
   const [deleteTrigger, setDeleteTrigger] = useState(false) // new state variable
-  console.log(authorList)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -72,7 +71,7 @@ export default function Authors() {
         {Array.isArray(authorList) &&
           authorList
             .filter((author: { name: string }) => {
-              return author.name.toLowerCase().includes(searchTerm.toLowerCase())
+              return author?.name.toLowerCase().includes(searchTerm.toLowerCase())
             })
             .map((author) => (
               <li key={author.id} className="author-card">
@@ -105,18 +104,18 @@ export default function Authors() {
                             )}
                           </span>
                         </h2>
-                        <span>
+                        {/* <span>
                           <i>{author.dateOfBirth}</i>
-                        </span>
+                        </span> */}
                         <p className="author-summary">
-                          <i>{author.shortSummary}</i>
+                          <i>{author.description}</i>
                         </p>
 
                         <p>Famous book(s): </p>
                         <ul>
                           {author.books.map((book) => (
-                            <li className="famous-books" key={book.ISBN}>
-                              <Link to={`/home/books/${book.ISBN}`}>
+                            <li className="famous-books" key={book.isbn}>
+                              <Link to={`/home/books/${book.isbn}`}>
                                 <p>{book.title}</p>
                               </Link>
                             </li>

@@ -26,14 +26,15 @@ export interface User {
 export type Author = {
   id: string
   name?: string | undefined
+  description: string
 }
 
 export interface Book {
-  publisher: string
-  category: string
-  ISBN: string
+  publishers: string
+  categoryName: string
+  isbn: number
   title: string
-  authors?: Author[]
+  authorName: string
   status: string
   borrowedId: null | string
   publishedDate: string
@@ -44,15 +45,14 @@ export interface Book {
 }
 
 interface AuthorBook {
-  ISBN: string
+  isbn: number
   title: string
 }
 
 export interface AuthorData {
+  description: ReactNode
   name: string
   books: AuthorBook[]
-  dateOfBirth: string
-  shortSummary: string
   image: string
   id: string
 }
@@ -85,4 +85,10 @@ export interface AuthState {
   loggedInUserName: string
   googleUser: GoogleUser | undefined
   profile: any | null
+}
+
+export interface CategoryData {
+  id: any
+  name: string
+  books: Book[]
 }

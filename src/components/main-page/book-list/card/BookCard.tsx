@@ -26,11 +26,11 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
   const favourites = useSelector((state: RootState) => state.book.favourites)
 
   const handleFavClick = () => {
-    const isFav = favourites.find((favBook) => favBook.ISBN === book.ISBN)
+    const isFav = favourites.find((favBook) => favBook.isbn === book.isbn)
     if (isFav) {
-      dispatch(booksActions.removeFavourite({ ISBN: book.ISBN }))
+      dispatch(booksActions.removeFavourite({ isbn: book.isbn }))
     } else {
-      dispatch(booksActions.addToFavourite({ ISBN: book.ISBN }))
+      dispatch(booksActions.addToFavourite({ isbn: book.isbn }))
     }
   }
 
@@ -39,35 +39,35 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
       <Card className="book-card" sx={{ maxWidth: 345 }}>
         <h2>{book.title}</h2>
         <span>
-          <i>"{book.category}"</i>
+          <i>"{book.categoryName}"</i>
         </span>
         <CardMedia
-          onClick={() => navigate(`/home/books/${book.ISBN}`)}
+          onClick={() => navigate(`/home/books/${book.isbn}`)}
           component="img"
           height="194"
           image={bookImg}
           alt="book"
         />
-        <CardContent className="card-content" onClick={() => navigate(`/home/books/${book.ISBN}`)}>
-          <h4>{book.authors && book.authors.map((author) => author.name)}</h4>
+        <CardContent className="card-content" onClick={() => navigate(`/home/books/${book.isbn}`)}>
+          <h4>{book.authorName}</h4>
           <ul>
-            <li>ISBN: {book.ISBN}</li>
+            <li>isbn: {book.isbn}</li>
             <li>Published: {book.publishedDate}</li>
             <li>
-              Publisher: <i style={{ color: '#2b5cb7', fontWeight: 'bold' }}>{book.publisher}</i>
+              Publisher: <i style={{ color: '#2b5cb7', fontWeight: 'bold' }}>{book.publishers}</i>
             </li>
           </ul>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton
             disabled={disabled}
-            color={favourites.find((favBook) => favBook.ISBN === book.ISBN) ? 'error' : 'inherit'}
+            color={favourites.find((favBook) => favBook.isbn === book.isbn) ? 'error' : 'inherit'}
             aria-label="add to favorites"
             onClick={handleFavClick}>
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="view">
-            <Link to={`/home/books/${book.ISBN}`}>
+            <Link to={`/home/books/${book.isbn}`}>
               <SearchIcon style={{ color: '#ccc' }} />
             </Link>
           </IconButton>

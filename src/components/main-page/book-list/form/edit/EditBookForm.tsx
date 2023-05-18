@@ -58,7 +58,7 @@ export default function EditBookForm() {
     const { name, value } = e.target
     setFormData((prevState) => ({ ...prevState, [name]: value }))
   }, [])
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const book = {
       isbn: Number(formData.isbn),
@@ -70,12 +70,9 @@ export default function EditBookForm() {
       authorId: authorId || '',
       categoryId: categoryId || ''
     }
-    if (book) {
-      dispatch(booksActions.editBookThunk({ isbn: Number(formData.isbn), book })).then(() => {
-        dispatch(booksActions.fetchBooksThunk())
-        navigate('/home/books')
-      })
-    }
+    await dispatch(booksActions.editBookThunk({ isbn: Number(formData.isbn), book }))
+    await dispatch(booksActions.fetchBooksThunk())
+    navigate('/home/books')
   }
   useEffect(() => {
     setFormData(initialFormData)

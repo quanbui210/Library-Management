@@ -23,9 +23,31 @@ interface AddAuthorPayload {
   }
 }
 
+interface EditAuthorPayload {
+  authorId: string
+  author: {
+    name: string
+    description: string
+    image?: string
+  }
+}
+
 const addAuthorThunk = createAsyncThunk('authors/add', async (payload: AddAuthorPayload) => {
   const response = await fetch('http://localhost:8080/api/v1/authors', {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload.author)
+  })
+  const newAuthor = await response.json()
+  return newAuthor
+})
+
+const editAuthorThunk = createAsyncThunk('authors/edit', async (payload: EditAuthorPayload) => {
+  console.log(payload.authorId)
+  const response = await fetch(`http://localhost:8080/api/v1/authors/${payload.authorId}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -43,6 +65,26 @@ const fetchAuthorsThunk = createAsyncThunk('authors/fetch', async () => {
   }
 })
 
+const deleteAuthor = createAsyncThunk(
+  'books/deleteBookById',
+  async (authorId: string, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/authors/${authorId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      if (!response.ok) {
+        throw new Error('Failed to delete book')
+      }
+      return authorId
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 const authorsSlice = createSlice({
   name: 'authors',
   initialState,
@@ -56,28 +98,7 @@ const authorsSlice = createSlice({
         state.items = updatedAuthorList
       }
       return state // Return the current state if the user cancels the delete action
-    },
-    editAuthor: (state, action) => {
-      const { id, value } = action.payload
-      const editedAuthor = state.items.map((author) => {
-        if (author.id === id) {
-          return { ...author, shortSummary: value }
-        }
-        return author
-      })
-
-      state.items = editedAuthor
     }
-    // addAuthor: (state, action) => {
-    //   const { author, id } = action.payload
-    //   console.log(author, id)
-    //   const existingAuthor = state.items.find((au) => au.id === id || au.name === author.name)
-    //   if (existingAuthor) {
-    //     window.alert('Author already exists')
-    //   } else {
-    //     state.items = [...state.items, author]
-    //   }
-    // }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAuthorsThunk.pending, (state) => {
@@ -121,5 +142,11 @@ const authorsSlice = createSlice({
   }
 })
 
-export const authorsActions = { ...authorsSlice.actions, fetchAuthorsThunk, addAuthorThunk }
+export const authorsActions = {
+  ...authorsSlice.actions,
+  fetchAuthorsThunk,
+  addAuthorThunk,
+  editAuthorThunk,
+  deleteAuthor
+}
 export default authorsSlice.reducer

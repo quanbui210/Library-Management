@@ -16,7 +16,7 @@ export default function AddAuthorForm() {
   const nameRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const authorName = nameRef.current?.value
     const description = descriptionRef.current?.value
@@ -24,14 +24,10 @@ export default function AddAuthorForm() {
       name: authorName ?? '',
       description: description ?? ''
     }
-    dispatch(
-      authorsActions.addAuthorThunk({
-        author: newAuthor
-      })
-    ).then(() => {
-      dispatch(authorsActions.fetchAuthorsThunk())
-      navigate('/home/authors')
-    })
+
+    await dispatch(authorsActions.addAuthorThunk({ author: newAuthor }))
+    await dispatch(authorsActions.fetchAuthorsThunk())
+    navigate('/home/authors')
   }
   return (
     <div className="container">
@@ -48,10 +44,6 @@ export default function AddAuthorForm() {
               placeholder="Author's Name"
             />
           </Form.Group>
-          {/* <Form.Group className="mb-3">
-            <Form.Label>Author DOB</Form.Label>
-            <Form.Control ref={dobRef} type="date" placeholder="Author's DOB" />
-          </Form.Group> */}
           <Form.Group className="mb-3">
             <Form.Label>Author Description</Form.Label>
             <Form.Control ref={descriptionRef} as="textarea" rows={3} />

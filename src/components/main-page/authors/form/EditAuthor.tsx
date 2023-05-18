@@ -15,20 +15,22 @@ export default function EditAuthor() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const authors = useSelector((state: RootState) => state.author.items)
-  const author = authors.find((a) => {
-    return a.id === parseInt(authorId as string)
-  })
-  const inputRef = useRef<HTMLTextAreaElement>(null)
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const author = authors.find((a) => a.id === authorId)
+  const nameInputRef = useRef<HTMLTextAreaElement>(null)
+  const descInputRef = useRef<HTMLTextAreaElement>(null)
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    const inputValue = inputRef.current?.value
-    dispatch(authorsActions.editAuthor({ id: parseInt(authorId as string), value: inputValue }))
-    // const updatedAuthor = {
-    //   ...author,
-    //   shortSummary: inputValue
-    // }
-    // localStorage.setItem(`author-${authorId}`, JSON.stringify(updatedAuthor))
-    // dispatch(authorsActions.updateAuthor(updatedAuthor))
+    const editedAuthor = {
+      name: nameInputRef.current?.value ?? '',
+      description: descInputRef.current?.value ?? ''
+    }
+    await dispatch(
+      authorsActions.editAuthorThunk({
+        authorId: authorId ?? '',
+        author: editedAuthor
+      })
+    )
+    await dispatch(authorsActions.fetchAuthorsThunk())
     navigate('/home/authors')
   }
 
@@ -36,13 +38,14 @@ export default function EditAuthor() {
     <div className="authors-form-container">
       <GoBackBtn />
       <h2>{author && author.name}</h2>
-      <p>{author && author.dateOfBirth}</p>
-      <p>{author?.shortSummary}</p>
+      <p>{author?.description}</p>
       <img src={author?.image} alt="" />
       <Form className="authors-action-form" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          {/* <Form.Label className="form-label">Edit Author's Info:</Form.Label> <br />] */}
-          <Form.Control ref={inputRef} as="textarea" placeholder="Enter short summary" />
+          <Form.Control ref={nameInputRef} as="textarea" placeholder="Enter name" />
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Control ref={descInputRef} as="textarea" placeholder="Enter description" />
         </Form.Group>
         <Form.Group>
           <Button className="add-form-btn" type="submit">

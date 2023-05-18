@@ -89,7 +89,7 @@ export default function Authors() {
                               <DeleteIcon
                                 className="author-actions"
                                 onClick={() => {
-                                  dispatch(authorsActions.removeAuthor({ id: author.id }))
+                                  dispatch(authorsActions.deleteAuthor(author.id))
                                   setDeleteTrigger(!deleteTrigger)
                                 }}
                               />

@@ -49,6 +49,7 @@ interface EditBookPayload {
     publishers: string
     authorId: string
     categoryId: string
+    image?: string
   }
 }
 
@@ -90,7 +91,6 @@ const deleteBookByISBNThunk = createAsyncThunk(
   }
 )
 const editBookThunk = createAsyncThunk('books/edit', async (payload: EditBookPayload) => {
-  console.log(payload.book.isbn)
   const response = await fetch(`http://localhost:8080/api/v1/books/${payload.book.isbn}`, {
     method: 'PUT',
     headers: {

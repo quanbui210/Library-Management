@@ -30,7 +30,7 @@ export default function AddBookForm() {
     'author'
   ].map(() => useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const title = inputRefs[0].current?.value
     const description = inputRefs[2].current?.value
@@ -48,12 +48,10 @@ export default function AddBookForm() {
       authorId: authorId ?? '',
       categoryId: categoryId ?? ''
     }
-    if (book) {
-      dispatch(booksActions.addBooksThunk({ book })).then(() => {
-        navigate('/home/books')
-        dispatch(booksActions.fetchBooksThunk())
-      })
-    }
+
+    await dispatch(booksActions.addBooksThunk({ book }))
+    await dispatch(booksActions.fetchBooksThunk())
+    navigate('/home/books')
   }
   const handleAuthorChange = (event: React.ChangeEvent<any>, value: AuthorData | null) => {
     if (value) {

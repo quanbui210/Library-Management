@@ -13,8 +13,8 @@ import axios from 'axios'
 const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn)
-
+  const { isLoggedIn, isAdmin } = useSelector((state: RootState) => state.auth)
+  console.log(isAdmin)
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const [user, setUser] = useState<Omit<
@@ -48,7 +48,7 @@ const LoginForm = () => {
   // log out function to log the user out of google and set the profile array to null
 
   useEffect(() => {
-    dispatch(authActions.fetchUser())
+    dispatch(authActions.fetchUsers())
   }, [])
 
   useEffect(() => {
@@ -64,11 +64,24 @@ const LoginForm = () => {
     setEnteredPassword(e.target.value)
   }
 
-  const submitHandler = (e: { preventDefault: () => void }) => {
+  const signupHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    dispatch(
-      authActions.loginUser({ enteredUsername: enteredUserName, enteredPassword: enteredPassword })
-    )
+    const logginUser = {
+      username: enteredUserName,
+      password: enteredPassword
+    }
+    dispatch(authActions.signupThunk(logginUser))
+  }
+
+  const loginHandler = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    const logginUser = {
+      user: {
+        username: enteredUserName,
+        password: enteredPassword
+      }
+    }
+    dispatch(authActions.loginThunk(logginUser))
   }
   const loginGoogle = () => {
     login()
@@ -76,7 +89,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form className="form" onSubmit={submitHandler} autoComplete="off">
+      <Form className="form" autoComplete="off">
         <Form.Group className="form-group" controlId="formBasicEmail">
           <Form.Label className="form-label">Username: </Form.Label>
           <Form.Control
@@ -101,18 +114,16 @@ const LoginForm = () => {
           />
         </Form.Group>
         <Form.Group className="form-group">
-          <button type="submit">Login</button>
+          <button onClick={signupHandler} type="button">
+            Sign Up
+          </button>
+          <button onClick={loginHandler} type="button">
+            Login
+          </button>
           <button type="button" onClick={loginGoogle}>
             Sign in with Google <i className="devicon-google-plain"></i>
           </button>
         </Form.Group>
-        {/* <div className="instruction">
-          <p>Login: Username: &#39;admin&#39; (+features) or &#39;user&#39;. Pw: password</p>
-          <p>
-            Admin can modify data, while user can borrow, return, and add book to favourite list
-          </p>
-          <p>Make sure to try both! *Login as user with Google</p>
-        </div> */}
       </Form>
     </>
   )

@@ -14,70 +14,60 @@ const initialState: AuthState = {
   addUserError: null,
   loggedInUserName: '',
   googleUser: undefined,
-  profile: null
+  profile: null,
+  loggedInUser: {}
 }
 
-const fetchUser = createAsyncThunk('authentication/fetch', async () => {
-  const response = await fetch('/data/users.json')
-  const usersData = await response.json()
-  return {
-    usersData
+interface UserPayload {
+  user: {
+    username: string
+    password: string
   }
+}
+
+export const fetchUsers = createAsyncThunk('authentication/fetchUsers', async () => {
+  const response = await fetch('http://localhost:8080/api/v1/users')
+  const usersData = await response.json()
+  return usersData
+})
+
+export const signupThunk = createAsyncThunk(
+  'authentication/signup',
+  async (user: { username: string; password: string }) => {
+    const response = await fetch('http://localhost:8080/api/v1/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    console.log(JSON.stringify(user))
+    const newUser = await response.json()
+    return newUser
+  }
+)
+
+const loginThunk = createAsyncThunk('login/post', async (payload: UserPayload) => {
+  const response = await fetch('http://localhost:8080/api/v1/signin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload.user)
+  })
+
+  const data = await response.json()
+  return data
 })
 
 const authSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: {
-    loginUser: (
-      state,
-      action: PayloadAction<{ enteredUsername: string; enteredPassword: string }>
-    ) => {
-      const { enteredUsername, enteredPassword } = action.payload
-      const regex = new RegExp(`^${enteredUsername}$`, 'i')
-      const user = state.users.find((user) => {
-        return regex.test(user.username) && user.password === enteredPassword
-      })
-      if (user) {
-        state.isLoggedIn = true
-        state.enteredUsername = ''
-        state.loggedInUserName = user.fullName
-        console.log(user.fullName, state.loggedInUserName)
-        state.googleUser = undefined
-        if (user.role === 'admin') {
-          state.isAdmin = true
-        } else if (user.role === 'user') {
-          state.isAdmin = false
-        }
-      } else {
-        state.invalid = true
-        state.isLoggedIn = false
-      }
-    },
     logout: (state) => {
       state.isLoggedIn = false
     },
-    addUsers: (state, action: PayloadAction<AddUserPayload>) => {
-      const { id, username } = action.payload
-      const existingUser = state.users.find((user) => user.id === id || user.username === username)
-      if (existingUser) {
-        state.addUserError = true
-        window.alert(`User with id: ${id} or username:' ${username}' already exsists`)
-      } else {
-        state.users.push(action.payload)
-        window.alert(`Successfully added "${username}"`)
-      }
-    },
-    deleteUser: (state, action) => {
-      const { id, role } = action.payload
-      console.log(role)
-      if (role === 'user') {
-        const updatedUsers = state.users.filter((user) => user.id !== id)
-        state.users = updatedUsers
-      } else {
-        window.alert('Cannot delete admin')
-      }
-    },
+
     setGoogleProfile: (state, action) => {
       const { profile } = action.payload
       const newGoogleUser = {
@@ -95,19 +85,41 @@ const authSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUser.pending, (state) => {
-      state.isLoading = true
-    })
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.isLoading = false
-      state.users = action.payload.usersData
-    })
-    builder.addCase(fetchUser.rejected, (state) => {
-      state.isLoading = false
-      state.error = true
-    })
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.users = action.payload.usersData
+      })
+      .addCase(fetchUsers.rejected, (state) => {
+        state.isLoading = false
+        state.error = true
+      })
+      .addCase(signupThunk.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(signupThunk.fulfilled, (state) => {
+        state.isLoading = false
+      })
+      .addCase(loginThunk.pending, (state, action) => {
+        state.isLoading = true
+      })
+      .addCase(loginThunk.fulfilled, (state, action) => {
+        const { token, userData } = action.payload
+        state.isLoggedIn = true
+        state.isLoading = false
+        state.loggedInUser = userData
+        state.loggedInUserName = userData.username
+        if (state.loggedInUserName === 'admin') {
+          state.isAdmin = true
+        } else {
+          state.isAdmin = false
+        }
+      })
   }
 })
 
-export const authActions = { ...authSlice.actions, fetchUser }
+export const authActions = { ...authSlice.actions, fetchUsers, signupThunk, loginThunk }
 export default authSlice.reducer

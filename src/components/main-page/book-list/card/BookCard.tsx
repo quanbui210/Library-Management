@@ -45,7 +45,7 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
           onClick={() => navigate(`/home/books/${book.isbn}`)}
           component="img"
           height="194"
-          image={bookImg}
+          image={book.imageUrl ? book.imageUrl : bookImg}
           alt="book"
         />
         <CardContent className="card-content" onClick={() => navigate(`/home/books/${book.isbn}`)}>

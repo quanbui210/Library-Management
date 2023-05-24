@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from '../../../../store/store'
 import GoBackBtn from '../../../btn/GoBackBtn'
 import { authorsActions } from '../../../../store/authors/authorsSlice'
 import './EditAuthor.scss'
+import authorImage from '../../../../assets/authors-image/aimg.png'
 
 export default function EditAuthor() {
   const { authorId } = useParams()
@@ -17,6 +18,7 @@ export default function EditAuthor() {
   const authors = useSelector((state: RootState) => state.author.items)
   const author = authors.find((a) => a.id === authorId)
   const nameInputRef = useRef<HTMLTextAreaElement>(null)
+  const imgInputRef = useRef<HTMLTextAreaElement>(null)
   const descInputRef = useRef<HTMLTextAreaElement>(null)
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
@@ -39,7 +41,7 @@ export default function EditAuthor() {
       <GoBackBtn />
       <h2>{author && author.name}</h2>
       <p>{author?.description}</p>
-      <img src={author?.image} alt="" />
+      <img src={author?.imageUrl ? author.imageUrl : authorImage} alt="" />
       <Form className="authors-action-form" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Control ref={nameInputRef} as="textarea" placeholder="Enter name" />

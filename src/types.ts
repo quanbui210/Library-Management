@@ -15,7 +15,6 @@ export interface GoogleUser {
 }
 
 export interface User {
-  fullName: string
   id: number
   username: string
   password: string
@@ -42,6 +41,7 @@ export interface Book {
   returnDate: null | string
   isFav: boolean
   description: string
+  imageUrl: string
 }
 
 interface AuthorBook {
@@ -53,7 +53,7 @@ export interface AuthorData {
   description: ReactNode
   name: string
   books: AuthorBook[]
-  image: string
+  imageUrl: string
   id: string
 }
 
@@ -85,6 +85,7 @@ export interface AuthState {
   loggedInUserName: string
   googleUser: GoogleUser | undefined
   profile: any | null
+  loggedInUser: object
 }
 
 export interface CategoryData {

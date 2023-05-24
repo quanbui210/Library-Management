@@ -15,6 +15,7 @@ export default function AddAuthorForm() {
   //   const [newAuthor, setNewAuthor] = useState<Partial<AuthorData> | undefined>()
   const nameRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
+  const imageUrlRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -22,6 +23,7 @@ export default function AddAuthorForm() {
     const description = descriptionRef.current?.value
     const newAuthor = {
       name: authorName ?? '',
+      imgUrl: imageUrlRef.current?.value,
       description: description ?? ''
     }
 
@@ -42,6 +44,15 @@ export default function AddAuthorForm() {
               ref={nameRef}
               type="text"
               placeholder="Author's Name"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label className="form-label">Image</Form.Label>
+            <Form.Control
+              className="form-control"
+              ref={imageUrlRef}
+              type="text"
+              placeholder="Image Url"
             />
           </Form.Group>
           <Form.Group className="mb-3">

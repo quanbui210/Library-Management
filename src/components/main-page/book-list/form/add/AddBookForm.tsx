@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap'
+import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRef, FormEvent, useState, ChangeEvent, useEffect } from 'react'
@@ -8,7 +8,7 @@ import { Box } from '@mui/material'
 // import nextId from 'react-id-generator'
 
 import { booksActions } from '../../../../../store/books/booksSlice'
-import { Book, Author, AuthorData, CategoryData } from '../../../../../types'
+import { AuthorData, CategoryData } from '../../../../../types'
 import './AddBookForm.scss'
 import GoBackBtn from '../../../../btn/GoBackBtn'
 import { RootState } from '../../../../../store/store'
@@ -27,7 +27,8 @@ export default function AddBookForm() {
     'publisher',
     'publishedDate',
     'isbn',
-    'author'
+    'author',
+    'imageURL'
   ].map(() => useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>)
 
   const handleSubmit = async (e: FormEvent) => {
@@ -37,6 +38,7 @@ export default function AddBookForm() {
     const publisher = inputRefs[3].current?.value
     const publishedDate = inputRefs[4].current?.value
     const isbn = inputRefs[5].current?.value
+    const imgURL = inputRefs[7].current.value
 
     const book = {
       isbn: parseInt(isbn),
@@ -46,9 +48,10 @@ export default function AddBookForm() {
       status: 'AVAILABLE',
       publishers: publisher ?? '',
       authorId: authorId ?? '',
-      categoryId: categoryId ?? ''
+      categoryId: categoryId ?? '',
+      imageURL: imgURL ?? ''
     }
-
+    console.log(book.imageURL)
     await dispatch(booksActions.addBooksThunk({ book }))
     await dispatch(booksActions.fetchBooksThunk())
     navigate('/home/books')
@@ -73,61 +76,88 @@ export default function AddBookForm() {
   }
 
   return (
-    <div>
+    <div className="container">
       <GoBackBtn />
       <h1 style={{ textAlign: 'center', marginTop: '110px' }}>Add Book</h1>
       <Form onSubmit={handleSubmit} className="add-book-form">
-        <div>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Title</Form.Label>
-            <Form.Control ref={inputRefs[0]} type="text" placeholder="Title" />
-          </Form.Group>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={categories}
-            getOptionLabel={(option) => option.name} // specify the label for the options
-            sx={{ width: 300 }}
-            onChange={handleCategoryChange}
-            renderInput={(params) => <TextField {...params} label="Category" />}
-            renderOption={(props, option) => (
-              <Box component="li" {...props}>
-                <div>{option.name}</div>
-              </Box>
-            )}
-          />
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Publisher</Form.Label>
-            <Form.Control ref={inputRefs[3]} type="text" placeholder="Publisher" />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">isbn</Form.Label>
-            <Form.Control ref={inputRefs[5]} type="text" placeholder="isbn" />
-          </Form.Group>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={authors}
-            getOptionLabel={(option) => option.name} // specify the label for the options
-            sx={{ width: 300 }}
-            onChange={handleAuthorChange}
-            renderInput={(params) => <TextField {...params} label="Author" />}
-            renderOption={(props, option) => (
-              <Box component="li" {...props}>
-                <div>{option.name}</div>
-              </Box>
-            )}
-          />
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Published Date</Form.Label>
-            <Form.Control ref={inputRefs[4]} type="date" placeholder="Published Date" />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Book Description</Form.Label>
-            <Form.Control ref={inputRefs[2]} className="textarea" />
-          </Form.Group>
-        </div>
-        <button>Submit</button>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3 form-group">
+              {/* <Form.Label className="form-label">Title</Form.Label> */}
+              <Form.Control ref={inputRefs[0]} type="text" placeholder="Title" />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3 form-group">
+              {/* <Form.Label className="form-label">Publisher</Form.Label> */}
+              <Form.Control ref={inputRefs[3]} type="text" placeholder="Publisher" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="autocomplete-row">
+          <Col>
+            <Autocomplete
+              className="form-autocomplete"
+              disablePortal
+              id="combo-box-demo"
+              options={authors}
+              getOptionLabel={(option) => option.name}
+              sx={{ width: 300 }}
+              onChange={handleAuthorChange}
+              renderInput={(params) => <TextField {...params} label="Author" />}
+              renderOption={(props, option) => (
+                <Box component="li" {...props}>
+                  <div>{option.name}</div>
+                </Box>
+              )}
+            />
+          </Col>
+          <Col>
+            <Autocomplete
+              className="form-autocomplete"
+              disablePortal
+              id="combo-box-demo"
+              options={categories}
+              getOptionLabel={(option) => option.name}
+              sx={{ width: 300 }}
+              onChange={handleCategoryChange}
+              renderInput={(params) => <TextField {...params} label="Category" />}
+              renderOption={(props, option) => (
+                <Box component="li" {...props}>
+                  <div>{option.name}</div>
+                </Box>
+              )}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3 form-group">
+              {/* <Form.Label className="form-label">ISBN</Form.Label> */}
+              <Form.Control ref={inputRefs[5]} type="text" placeholder="ISBN" />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3 form-group">
+              <Form.Control ref={inputRefs[4]} type="date" placeholder="Published Date" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3 form-group">
+              {/* <Form.Label className="form-label">Image URL</Form.Label> */}
+              <Form.Control ref={inputRefs[7]} type="text" placeholder="Image URL" />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3 form-group">
+              {/* <Form.Label className="form-label">Book Description</Form.Label> */}
+              <Form.Control ref={inputRefs[2]} className="textarea" placeholder="Description" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Button type="submit">Submit</Button>
       </Form>
     </div>
   )

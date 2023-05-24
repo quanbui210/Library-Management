@@ -10,10 +10,10 @@ import AddUserForm from '../form/AddUserForm'
 import { authActions } from '../../../../store/authentication/authSlice'
 
 import './Table.scss'
+import { useEffect } from 'react'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
-  { field: 'fullName', headerName: 'FullName', width: 370 },
   { field: 'username', headerName: 'Username', width: 270 },
   { field: 'role', headerName: 'Role', width: 170 },
   {
@@ -60,6 +60,8 @@ export default function DataTable() {
     useSelector((state) => (Array.isArray(state.auth.users) ? state.auth.users : [])) || []
   const showTable = useSelector((state) => state.toggle.show)
   const isAdmin = useSelector((state) => state.auth.isAdmin)
+  const dispatch = useDispatch()
+
   return (
     <>
       {showTable && isAdmin && <AddUserForm />}

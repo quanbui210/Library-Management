@@ -14,7 +14,6 @@ const Navigation = () => {
   const { isLoggedIn, isAdmin, loggedInUserName, googleUser } = useSelector(
     (state: RootState) => state.auth
   )
-  console.log(isAdmin)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogout = () => {

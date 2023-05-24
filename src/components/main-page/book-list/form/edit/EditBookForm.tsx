@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap'
+import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FormEvent, useState, useCallback, useEffect } from 'react'
@@ -22,7 +22,8 @@ export default function EditBookForm() {
     publishers: '',
     publishedDate: '',
     isbn: 0,
-    authorName: ''
+    authorName: '',
+    imageUrl: ''
   })
   const [authorId, setAuthorId] = useState<string | null>('')
   const [categoryId, setCategoryId] = useState<string | null>('')
@@ -39,19 +40,21 @@ export default function EditBookForm() {
         title: book.title || '',
         category: book.categoryName || '',
         description: book.description || '',
-        publisher: book.publishers || '',
+        publishers: book.publishers || '',
         publishedDate: book.publishedDate || '',
         isbn: book.isbn || '',
-        author: book.authorName || ''
+        author: book.authorName || '',
+        imageUrl: book.imageUrl || ''
       }
     : {
         title: '',
         category: '',
         description: '',
-        publisher: '',
+        publishers: '',
         publishedDate: '',
         isbn: '',
-        author: ''
+        author: '',
+        imageUrl: ''
       }
   const [formData, setFormData] = useState(initialFormData)
   const handleChange = useCallback((e: { target: { name: any; value: any } }) => {
@@ -66,9 +69,10 @@ export default function EditBookForm() {
       publishedDate: formData.publishedDate,
       description: formData.description,
       status: 'AVAILABLE',
-      publishers: formData.publisher,
+      publishers: formData.publishers,
       authorId: authorId || '',
-      categoryId: categoryId || ''
+      categoryId: categoryId || '',
+      imageUrl: formData.imageUrl
     }
     await dispatch(booksActions.editBookThunk({ isbn: Number(formData.isbn), book }))
     await dispatch(booksActions.fetchBooksThunk())
@@ -77,6 +81,24 @@ export default function EditBookForm() {
   useEffect(() => {
     setFormData(initialFormData)
   }, [book])
+
+  useEffect(() => {
+    // Check if the initial data is available
+    if (book) {
+      const initialAuthor = authors.find((author) => author.name === book.authorName)
+      const initialCategory = categories.find((category) => category.name === book.categoryName)
+
+      // Set the initial author value if available
+      if (initialAuthor) {
+        setAuthorId(initialAuthor.id.toString())
+      }
+
+      // Set the initial category value if available
+      if (initialCategory) {
+        setCategoryId(initialCategory.id.toString())
+      }
+    }
+  }, [authors, categories, book])
 
   const handleAuthorChange = (event: React.ChangeEvent<any>, value: AuthorData | null) => {
     if (value) {
@@ -97,28 +119,91 @@ export default function EditBookForm() {
     }
   }
   return (
-    <div>
+    <div className="container">
       <GoBackBtn />
-      <h1 style={{ textAlign: 'center', marginTop: '110px' }}>Edit {book?.title}</h1>
-      <Form className="add-book-form" onSubmit={handleSubmit}>
-        <div>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Title</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={formData.title}
-              type="text"
-              placeholder="Title"
-              name="title"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
+      <h1>Edit</h1>
+      <Form onSubmit={handleSubmit} className="add-book-form">
+        <Row>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Title"
+                value={formData.title}
+                onChange={handleChange}
+                name="title"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>Publisher</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Publisher"
+                value={formData.publishers || ''}
+                onChange={handleChange}
+                name="publishers"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>ISBN</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="ISBN"
+                value={formData.isbn}
+                onChange={handleChange}
+                name="isbn"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
             <Autocomplete
+              className="form-autocomplete"
               disablePortal
-              id="combo-box-demo"
+              id="author-autocomplete"
+              options={authors}
+              getOptionLabel={(option) => option.name}
+              value={authorId ? authors.find((author) => author.id.toString() === authorId) : null}
+              onChange={handleAuthorChange}
+              renderInput={(params) => <TextField {...params} label="Author" />}
+              renderOption={(props, option) => (
+                <Box component="li" {...props}>
+                  <div>{option.name}</div>
+                </Box>
+              )}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>P.Date</Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="Date"
+                value={formData.publishedDate}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Autocomplete
+              className="form-autocomplete"
+              disablePortal
+              id="category-autocomplete"
               options={categories}
-              getOptionLabel={(option) => option.name} // specify the label for the options
-              sx={{ width: 300 }}
+              getOptionLabel={(option) => option.name}
+              value={
+                categoryId
+                  ? categories.find((category) => category.id.toString() === categoryId)
+                  : null
+              }
               onChange={handleCategoryChange}
               renderInput={(params) => <TextField {...params} label="Category" />}
               renderOption={(props, option) => (
@@ -127,65 +212,25 @@ export default function EditBookForm() {
                 </Box>
               )}
             />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Publisher</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={formData.publisher || ''}
-              type="text"
-              placeholder="Publisher"
-              name="publisher"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">ISBN</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={formData.isbn}
-              type="text"
-              placeholder="ISBN"
-              name="ISBN"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={authors}
-              getOptionLabel={(option) => option.name} // specify the label for the options
-              sx={{ width: 300 }}
-              onChange={handleAuthorChange}
-              renderInput={(params) => <TextField {...params} label="Authors" />}
-              renderOption={(props, option) => (
-                <Box component="li" {...props}>
-                  <div>{option.name}</div>
-                </Box>
-              )}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Published Date</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={formData.publishedDate}
-              type="date"
-              placeholder="Published Date"
-              name="publishedDate"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3 form-group">
-            <Form.Label className="form-label">Book Descrsiption</Form.Label>
-            <Form.Control
-              onChange={handleChange}
-              value={formData.description}
-              as="textarea"
-              rows={3}
-              name="description"
-            />
-          </Form.Group>
-        </div>
-        <button>Submit</button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="form-group">
+              <Form.Label>Book Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={5}
+                value={formData.description}
+                onChange={handleChange}
+                name="description"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Button variant="primary" type="submit" className="submit-button">
+          Submit
+        </Button>
       </Form>
     </div>
   )

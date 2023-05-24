@@ -11,13 +11,12 @@ import { categoryActions } from '../../../store/category/categorySlice'
 export default function Categories() {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('')
-  const [categoriesList, setCategoriesList] = useState<string[]>([])
+  // const [categoriesList, setCategoriesList] = useState<string[]>([])
   const books = useSelector((state: RootState) => state.book.items)
   const categories = useSelector((state: RootState) => state.category.items)
-
+  console.log(categories)
   useEffect(() => {
     dispatch(categoryActions.fetchCategoriesThunk())
-    console.log(categories)
   }, [dispatch])
 
   // const filterCategories = () => {
@@ -42,12 +41,11 @@ export default function Categories() {
       <SearchInput setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       <h1 style={{ textAlign: 'center', margin: '50px 0' }}>Categories</h1>
       <ul className="categories">
-        {categoriesList &&
-          categoriesList.map((category) => (
-            <li key={category} className="category-list">
-              <BasicCard books={books} category={category} />
-            </li>
-          ))}
+        {categories.map((category) => (
+          <li key={category.name} className="category-list">
+            <BasicCard books={category.books} category={category.name} />
+          </li>
+        ))}
       </ul>
     </div>
   )

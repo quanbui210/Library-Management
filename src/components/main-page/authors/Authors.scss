@@ -42,6 +42,15 @@
             text-decoration: underline;
             color: #ccc !important;
         }
+    display: flex;
+    span {
+        
+    }
+}
+.author-book {
+    width: 70px !important;
+    height: 90px !important;
+    margin: 0 20px;
 }
 
 .author-actions {

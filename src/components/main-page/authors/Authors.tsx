@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+import { Button } from '@mui/material'
 
 import GoBackBtn from '../../btn/GoBackBtn'
 import { RootState } from '../../../store/store'
@@ -15,7 +16,8 @@ import { booksActions } from '../../../store/books/booksSlice'
 import { authorsActions } from '../../../store/authors/authorsSlice'
 
 import './Authors.scss'
-import { Button } from '@mui/material'
+import authorImage from '../../../assets/authors-image/aimg.png'
+import bookImage from '../../../assets/book.png'
 
 export default function Authors() {
   const dispatch = useDispatch()
@@ -46,12 +48,11 @@ export default function Authors() {
       setAuthorList([...filteredAuthors])
     }
   }
-
   useEffect(() => {
     filterAuthors()
   }, [searchTerm])
 
-  if (isLoading || authorList.length < 1) {
+  if (isLoading) {
     return <h2>Loading....</h2>
   }
 
@@ -78,7 +79,7 @@ export default function Authors() {
                 <Box sx={{ flexGrow: 1 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={5}>
-                      <img src={author.image} alt="" />
+                      <img src={author.imageUrl ? author.imageUrl : authorImage} alt="" />
                     </Grid>
                     <Grid item xs={5}>
                       <div>
@@ -114,11 +115,12 @@ export default function Authors() {
                         <p>Famous book(s): </p>
                         <ul>
                           {author.books.map((book) => (
-                            <li className="famous-books" key={book.isbn}>
+                            <div className="famous-books" key={book.isbn}>
                               <Link to={`/home/books/${book.isbn}`}>
-                                <p>{book.title}</p>
+                                <img className="author-book" src={bookImage} />
+                                <span>{book.title}</span>
                               </Link>
-                            </li>
+                            </div>
                           ))}
                         </ul>
                       </div>

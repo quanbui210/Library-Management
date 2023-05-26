@@ -29,6 +29,7 @@ export type Author = {
 }
 
 export interface Book {
+  id: string
   publishers: string
   categoryName: string
   isbn: number
@@ -85,11 +86,25 @@ export interface AuthState {
   loggedInUserName: string
   googleUser: GoogleUser | undefined
   profile: any | null
-  loggedInUser: object
+  loggedInUser: {
+    id: string
+    username: string
+  }
 }
 
 export interface CategoryData {
   id: any
   name: string
   books: Book[]
+}
+
+export interface CheckoutData {
+  id: string
+  bookId: string
+  userId: string
+  bookName: string
+  username: string
+  borrowedDate: string
+  returnedDate: string | null
+  returned: boolean
 }

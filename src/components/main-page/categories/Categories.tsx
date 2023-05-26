@@ -7,12 +7,12 @@ import BasicCard from './CategoriesCard'
 import GoBackBtn from '../../btn/GoBackBtn'
 import SearchInput from '../../input/SearchInput'
 import { categoryActions } from '../../../store/category/categorySlice'
+import { CategoryData } from '../../../types'
 
 export default function Categories() {
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('')
-  // const [categoriesList, setCategoriesList] = useState<string[]>([])
-  const books = useSelector((state: RootState) => state.book.items)
+  // const [categoriesList, setCategoriesList] = useState<CategoryData[]>([])
   const categories = useSelector((state: RootState) => state.category.items)
   console.log(categories)
   useEffect(() => {
@@ -23,8 +23,8 @@ export default function Categories() {
   //   if (searchTerm.trim() === '') {
   //     setCategoriesList(categories)
   //   } else {
-  //     const filteredCategories = categories.filter((category: string) => {
-  //       return category.toLowerCase().includes(searchTerm.toLowerCase())
+  //     const filteredCategories = categories.filter((category) => {
+  //       return category.name.toLowerCase().includes(searchTerm.toLowerCase())
   //     })
   //     setCategoriesList(filteredCategories)
   //   }

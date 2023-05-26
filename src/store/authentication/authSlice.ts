@@ -15,20 +15,18 @@ const initialState: AuthState = {
   loggedInUserName: '',
   googleUser: undefined,
   profile: null,
-  loggedInUser: {}
-}
-
-interface UserPayload {
-  user: {
-    username: string
-    password: string
+  loggedInUser: {
+    id: '',
+    username: ''
   }
 }
 
 export const fetchUsers = createAsyncThunk('authentication/fetchUsers', async () => {
   const response = await fetch('http://localhost:8080/api/v1/users')
   const usersData = await response.json()
-  return usersData
+  return {
+    usersData
+  }
 })
 
 export const signupThunk = createAsyncThunk(
@@ -47,18 +45,21 @@ export const signupThunk = createAsyncThunk(
   }
 )
 
-const loginThunk = createAsyncThunk('login/post', async (payload: UserPayload) => {
-  const response = await fetch('http://localhost:8080/api/v1/signin', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload.user)
-  })
+const loginThunk = createAsyncThunk(
+  'login/post',
+  async (user: { username: string; password: string }) => {
+    const response = await fetch('http://localhost:8080/api/v1/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
 
-  const data = await response.json()
-  return data
-})
+    const data = await response.json()
+    return data
+  }
+)
 
 const authSlice = createSlice({
   name: 'authentication',
@@ -92,6 +93,7 @@ const authSlice = createSlice({
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.isLoading = false
         state.users = action.payload.usersData
+        console.log(state.users)
       })
       .addCase(fetchUsers.rejected, (state) => {
         state.isLoading = false

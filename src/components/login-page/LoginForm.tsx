@@ -14,7 +14,6 @@ const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
   const { isLoggedIn, isAdmin } = useSelector((state: RootState) => state.auth)
-  console.log(isAdmin)
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const [user, setUser] = useState<Omit<
@@ -64,22 +63,21 @@ const LoginForm = () => {
     setEnteredPassword(e.target.value)
   }
 
-  const signupHandler = (e: { preventDefault: () => void }) => {
+  const signupHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const logginUser = {
       username: enteredUserName,
       password: enteredPassword
     }
-    dispatch(authActions.signupThunk(logginUser))
+    await dispatch(authActions.signupThunk(logginUser))
+    await dispatch(authActions.loginThunk(logginUser))
   }
 
   const loginHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const logginUser = {
-      user: {
-        username: enteredUserName,
-        password: enteredPassword
-      }
+      username: enteredUserName,
+      password: enteredPassword
     }
     dispatch(authActions.loginThunk(logginUser))
   }
@@ -117,6 +115,12 @@ const LoginForm = () => {
           <button onClick={signupHandler} type="button">
             Sign Up
           </button>
+          <p
+            style={{
+              fontSize: '11px'
+            }}>
+            ------Already having an account?------
+          </p>
           <button onClick={loginHandler} type="button">
             Login
           </button>

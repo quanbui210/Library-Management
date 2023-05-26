@@ -38,6 +38,7 @@ const BookCard = (props: { book: Book; disabled: boolean }) => {
     <div>
       <Card className="book-card" sx={{ maxWidth: 345 }}>
         <h2>{book.title}</h2>
+        <h3>{book.status}</h3>
         <span>
           <i>"{book.categoryName}"</i>
         </span>

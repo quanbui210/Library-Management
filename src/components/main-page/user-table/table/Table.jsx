@@ -17,7 +17,7 @@ const columns = [
   { field: 'username', headerName: 'Username', width: 270 },
   { field: 'role', headerName: 'Role', width: 170 },
   {
-    field: 'booksBorrowed',
+    field: 'checkoutList.length',
     headerName: 'Borrowed',
     width: 180
   },

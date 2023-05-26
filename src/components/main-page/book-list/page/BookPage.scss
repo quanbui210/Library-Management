@@ -15,19 +15,17 @@
         color: rgba(243, 115, 252, 0.735);
         font-weight: normal;
     }
-    button {
-        border: 1px solid #2f2f2f;
+    .borrow-btn {
+        border: 1px solid #2256b6;
+        background-color: #337bae;
+        color: #e6e6e6;
         border-radius: 4px;
-        padding: 12px;
-    }
-    .disabled {
-        color: #807e7e !important;
-        margin-top: 20px;
-    }
-    .avail {
-        color: #ddd9d9 !important;
-        margin-top: 20px;
-        background-color: #4840be;
+        margin-top: 30px;
+        margin-left: 40px;
+        :hover {
+            background-color: #3838ce !important;
+            cursor: pointer !important;
+        }
     }
     .note {
         font-style: italic;

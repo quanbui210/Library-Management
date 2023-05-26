@@ -1,6 +1,7 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/store'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import PageCard from './card/PageCard'
 import bookImg from '../../assets/books.png'
@@ -10,12 +11,15 @@ import authorImg from '../../assets/authors.png'
 import categoriesImg from '../../assets/categories.png'
 import favImg from '../../assets/fav.svg'
 
+import { borrowActions } from '../../store/borrow/borrowSlice'
+
 import './MainPage.scss'
 
 export default function MainPage() {
   const { isAdmin, loggedInUserName, googleUser, isLoading } = useSelector(
     (state: RootState) => state.auth
   )
+
   const navigate = useNavigate()
   const toDasboard = () => {
     navigate('/home/dashboard')
@@ -35,6 +39,9 @@ export default function MainPage() {
   const toFavourite = () => {
     navigate('/home/favourites')
   }
+  const toCheckouts = () => {
+    navigate('/home/checkouts')
+  }
 
   if (isLoading) {
     return (
@@ -53,13 +60,24 @@ export default function MainPage() {
       )}
 
       <div className="card-container">
-        <PageCard
-          title="Dasboard"
-          imageURL={dashboardImg}
-          description="View DashBoard"
-          onClick={toDasboard}
-          index="first"
-        />
+        {isAdmin ? (
+          <PageCard
+            title="Dasboard"
+            imageURL={dashboardImg}
+            description="View DashBoard"
+            onClick={toDasboard}
+            index="first"
+          />
+        ) : (
+          <PageCard
+            title="Checkout List"
+            imageURL={dashboardImg}
+            description="Checkout"
+            onClick={toCheckouts}
+            index="first"
+          />
+        )}
+
         <PageCard
           title="Books"
           imageURL={bookImg}
@@ -88,13 +106,23 @@ export default function MainPage() {
           onClick={toAuthorsList}
           index="five"
         />
-        <PageCard
-          title="Favourite Books"
-          imageURL={favImg}
-          description="View Favourite Books"
-          onClick={toFavourite}
-          index="six"
-        />
+        {!isAdmin ? (
+          <PageCard
+            title="Favourite Books"
+            imageURL={favImg}
+            description="View Favourite Books"
+            onClick={toFavourite}
+            index="six"
+          />
+        ) : (
+          <PageCard
+            title="Checkout List"
+            imageURL={dashboardImg}
+            description="Checkout"
+            onClick={toCheckouts}
+            index="first"
+          />
+        )}
       </div>
     </div>
   )

@@ -1,34 +1,46 @@
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Grid } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import { AppDispatch, RootState } from '../../../../store/store'
 import './BookPage.scss'
 import bookImg from '../../../../assets/book.png'
 import { booksActions } from '../../../../store/books/booksSlice'
 import GoBackBtn from '../../../btn/GoBackBtn'
+import { borrowActions } from '../../../../store/borrow/borrowSlice'
 
 export default function BookPage() {
   const { isbn } = useParams<{ isbn: string }>()
   const dispatch = useDispatch<AppDispatch>()
   const books = useSelector((state: RootState) => state.book.items)
-  const isAdmin = useSelector((state: RootState) => state.auth.isAdmin || undefined)
+  const { isAdmin, loggedInUser } = useSelector((state: RootState) => state.auth || undefined)
   const book = books.find((book) => {
     return book.isbn.toString() === isbn
   })
+  console.log(book)
   const isBorrowed = book && book.status === 'borrowed'
   const navigate = useNavigate()
 
-  const handleBorrow = () => {
-    if (isBorrowed) {
-      dispatch(booksActions.returnBook(isbn))
-    } else {
-      dispatch(booksActions.borrowedBook(isbn))
+  const handleBorrow = async () => {
+    const confirmed = window.confirm('Borrow this book?')
+    if (confirmed) {
+      await dispatch(
+        borrowActions.borrowBook({
+          bookId: book?.id || '',
+          userId: loggedInUser.id
+        })
+      )
+      await dispatch(booksActions.fetchBooksThunk())
     }
   }
+
+  useEffect(() => {
+    console.log(book)
+  }, [dispatch])
 
   return (
     <>
@@ -68,6 +80,8 @@ export default function BookPage() {
                 )}
               </span>
             </h1>
+            <span>{book?.status}</span>
+            <br></br>
             <span className="category">
               <i>Category: {book?.categoryName}</i>
             </span>
@@ -77,21 +91,14 @@ export default function BookPage() {
               <li>isbn: {book?.isbn}</li>
               <li>Pubslished Date: {book?.publishedDate}</li>
               <li>Publisher: {book?.publishers}</li>
-              <li>Borrowed Date: {book?.borrowDate && book.borrowDate}</li>
-              <li>Return Date: {book?.returnDate && book.returnDate}</li>
             </ul>
-            <button
-              disabled={isAdmin}
-              className={isAdmin ? 'disabled' : 'avail'}
+            <Button
+              disabled={(isAdmin || book?.status === 'BORROWED') ?? false}
+              className="borrow-btn"
               onClick={handleBorrow}>
               {isBorrowed ? 'Return' : 'Borrow'}
-            </button>{' '}
+            </Button>{' '}
             <br />
-            {isAdmin && (
-              <span className="note">
-                Note: Admin cannot borrow or return book, please login as user to try
-              </span>
-            )}
           </Grid>
         </Grid>
       </div>

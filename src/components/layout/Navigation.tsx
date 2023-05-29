@@ -11,7 +11,7 @@ import logo from '../../assets/logoo.jpeg'
 import './Navigation.scss'
 
 const Navigation = () => {
-  const { isLoggedIn, isAdmin, loggedInUserName, googleUser } = useSelector(
+  const { isLoggedIn, isAdmin, loggedInUserName, googleUser, loggedInUser } = useSelector(
     (state: RootState) => state.auth
   )
   const dispatch = useDispatch()
@@ -42,7 +42,7 @@ const Navigation = () => {
             ) : (
               <li>
                 <PersonIcon className="person-icon" />
-                {isAdmin ? `${loggedInUserName} (Admin)` : `${loggedInUserName} (User)`}
+                {isAdmin ? `${loggedInUser.username} (Admin)` : `${loggedInUser.username} (User)`}
               </li>
             ))}
           {isLoggedIn && (

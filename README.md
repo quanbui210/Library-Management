@@ -8,7 +8,7 @@
 
 # login as admin: 
 username: admin
-password: password
+password: admin
 
 
 ## Tech-Stacks:
@@ -20,8 +20,8 @@ password: password
 
 
 ## Features: 
-*Login / Logout as user or admin  (username: admin / user, password: password)
-
+*Login / Logout as user or admin  (username: admin, password: admin)
+*Sign up new account
 *Login with Google (default as user)
 User: 
 - View books, authors, categories
@@ -39,7 +39,7 @@ Admin:
 - Improve UI
 - Responsive Design
 - View borrowed books page
-- Build Backend with Java, Spring boot
+- Build Backend with Java, Spring boot (80% completed)
 
 
 

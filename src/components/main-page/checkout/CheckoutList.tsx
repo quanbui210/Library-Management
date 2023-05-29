@@ -16,13 +16,13 @@ export default function CheckoutList() {
     dispatch(borrowActions.getCheckoutsThunk())
   }, [dispatch])
 
-  const returnHandler = (checkout: CheckoutData) => {
+  const returnHandler = async (checkout: CheckoutData) => {
     const returnData = {
       checkoutId: checkout.id
     }
     const confirmed = window.confirm(`Do you want to return ${checkout.bookName}`)
     if (confirmed) {
-      dispatch(borrowActions.returnBook(returnData))
+      await dispatch(borrowActions.returnBook(returnData))
     }
   }
 
@@ -65,7 +65,9 @@ export default function CheckoutList() {
                   <Button
                     disabled={checkout.returned}
                     onClick={() => returnHandler(checkout)}
-                    className="return-button">
+                    className={
+                      checkout.returned ? 'return-button returned' : 'return-button borrowed'
+                    }>
                     Return
                   </Button>
                 </div>

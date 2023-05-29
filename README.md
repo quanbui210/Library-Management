@@ -5,6 +5,8 @@
 
 ##Live Demo: https://library-quanbui.netlify.app/
 
+##Backend code: https://github.com/quanbui210/Library-backend
+
 
 # login as admin: 
 username: admin
@@ -12,11 +14,23 @@ password: admin
 
 
 ## Tech-Stacks:
+*Frontend:
 - React 
 - Redux-Toolkit
 - TypeScript
 - React-Router
 - Material UI
+
+*Backend
+- Java
+- Spring Boot
+- Hibernate
+- PostgresSQL
+- Spring Security
+
+*Deployment
+- Docker
+- Railways
 
 
 ## Features: 

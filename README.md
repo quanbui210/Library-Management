@@ -1,7 +1,11 @@
 #Library-Management Frontend Project (not finished yet)
 
+Admin can:
 
-## Summary: A Library Management project (frontend, built in 2 weeks). Including separated user and admin functionalities (CRUD operations). Built mainly with React, ReduxToolkit and TypeScript(first project with TS)
+- add new product
+- update info of a product
+- remove a product
+- ban a user
 
 ##Live Demo: https://library-quanbui.netlify.app/
 
@@ -44,10 +48,7 @@ User:
 - Search for books / authors / categories
 - View favourite books
 
-Admin: 
-- Add new books / users / authors
-- Edit books / users / authors
-- Delete books / user / authors
+## Lastly
 
 ##To be completed:
 - Improve UI

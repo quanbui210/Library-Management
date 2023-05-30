@@ -12,7 +12,7 @@ const initialState: CategoryState = {
 }
 
 const fetchCategoriesThunk = createAsyncThunk('categories/fetch', async () => {
-  const response = await fetch(`http://localhost:8080/api/v1/categories`)
+  const response = await fetch(`https://library-backend-tije.onrender.com/api/v1/categories`)
   const categoriesData = await response.json()
   return {
     categoriesData

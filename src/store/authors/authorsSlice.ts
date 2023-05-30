@@ -33,7 +33,7 @@ interface EditAuthorPayload {
 }
 
 const addAuthorThunk = createAsyncThunk('authors/add', async (payload: AddAuthorPayload) => {
-  const response = await fetch('http://localhost:8080/api/v1/authors', {
+  const response = await fetch('https://library-backend-tije.onrender.com/api/v1/authors', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -46,19 +46,22 @@ const addAuthorThunk = createAsyncThunk('authors/add', async (payload: AddAuthor
 
 const editAuthorThunk = createAsyncThunk('authors/edit', async (payload: EditAuthorPayload) => {
   console.log(payload.authorId)
-  const response = await fetch(`http://localhost:8080/api/v1/authors/${payload.authorId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload.author)
-  })
+  const response = await fetch(
+    `https://library-backend-tije.onrender.com/api/v1/authors/${payload.authorId}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload.author)
+    }
+  )
   const newAuthor = await response.json()
   return newAuthor
 })
 
 const fetchAuthorsThunk = createAsyncThunk('authors/fetch', async () => {
-  const response = await fetch(`http://localhost:8080/api/v1/authors`)
+  const response = await fetch(`https://library-backend-tije.onrender.com/api/v1/authors`)
   const authorsData = await response.json()
   return {
     authorsData
@@ -69,12 +72,15 @@ const deleteAuthor = createAsyncThunk(
   'books/deleteBookById',
   async (authorId: string, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/authors/${authorId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `https://library-backend-tije.onrender.com/api/v1/authors/${authorId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      })
+      )
       if (!response.ok) {
         throw new Error('Failed to delete book')
       }

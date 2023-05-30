@@ -17,7 +17,7 @@ interface ReturnData {
 }
 
 const getCheckoutsThunk = createAsyncThunk('checkouts/fetch', async () => {
-  const response = await fetch('http://localhost:8080/api/v1/checkouts')
+  const response = await fetch('https://library-backend-tije.onrender.com/api/v1/checkouts')
   const checkoutsData = await response.json()
   console.log(checkoutsData)
   return {
@@ -28,7 +28,7 @@ const getCheckoutsThunk = createAsyncThunk('checkouts/fetch', async () => {
 const borrowBook = createAsyncThunk(
   'checkouts/borrow',
   async (checkoutRequest: { bookId: string; userId: string }) => {
-    const response = await fetch('http://localhost:8080/api/v1/checkout', {
+    const response = await fetch('https://library-backend-tije.onrender.com/api/v1/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ const borrowBook = createAsyncThunk(
   }
 )
 const returnBook = createAsyncThunk('checkouts/return', async (checkoutId: ReturnData) => {
-  const response = await fetch('http://localhost:8080/api/v1/return', {
+  const response = await fetch('https://library-backend-tije.onrender.com/api/v1/return', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

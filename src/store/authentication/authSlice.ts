@@ -22,7 +22,7 @@ const initialState: AuthState = {
 }
 
 export const fetchUsers = createAsyncThunk('authentication/fetchUsers', async () => {
-  const response = await fetch('http://localhost:8080/api/v1/users')
+  const response = await fetch('https://library-backend-tije.onrender.com/api/v1/users')
   const usersData = await response.json()
   return {
     usersData
@@ -32,7 +32,7 @@ export const fetchUsers = createAsyncThunk('authentication/fetchUsers', async ()
 export const signupThunk = createAsyncThunk(
   'authentication/signup',
   async (user: { username: string; password: string }) => {
-    const response = await fetch('http://localhost:8080/api/v1/signup', {
+    const response = await fetch('https://library-backend-tije.onrender.com/api/v1/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ export const signupThunk = createAsyncThunk(
 const loginThunk = createAsyncThunk(
   'login/post',
   async (user: { username: string; password: string }) => {
-    const response = await fetch('http://localhost:8080/api/v1/signin', {
+    const response = await fetch('https://library-backend-tije.onrender.com/api/v1/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

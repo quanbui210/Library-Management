@@ -189,7 +189,7 @@ export default function Dashboard() {
                     <DeleteIcon
                       className="author-actions"
                       onClick={() => {
-                        if (author.books.length > 1) {
+                        if (author.books.length > 0) {
                           window.alert('cannot delete author that already have books')
                         } else {
                           const confirmed = window.confirm('Delete this author?')

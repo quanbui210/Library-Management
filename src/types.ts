@@ -76,7 +76,7 @@ export interface AddUserPayload {
 export interface AuthState {
   isLoggedIn: boolean | null
   isLoading: boolean
-  invalid: boolean
+  invalid: boolean | null
   error: boolean
   users: User[]
   enteredUsername: string
@@ -90,6 +90,7 @@ export interface AuthState {
     id: string
     username: string
   }
+  loginInvalid: boolean | null
 }
 
 export interface CategoryData {

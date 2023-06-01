@@ -54,14 +54,14 @@ interface EditBookPayload {
 }
 
 const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
-  const res = await fetch(`https://library-backend-tije.onrender.com/api/v1/books`)
+  const res = await fetch(`https://lib-backend-e0qi.onrender.com/api/v1/books`)
   const books = await res.json()
   return {
     books
   }
 })
 const addBooksThunk = createAsyncThunk('books/add', async (payload: AddBookPayload) => {
-  const response = await fetch('https://library-backend-tije.onrender.com/api/v1/books', {
+  const response = await fetch('https://lib-backend-e0qi.onrender.com/api/v1/books', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -75,15 +75,12 @@ const deleteBookByISBNThunk = createAsyncThunk(
   'books/deleteBookById',
   async (isbn: number, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `https://library-backend-tije.onrender.com/api/v1/books/${isbn}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const response = await fetch(`https://lib-backend-e0qi.onrender.com/api/v1/books/${isbn}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
         }
-      )
+      })
       if (!response.ok) {
         throw new Error('Failed to delete book')
       }
@@ -95,7 +92,7 @@ const deleteBookByISBNThunk = createAsyncThunk(
 )
 const editBookThunk = createAsyncThunk('books/edit', async (payload: EditBookPayload) => {
   const response = await fetch(
-    `https://library-backend-tije.onrender.com/api/v1/books/${payload.book.isbn}`,
+    `https://lib-backend-e0qi.onrender.com/api/v1/books/${payload.book.isbn}`,
     {
       method: 'PUT',
       headers: {

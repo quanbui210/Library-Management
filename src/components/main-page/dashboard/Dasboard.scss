@@ -17,6 +17,38 @@
     margin: 20px 0 0 10px;
 }
 
+.admin-table {
+    text-align: center;
+    margin-top: 70px;
+    
+}
+
+.data-card {
+    background-color: #fff!important;
+}
+
+.author-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.book-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.add-icon {
+    font-size: 25px !important;
+    margin: 20px 0 !important;  
+    padding: 3px;
+    :hover {
+        background-color: #333 !important;
+        color: #1f7cae !important;
+    }
+}
+button {
+    all: unset
+}
+
 
 .one {
     background-color: #3e976c !important;

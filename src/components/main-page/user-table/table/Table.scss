@@ -1,104 +1,21 @@
-.table {
-    margin: auto;
-    max-width: 1255px;
+.complex-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+  .user-card {
     width: auto;
-    border-radius: 4px;
-  
-    .MuiDataGrid-root {
-      border-radius: 4px;
-      color: #ccc;
-  
-      .MuiDataGrid-columnsContainer {
-        background-color: #a2a3a4;
-        padding: 12px;
-  
-        .MuiDataGrid-columnSeparator {
-          display: none;
-        }
-  
-        .MuiDataGrid-colCellWrapper {
-          display: flex;
-          align-items: center;
-          font-weight: bold;
-  
-          &:hover {
-            background-color: #232424;
-          }
-  
-          .MuiDataGrid-colCellTitle {
-            margin-left: 8px;
-          }
-        }
-      }
-  
-      .MuiDataGrid-viewport {
-        .MuiDataGrid-row {
-          border-bottom: 1px solid #E5E5E5;
-  
-          &:last-child {
-            border-bottom: none;
-          }
-  
-          &:hover {
-            background-color: #F0F2F5;
-          }
-  
-          .MuiDataGrid-cell {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            padding: 12px;
-            white-space: nowrap;
-  
-            .MuiDataGrid-cellValue {
-              margin-left: 8px;
-            }
-          }
-        }
-      }
-  
-      .MuiPagination-root {
-        margin-top: 12px;
-        margin-bottom: 24px;
-        display: flex;
-        justify-content: center;
-  
-        .MuiPagination-ul {
-          & > li > button {
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            margin: 0 4px;
-            padding: 0;
-  
-            &:hover {
-              background-color: #E5E5E5;
-            }
-  
-            &.Mui-disabled {
-              background-color: transparent;
-              border: 1px solid #E5E5E5;
-              color: #E5E5E5;
-            }
-          }
-  
-          & > li.Mui-selected > button {
-            background-color: #0065C5;
-            color: #FFFFFF;
-            border: none;
-  
-            &:hover {
-              background-color: #0053A3;
-            }
-          }
-        }
-      }
+
+    .MuiCardContent-root {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .MuiTypography-root {
+      text-align: center;
     }
   }
-
-  .delete-user-icon {
-    color: #ccc;
-      &:hover {
-        color: #555454
-      }
-  }
+}

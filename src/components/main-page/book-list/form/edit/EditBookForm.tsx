@@ -29,7 +29,7 @@ export default function EditBookForm() {
   const [categoryId, setCategoryId] = useState<string | null>('')
   useEffect(() => {
     const fetchBook = async () => {
-      const res = await fetch(`https://library-backend-tije.onrender.com/api/v1/books/${isbn}`)
+      const res = await fetch(`https://lib-backend-e0qi.onrender.com/api/v1/books/${isbn}`)
       const book = await res.json()
       setBook(book)
     }

@@ -18,11 +18,12 @@ const initialState: AuthState = {
   loggedInUser: {
     id: '',
     username: ''
-  }
+  },
+  loginInvalid: false
 }
 
 export const fetchUsers = createAsyncThunk('authentication/fetchUsers', async () => {
-  const response = await fetch('https://library-backend-tije.onrender.com/api/v1/users')
+  const response = await fetch('https://lib-backend-e0qi.onrender.com/api/v1/users')
   const usersData = await response.json()
   return {
     usersData
@@ -32,7 +33,7 @@ export const fetchUsers = createAsyncThunk('authentication/fetchUsers', async ()
 export const signupThunk = createAsyncThunk(
   'authentication/signup',
   async (user: { username: string; password: string }) => {
-    const response = await fetch('https://library-backend-tije.onrender.com/api/v1/signup', {
+    const response = await fetch('https://lib-backend-e0qi.onrender.com/api/v1/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -48,7 +49,7 @@ export const signupThunk = createAsyncThunk(
 const loginThunk = createAsyncThunk(
   'login/post',
   async (user: { username: string; password: string }) => {
-    const response = await fetch('https://library-backend-tije.onrender.com/api/v1/signin', {
+    const response = await fetch('https://lib-backend-e0qi.onrender.com/api/v1/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -101,17 +102,25 @@ const authSlice = createSlice({
       })
       .addCase(signupThunk.pending, (state) => {
         state.isLoading = true
+        state.invalid = false
       })
       .addCase(signupThunk.fulfilled, (state) => {
         state.isLoading = false
+        state.invalid = false
+      })
+      .addCase(signupThunk.rejected, (state) => {
+        state.isLoading = false
+        state.invalid = true
       })
       .addCase(loginThunk.pending, (state, action) => {
         state.isLoading = true
+        state.loginInvalid = false
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        const { token, userData } = action.payload
+        const { userData } = action.payload
         state.isLoggedIn = true
         state.isLoading = false
+        state.loginInvalid = false
         state.loggedInUser = userData
         state.loggedInUserName = userData.username
         if (state.loggedInUserName === 'admin') {
@@ -119,6 +128,11 @@ const authSlice = createSlice({
         } else {
           state.isAdmin = false
         }
+      })
+      .addCase(loginThunk.rejected, (state, action) => {
+        state.error = true
+        state.isLoading = false
+        state.loginInvalid = true
       })
   }
 })

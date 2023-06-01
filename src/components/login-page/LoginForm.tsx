@@ -13,7 +13,9 @@ import axios from 'axios'
 const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
-  const { isLoggedIn, isAdmin } = useSelector((state: RootState) => state.auth)
+  const { isLoggedIn, loginInvalid, isLoading, invalid } = useSelector(
+    (state: RootState) => state.auth
+  )
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const [user, setUser] = useState<Omit<
@@ -65,12 +67,17 @@ const LoginForm = () => {
 
   const signupHandler = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    const logginUser = {
+    const userToSignup = {
       username: enteredUserName,
       password: enteredPassword
     }
-    await dispatch(authActions.signupThunk(logginUser))
-    await dispatch(authActions.loginThunk(logginUser))
+
+    try {
+      await dispatch(authActions.signupThunk(userToSignup))
+      await dispatch(authActions.loginThunk(userToSignup))
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const loginHandler = (e: { preventDefault: () => void }) => {

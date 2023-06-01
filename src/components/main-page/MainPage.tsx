@@ -12,6 +12,8 @@ import categoriesImg from '../../assets/categories.png'
 import favImg from '../../assets/fav.svg'
 
 import { borrowActions } from '../../store/borrow/borrowSlice'
+import { authorsActions } from '../../store/authors/authorsSlice'
+import { booksActions } from '../../store/books/booksSlice'
 
 import './MainPage.scss'
 
@@ -19,6 +21,12 @@ export default function MainPage() {
   const { isAdmin, loggedInUserName, googleUser, isLoading } = useSelector(
     (state: RootState) => state.auth
   )
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(authorsActions.fetchAuthorsThunk())
+    dispatch(booksActions.fetchBooksThunk())
+  }, [])
 
   const navigate = useNavigate()
   const toDasboard = () => {

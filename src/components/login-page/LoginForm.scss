@@ -16,10 +16,12 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             color: #333;
+            min-width: 180px
         }
         &-label {
             float: left;
             font-size: 16px;
+            min-width: 130px
         }
         button {
             border: 1px solid #2f2f2f;
@@ -30,6 +32,7 @@
             font-weight: bold;
             color: #ccc;
             background-color: #323131;
+            margin-bottom: 13px;
             transition: all 0.3s ease-in-out;
                 &:hover {
                     background-color: #fff;
@@ -45,8 +48,19 @@
             }
 
         }
-        
 }
+.signup {
+   font-size: 12px;
+   a {
+    text-decoration: underline;
+    cursor: pointer !important;
+    :hover {
+        color: #565454 !important;
+        opacity: 0.8;
+    }
+   }
+}
+
 .error-message-login {
     color: red;
     font-size: 11px;

@@ -7,15 +7,15 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authActions } from '../../store/authentication/authSlice'
+import { toggleActions } from '../../store/toggle/toggleSlice'
 import { useGoogleLogin, TokenResponse } from '@react-oauth/google'
 import axios from 'axios'
 
 const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
-  const { isLoggedIn, loginInvalid, isLoading, invalid } = useSelector(
-    (state: RootState) => state.auth
-  )
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth)
+  const { isSignup } = useSelector((state: RootState) => state.toggle)
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const [user, setUser] = useState<Omit<
@@ -95,6 +95,17 @@ const LoginForm = () => {
   return (
     <>
       <Form className="form" autoComplete="off">
+        {isSignup && (
+          <Form.Group className="form-group" controlId="formBasicEmail">
+            <Form.Label className="form-label">Email</Form.Label>
+            <Form.Control
+              placeholder="Enter email"
+              autoComplete="off"
+              className="form-control"
+              name="form-useremail"
+            />
+          </Form.Group>
+        )}
         <Form.Group className="form-group" controlId="formBasicEmail">
           <Form.Label className="form-label">Username: </Form.Label>
           <Form.Control
@@ -119,22 +130,45 @@ const LoginForm = () => {
           />
         </Form.Group>
         <Form.Group className="form-group">
-          <button onClick={signupHandler} type="button">
-            Sign Up
-          </button>
-          <p
-            style={{
-              fontSize: '11px'
-            }}>
-            ------Already having an account?------
-          </p>
-          <button onClick={loginHandler} type="button">
-            Login
-          </button>
-          <button type="button" onClick={loginGoogle}>
-            Sign in with Google <i className="devicon-google-plain"></i>
-          </button>
+          {isSignup ? (
+            <button onClick={signupHandler} type="button">
+              Sign Up
+            </button>
+          ) : (
+            <div>
+              {' '}
+              <button onClick={loginHandler} type="button">
+                Login
+              </button>
+              <button type="button" onClick={loginGoogle}>
+                Sign in with Google <i className="devicon-google-plain"></i>
+              </button>
+            </div>
+          )}
         </Form.Group>
+        {isSignup ? (
+          <span className="signup">
+            Already have an account?{' '}
+            <a
+              onClick={() => {
+                dispatch(toggleActions.exitSignup())
+              }}>
+              Login
+            </a>{' '}
+            here
+          </span>
+        ) : (
+          <span className="signup">
+            Dont have an account yet?{' '}
+            <a
+              onClick={() => {
+                dispatch(toggleActions.isSignupAction())
+              }}>
+              SignUp
+            </a>{' '}
+            now
+          </span>
+        )}
       </Form>
     </>
   )

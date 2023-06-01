@@ -59,72 +59,48 @@ export default function Dashboard() {
           <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ backgroundColor: '#f8bbd0' }}>
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  Total Books
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  {books.length}
-                </Typography>
+                <h3>Total Books</h3>
+                <h2>{books.length}</h2>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ backgroundColor: '#c5cae9' }}>
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  Total Authors
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  {authors.length}
-                </Typography>
+                <h3>Total Authors</h3>
+                <h2>{authors.length}</h2>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ backgroundColor: '#ffcc80' }}>
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  Users
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  {users.length}
-                </Typography>
+                <h3>Users</h3>
+                <h2>{users.length}</h2>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ backgroundColor: '#b2dfdb' }}>
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  Returned
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  30
-                </Typography>
+                <h3>Returned</h3>
+                <h2>30</h2>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ backgroundColor: '#ffcc80' }}>
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  Not Returned
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  20
-                </Typography>
+                <h3>Not Returned</h3>
+                <h2>20</h2>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ backgroundColor: '#b2dfdb' }}>
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  Categories
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  {categories.length}
-                </Typography>
+                <h3>Categories</h3>
+                <h2>{categories.length}</h2>
               </CardContent>
             </Card>
           </Grid>
@@ -143,9 +119,9 @@ export default function Dashboard() {
               </AddIcon>
               {books.map((book) => (
                 <div key={book.id} className="book-item">
-                  <h5>ID: {book.id}</h5>
-                  <h5>{book.title}</h5>
-                  <h5>{book.status}</h5>
+                  <h5 className="a-book">ID: {book.id}</h5>
+                  <h5 className="a-name">{book.title}</h5>
+                  <h5 className="a-id">{book.status}</h5>
                   <div>
                     <EditIcon
                       className="author-actions"
@@ -178,9 +154,9 @@ export default function Dashboard() {
 
               {authors.map((author) => (
                 <div key={author.id} className="author-item">
-                  <h5>ID: {author.id}</h5>
-                  <h5>{author.name}</h5>
-                  <h5>books: {author.books.length}</h5>
+                  <h5 className="a-id">ID: {author.id}</h5>
+                  <h5 className="a-name">{author.name}</h5>
+                  <h5 className="a-book">books: {author.books.length}</h5>
                   <div>
                     <EditIcon
                       className="author-actions"

@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export interface ToggleState {
   show: boolean
   showSnackBar: boolean
+  isSignup: boolean
 }
 
-const initialState = {
+const initialState: ToggleState = {
   show: false,
-  showSnackBar: false
+  showSnackBar: false,
+  isSignup: false
 }
 
 const toggleSlice = createSlice({
@@ -19,6 +21,12 @@ const toggleSlice = createSlice({
     },
     hideForm: (state) => {
       state.show = false
+    },
+    isSignupAction: (state) => {
+      state.isSignup = true
+    },
+    exitSignup: (state) => {
+      state.isSignup = false
     }
   }
 })

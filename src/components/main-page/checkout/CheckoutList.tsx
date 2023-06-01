@@ -12,10 +12,6 @@ export default function CheckoutList() {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(borrowActions.getCheckoutsThunk())
-  }, [dispatch])
-
   const returnHandler = async (checkout: CheckoutData) => {
     const returnData = {
       checkoutId: checkout.id
@@ -23,12 +19,22 @@ export default function CheckoutList() {
     const confirmed = window.confirm(`Do you want to return ${checkout.bookName}`)
     if (confirmed) {
       await dispatch(borrowActions.returnBook(returnData))
+      dispatch(borrowActions.getCheckoutsThunk)
     }
   }
 
   useEffect(() => {
-    console.log(checkouts)
+    dispatch(borrowActions.getCheckoutsThunk())
   }, [dispatch])
+
+  if (checkouts.length < 1) {
+    return (
+      <div>
+        <h1 className="checkout-list-heading">Checkout List</h1>
+        <p>No Check out Available</p>
+      </div>
+    )
+  }
 
   return (
     <div className="checkout-list-container">

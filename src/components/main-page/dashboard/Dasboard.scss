@@ -35,6 +35,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.category-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 
 .add-icon {
     font-size: 25px !important;

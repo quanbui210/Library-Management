@@ -37,6 +37,9 @@ export default function Dashboard() {
   const authors = useSelector((state: RootState) => state.author.items)
   const categories = useSelector((state: RootState) => state.category.items)
   const users = useSelector((state: RootState) => state.auth.users)
+  const checkouts = useSelector((state: RootState) => state.borrow.items)
+  const borrowed = checkouts.filter((book) => book.returned === false)
+  const returned = checkouts.filter((book) => book.returned === true)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -84,7 +87,7 @@ export default function Dashboard() {
             <Card sx={{ backgroundColor: '#b2dfdb' }}>
               <CardContent>
                 <h3>Returned</h3>
-                <h2>30</h2>
+                <h2>{returned.length}</h2>
               </CardContent>
             </Card>
           </Grid>
@@ -92,7 +95,7 @@ export default function Dashboard() {
             <Card sx={{ backgroundColor: '#ffcc80' }}>
               <CardContent>
                 <h3>Not Returned</h3>
-                <h2>20</h2>
+                <h2>{borrowed.length}</h2>
               </CardContent>
             </Card>
           </Grid>
@@ -115,12 +118,12 @@ export default function Dashboard() {
               <h3>List of Books</h3>
               <AddIcon className="add-icon" onClick={() => navigate('/home/books/add')}>
                 {' '}
-                Add a new author
+                Add a book
               </AddIcon>
               {books.map((book) => (
                 <div key={book.id} className="book-item">
                   <h5 className="a-book">ID: {book.id}</h5>
-                  <h5 className="a-name">{book.title}</h5>
+                  <h4 className="a-name">{book.title}</h4>
                   <h5 className="a-id">{book.status}</h5>
                   <div>
                     <EditIcon
@@ -155,7 +158,7 @@ export default function Dashboard() {
               {authors.map((author) => (
                 <div key={author.id} className="author-item">
                   <h5 className="a-id">ID: {author.id}</h5>
-                  <h5 className="a-name">{author.name}</h5>
+                  <h4 className="a-name">{author.name}</h4>
                   <h5 className="a-book">books: {author.books.length}</h5>
                   <div>
                     <EditIcon
@@ -176,6 +179,23 @@ export default function Dashboard() {
                       }}
                     />
                   </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+        <div className="admin-table">
+          <Card className="data-card">
+            <CardContent>
+              <h3>List of Categories</h3>
+              <AddIcon className="add-icon" onClick={() => navigate('/home/books/add')}>
+                {' '}
+              </AddIcon>
+              {categories.map((category) => (
+                <div key={category.id} className="category-item">
+                  <h5 className="a-book">ID: {category.id}</h5>
+                  <h4 className="a-name">{category.name}</h4>
+                  <h5 className="a-id">Books:{category.books.length}</h5>
                 </div>
               ))}
             </CardContent>

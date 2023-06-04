@@ -19,7 +19,7 @@ export default function CheckoutList() {
     const confirmed = window.confirm(`Do you want to return ${checkout.bookName}`)
     if (confirmed) {
       await dispatch(borrowActions.returnBook(returnData))
-      dispatch(borrowActions.getCheckoutsThunk)
+      dispatch(borrowActions.getCheckoutsThunk())
     }
   }
 

@@ -18,6 +18,7 @@ import AddAuthorForm from './components/main-page/authors/form/AddAuthorForm'
 import AddBookForm from './components/main-page/book-list/form/add/AddBookForm'
 import EditBookForm from './components/main-page/book-list/form/edit/EditBookForm'
 import CheckoutList from './components/main-page/checkout/CheckoutList'
+import Support from './components/main-page/support/Support'
 
 
 const router = createBrowserRouter([
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
   {
     path: '/home/checkouts',
     element: <Layout><CheckoutList/></Layout>,
+  },
+  {
+    path: '/home/support',
+    element: <Layout><Support/></Layout>,
   },
 ])
 

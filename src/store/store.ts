@@ -22,7 +22,6 @@ export interface RootState {
   borrow: CheckoutState
 }
 const storedState = localStorage.getItem('reduxState')
-const preloadedState = storedState ? JSON.parse(storedState) : undefined
 
 const store = configureStore({
   reducer: {

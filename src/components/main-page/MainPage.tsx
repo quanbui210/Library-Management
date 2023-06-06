@@ -50,6 +50,9 @@ export default function MainPage() {
   const toCheckouts = () => {
     navigate('/home/checkouts')
   }
+  const toSupport = () => {
+    navigate('/home/support')
+  }
 
   if (isLoading) {
     return (
@@ -94,10 +97,10 @@ export default function MainPage() {
           index="second"
         />
         <PageCard
-          title="Users"
+          title="FAQs & Contact"
           imageURL={usersImg}
-          description="Manage List of Users"
-          onClick={toUsersList}
+          description="FAQs & Contact"
+          onClick={toSupport}
           index="third"
         />
         <PageCard

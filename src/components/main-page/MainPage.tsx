@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
 import PageCard from './card/PageCard'
-import bookImg from '../../assets/books.png'
+import bookImg from '../../assets/book1.png'
 import usersImg from '../../assets/users.svg'
 import dashboardImg from '../../assets/dasboard.jpeg'
 import authorImg from '../../assets/authors.png'
 import categoriesImg from '../../assets/categories.png'
 import favImg from '../../assets/fav.svg'
+import faqImg from '../../assets/faq.png'
 
 import { borrowActions } from '../../store/borrow/borrowSlice'
 import { authorsActions } from '../../store/authors/authorsSlice'
@@ -98,7 +99,7 @@ export default function MainPage() {
         />
         <PageCard
           title="FAQs & Contact"
-          imageURL={usersImg}
+          imageURL={faqImg}
           description="FAQs & Contact"
           onClick={toSupport}
           index="third"

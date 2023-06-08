@@ -6,6 +6,18 @@
       text-align: center;
       margin: 50px 0;
     }
+    .filter-btn {
+      text-align: center;
+      button {
+        margin: 20px 20px;
+        padding: 12px;
+        background-color: #454345;
+        color: #fff;
+        :hover {
+          background-color: #fff;
+        }
+      }
+    }
   
     .checkout-list {
       list-style: none;

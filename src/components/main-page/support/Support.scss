@@ -6,8 +6,74 @@
 
 .FAQ-card {
     margin: 20px 150px;
+    h5 {
+        font-weight: 700;
+    }
+}
+
+.lib-intro {
+    margin: 130px 200px;
+    text-align: center;
+    p {
+      text-align: start !important;
+    }
+}
+.lib-img {
+  width: 900px;
+  height: 400px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
 
 .contact-info {
     
 }
+
+.FAQ-card.blue {
+    background-color: #eaf6fd;
+  }
+  
+  .FAQ-card.green {
+    background-color: #e4fbed;
+  }
+  
+  .FAQ-card.purple {
+    background-color: #f0e9ff;
+  }
+  
+  .FAQ-card.orange {
+    background-color: #fff2e6;
+  }
+  
+  .FAQ-card.pink {
+    background-color: #ffeef0;
+  }
+  
+  .FAQ-card.teal {
+    background-color: #e6fffa;
+  }
+  
+  .FAQ-card-title.blue {
+    color: #1c6bea;
+  }
+  
+  .FAQ-card-title.green {
+    color: #33b194;
+  }
+  
+  .FAQ-card-title.purple {
+    color: #cf4497;
+  }
+  
+  .FAQ-card-title.orange {
+    color: #32d520;
+  }
+  
+  .FAQ-card-title.pink {
+    color: #ff4162;
+  }
+  
+  .FAQ-card-title.teal {
+    color: #c1bc3d;
+  }
+  

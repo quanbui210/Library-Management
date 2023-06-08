@@ -21,7 +21,6 @@ export default function BookPage() {
   const book = books.find((book) => {
     return book.isbn.toString() === isbn
   })
-  console.log(book)
   const isBorrowed = book && book.status === 'borrowed'
   const navigate = useNavigate()
 

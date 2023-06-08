@@ -4,6 +4,7 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import './Support.scss'
+import libImg from '../../../assets/lib-img.png'
 
 export default function Support() {
   const faqs = [
@@ -37,21 +38,55 @@ export default function Support() {
       answer:
         'To pay fines for late returns, go to the "My Account" section and select the "Fines and Payments" tab. Follow the instructions to make the payment using the available payment methods.'
     }
-    // Add more FAQs as needed
   ]
+
+  const getCardColorClass = (index: number) => {
+    const colors = ['blue', 'green', 'purple', 'orange', 'pink', 'teal'] // Add more colors as needed
+    return colors[index % colors.length]
+  }
   return (
     <div className="support-container">
-      <h1>Support</h1>
+      <h1>Library Support and FAQs</h1>
+      <h4 style={{ textAlign: 'center' }}>
+        <i>
+          Discover Our Library, Uncover Our Story, and Get Support from Our Customer Service Team!
+        </i>
+      </h4>
+      <section className="lib-intro">
+        <h2>Library Introduction</h2>
+        <img className="lib-img" src={libImg} alt="" />
+        <p>
+          Welcome to our library! We strive to provide a rich collection of books and resources to
+          cater to the diverse interests of our readers. Whether you are a student, a book
+          enthusiast, or someone seeking knowledge, our library is the perfect place for you.
+        </p>
+        <p>
+          Our library features a wide range of genres, including fiction, non-fiction, biographies,
+          self-help, academic resources, and much more. With a dedicated team of librarians and
+          staff, we aim to create a comfortable and conducive environment for your reading and
+          learning experience.
+        </p>
+        <p>
+          Browse through our extensive collection, borrow your favorite books, and embark on a
+          literary journey. If you have any questions or need assistance, our support team is always
+          ready to help. Check out the FAQs section below for answers to common queries, or feel
+          free to reach out to us directly.
+        </p>
+      </section>
       <section>
         <h2>Frequently Asked Questions</h2>
         {faqs.map((faq, index) => (
-          <div key={index} className="FAQ-card">
+          <div key={index} className={`FAQ-card ${getCardColorClass(index)}`}>
             <Accordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                className={`FAQ-card-title ${getCardColorClass(index)}`}>
                 <h3>{faq.question}</h3>
               </AccordionSummary>
               <AccordionDetails>
-                <h5>{faq.answer}</h5>
+                <h5>
+                  <i>{faq.answer}</i>
+                </h5>
               </AccordionDetails>
             </Accordion>
           </div>
@@ -61,7 +96,8 @@ export default function Support() {
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="contact-info-content"
-              id="contact-info-header">
+              id="contact-info-header"
+              style={{ color: '#1c6bea' }}>
               <h3>Contact Information</h3>
             </AccordionSummary>
             <AccordionDetails>
@@ -90,7 +126,8 @@ export default function Support() {
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="opening-hours-content"
-              id="opening-hours-header">
+              id="opening-hours-header"
+              style={{ color: '#26a267' }}>
               <h3>Opening Hours</h3>
             </AccordionSummary>
             <AccordionDetails>

@@ -12,6 +12,7 @@ import SearchInput from '../../input/SearchInput'
 import { AppDispatch } from '../../../store/store'
 import handleRender from './render/handleBookRender'
 import GoBackBtn from '../../btn/GoBackBtn'
+import { log } from 'console'
 
 export default function Books() {
   const navigate = useNavigate()

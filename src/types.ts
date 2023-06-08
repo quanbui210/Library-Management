@@ -15,11 +15,11 @@ export interface GoogleUser {
 }
 
 export interface User {
+  role: ReactNode
   id: number
   username: string
   password: string
-  role: 'user' | 'admin'
-  booksBorrowed: number | undefined
+  checkoutList?: []
 }
 
 export type Author = {

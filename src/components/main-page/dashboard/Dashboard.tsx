@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { authorsActions } from '../../../store/authors/authorsSlice'
 import { booksActions } from '../../../store/books/booksSlice'
+import { CheckoutData } from '../../../types'
 type Books = {
   total: number
   returned: number
@@ -188,14 +189,30 @@ export default function Dashboard() {
           <Card className="data-card">
             <CardContent>
               <h3>List of Categories</h3>
-              <AddIcon className="add-icon" onClick={() => navigate('/home/books/add')}>
-                {' '}
-              </AddIcon>
               {categories.map((category) => (
                 <div key={category.id} className="category-item">
                   <h5 className="a-book">ID: {category.id}</h5>
                   <h4 className="a-name">{category.name}</h4>
                   <h5 className="a-id">Books:{category.books.length}</h5>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="admin-table">
+          <Card className="data-card">
+            <CardContent>
+              <h3>List of Users</h3>
+              {users.map((user) => (
+                <div key={user.id} className="user-item">
+                  <h5 className="a-book">ID: {user.id}</h5>
+                  <h4 className="a-name">{user.username}</h4>
+                  <h5 className="a-id">loans: {user.checkoutList?.length}</h5>
+                  <h5 className="a-id">
+                    returned:{' '}
+                    {user.checkoutList?.filter((c: CheckoutData) => c.returned === true).length}
+                  </h5>
                 </div>
               ))}
             </CardContent>

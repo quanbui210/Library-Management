@@ -40,6 +40,11 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.user-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .add-icon {
     font-size: 25px !important;
     margin: 20px 0 !important;  

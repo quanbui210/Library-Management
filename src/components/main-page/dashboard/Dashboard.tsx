@@ -1,37 +1,18 @@
-import { Card, CardContent, Grid, Typography, CircularProgress, Button } from '@mui/material'
+import { Card, CardContent, Grid, Typography, CircularProgress } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 
-import GoBackBtn from '../../btn/GoBackBtn'
 import './Dasboard.scss'
+
+import GoBackBtn from '../../btn/GoBackBtn'
 import { RootState } from '../../../store/store'
-import Categories from '../categories/Categories'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { authorsActions } from '../../../store/authors/authorsSlice'
 import { booksActions } from '../../../store/books/booksSlice'
 import { CheckoutData } from '../../../types'
-type Books = {
-  total: number
-  returned: number
-  notReturned: number
-}
-
-type Authors = {
-  total: number
-}
-
-type Categories = {
-  total: number
-}
-
-type DashboardData = {
-  books: Books
-  authors: Authors
-  categories: Categories
-}
 
 export default function Dashboard() {
   const books = useSelector((state: RootState) => state.book.items)
@@ -124,7 +105,9 @@ export default function Dashboard() {
               {books.map((book) => (
                 <div key={book.id} className="book-item">
                   <h5 className="a-book">ID: {book.id}</h5>
+                  <h5>ISBN: {book.isbn}</h5>
                   <h4 className="a-name">{book.title}</h4>
+
                   <h5 className="a-id">{book.status}</h5>
                   <div>
                     <EditIcon

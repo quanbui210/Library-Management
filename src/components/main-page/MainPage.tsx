@@ -5,14 +5,13 @@ import { useEffect } from 'react'
 
 import PageCard from './card/PageCard'
 import bookImg from '../../assets/book1.png'
-import usersImg from '../../assets/users.svg'
-import dashboardImg from '../../assets/dasboard.jpeg'
-import authorImg from '../../assets/authors.png'
+import dashboardImg from '../../assets/adm.png'
+import checkoutImg from '../../assets/dasboard.jpeg'
+import authorImg from '../../assets/feather.png'
 import categoriesImg from '../../assets/categories.png'
 import favImg from '../../assets/fav.svg'
 import faqImg from '../../assets/faq.png'
 
-import { borrowActions } from '../../store/borrow/borrowSlice'
 import { authorsActions } from '../../store/authors/authorsSlice'
 import { booksActions } from '../../store/books/booksSlice'
 
@@ -83,7 +82,7 @@ export default function MainPage() {
         ) : (
           <PageCard
             title="Checkout List"
-            imageURL={dashboardImg}
+            imageURL={checkoutImg}
             description="Checkout"
             onClick={toCheckouts}
             index="first"
@@ -129,7 +128,7 @@ export default function MainPage() {
         ) : (
           <PageCard
             title="Checkout List"
-            imageURL={dashboardImg}
+            imageURL={checkoutImg}
             description="Checkout"
             onClick={toCheckouts}
             index="first"

@@ -59,7 +59,7 @@ export default function AddAuthorForm() {
             <Form.Label>Author Description</Form.Label>
             <Form.Control ref={descriptionRef} as="textarea" rows={3} />
           </Form.Group>
-          <button>Submit</button>
+          <button className="add-form-btn">Submit</button>
         </Form>
       </div>
     </div>

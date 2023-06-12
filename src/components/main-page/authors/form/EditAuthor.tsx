@@ -18,7 +18,6 @@ export default function EditAuthor() {
   const authors = useSelector((state: RootState) => state.author.items)
   const author = authors.find((a) => a.id === authorId)
   const nameInputRef = useRef<HTMLTextAreaElement>(null)
-  const imgInputRef = useRef<HTMLTextAreaElement>(null)
   const descInputRef = useRef<HTMLTextAreaElement>(null)
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
@@ -44,15 +43,25 @@ export default function EditAuthor() {
       <img src={author?.imageUrl ? author.imageUrl : authorImage} alt="" />
       <Form className="authors-action-form" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Control ref={nameInputRef} as="textarea" placeholder="Enter name" />
+          <Form.Control
+            ref={nameInputRef}
+            as="textarea"
+            placeholder="Enter name"
+            defaultValue={author ? author.name : ''}
+          />
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
-          <Form.Control ref={descInputRef} as="textarea" placeholder="Enter description" />
+          <Form.Control
+            ref={descInputRef}
+            as="textarea"
+            placeholder="Enter description"
+            defaultValue={author ? String(author.description) : ''}
+          />
         </Form.Group>
         <Form.Group>
-          <Button className="add-form-btn" type="submit">
+          <button className="edit-form-btn" type="submit">
             Submit
-          </Button>
+          </button>
         </Form.Group>
       </Form>
     </div>

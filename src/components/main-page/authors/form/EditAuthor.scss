@@ -13,3 +13,13 @@
         padding: 20px 130px;
     }
 }
+
+.add-form-btn, .edit-form-btn {
+    padding: 10px;
+    margin: 20px;
+    background-color: #5f5e5e;
+}
+.add-form-btn:hover {
+    background-color: #fff !important;
+    color: #333 !important;
+}

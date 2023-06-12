@@ -112,7 +112,7 @@ export default function Dashboard() {
                   <div>
                     <EditIcon
                       className="author-actions"
-                      onClick={() => navigate(`/home/books/edit/${book.id}`)}
+                      onClick={() => navigate(`/home/books/edit/${book.isbn}`)}
                     />
                     <DeleteIcon
                       className="author-actions"

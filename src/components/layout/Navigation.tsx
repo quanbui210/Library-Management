@@ -43,7 +43,7 @@ const Navigation = () => {
             ) : (
               <li>
                 <PersonIcon className="person-icon" />
-                {isAdmin ? `${loggedInUser.username} (Admin)` : `${loggedInUser.username} (User)`}
+                {isAdmin ? `${loggedInUser.username} (admin)` : `${loggedInUser.username} (user)`}
               </li>
             ))}
           {isLoggedIn && (

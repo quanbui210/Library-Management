@@ -1,4 +1,4 @@
-First time logged in might take few minutes becauses this project was deployed with a free tier
+:warning: **First time logged in:** might take few minutes becauses this project was deployed with a free tier
 
 #Library-Management Frontend Project (not finished yet)
 

@@ -148,7 +148,9 @@ const LoginForm = () => {
               </button>
             </div>
           )}
-          {loadMsg && <p className="load-msg">The server is slow, please wait for a few minutes</p>}
+          {loadMsg && (
+            <p className="load-msg">The server is slow, please wait for a few minutes...</p>
+          )}
         </Form.Group>
         {isSignup ? (
           <span className="signup">

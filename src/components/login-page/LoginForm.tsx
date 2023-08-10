@@ -14,6 +14,7 @@ import axios from 'axios'
 const LoginForm = () => {
   const [enteredUserName, setEnteredUserName] = useState('')
   const [enteredPassword, setEnteredPassword] = useState('')
+  const [loadMsg, setLoadMsg] = useState(false)
   const { isLoggedIn } = useSelector((state: RootState) => state.auth)
   const { isSignup } = useSelector((state: RootState) => state.toggle)
   const dispatch = useDispatch<AppDispatch>()
@@ -54,6 +55,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
+      setLoadMsg(false)
       navigate('/home')
     }
   }, [isLoggedIn, navigate])
@@ -86,6 +88,7 @@ const LoginForm = () => {
       username: enteredUserName,
       password: enteredPassword
     }
+    setLoadMsg(true)
     dispatch(authActions.loginThunk(logginUser))
   }
   const loginGoogle = () => {
@@ -145,6 +148,7 @@ const LoginForm = () => {
               </button>
             </div>
           )}
+          {loadMsg && <p className="load-msg">The server is slow, please wait for a few minutes</p>}
         </Form.Group>
         {isSignup ? (
           <span className="signup">

@@ -52,7 +52,7 @@ interface EditBookPayload {
     image?: string
   }
 }
-
+const rootUrl = 'https://lib-backend-e0qi.onrender.com/api/v1'
 const fetchBooksThunk = createAsyncThunk('books/fetch', async () => {
   const res = await fetch(`https://lib-backend-e0qi.onrender.com/api/v1/books`)
   const books = await res.json()

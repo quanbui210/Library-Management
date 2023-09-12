@@ -1,65 +1,78 @@
-:warning: **First time logged in:** might take few minutes becauses this project was deployed with a free tier
+# Library Management Frontend Project (Work in Progress)
 
-#Library-Management Frontend Project (not finished yet)
+:warning: **Please note:** The initial load may take a few minutes because this project is deployed with a free-tier hosting service.
 
-Admin can:
+## Overview
 
-- add new product
-- update info of a product
-- remove a product
-- ban a user
+This project provides a frontend for a library management system. Administrators have the following capabilities:
 
-##Live Demo: https://library-quanbui.netlify.app/
+- Add new products to the library
+- Update information for library items
+- Remove library items
+- Ban user accounts
 
-##Backend code: https://github.com/quanbui210/Library-backend
+## Live Demo
+
+Explore the live demo: [Library Management Frontend Demo](https://library-quanbui.netlify.app/)
+
+For the backend code, visit: [Library Management Backend](https://github.com/quanbui210/Library-backend)
 
 
-# login as admin: 
-username: admin
-password: admin
+## Database Structure
 
 
-## Tech-Stacks:
-*Frontend:
-- React 
-- Redux-Toolkit
+### Admin Login
+
+- **Username:** admin
+- **Password:** admin
+
+## Tech Stacks
+
+### Frontend:
+
+- React
+- Redux Toolkit
 - TypeScript
-- React-Router
+- React Router
 - Material UI
 
-*Backend
+### Backend:
+
 - Java
 - Spring Boot
 - Hibernate
-- PostgresSQL
+- PostgreSQL
 - Spring Security
 
-*Deployment
+### Deployment:
+
 - Docker
 - Railways
 
+## Key Features
 
-## Features: 
-*Login / Logout as user or admin  (username: admin, password: admin)
-*Sign up new account
-*Login with Google (default as user)
-User: 
-- View books, authors, categories
+- User and Admin login/logout (Use `username: admin` and `password: admin` for admin access)
+- User account registration
+- Google Sign-In (Default role: User)
+
+### User Features:
+
+- View books, authors, and categories
 - Borrow and return books
-- Add books to favourite
-- Search for books / authors / categories
-- View favourite books
+- Add books to favorites
+- Search for books, authors, and categories
+- View favorite books
 
-## Lastly
+## Upcoming Improvements
 
-##To be completed:
-- Improve UI
-- Responsive Design
-- View borrowed books page
-- Build Backend with Java, Spring boot (80% completed)
+This project is a work in progress. Upcoming enhancements include:
 
+- UI improvements
+- Responsive design
+- Borrowed books page
+- Completion of the Java Spring Boot backend (currently 80% completed)
 
-![image](https://github.com/quanbui210/Library-Management/assets/89993167/4e755f03-98dd-4eca-b4c4-5cc1884bcdad)
+![Library Management](https://github.com/quanbui210/Library-Management/assets/89993167/4e755f03-98dd-4eca-b4c4-5cc1884bcdad)
 
 
 

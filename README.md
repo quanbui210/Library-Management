@@ -19,7 +19,7 @@ For the backend code, visit: [Library Management Backend](https://github.com/qua
 
 
 ## Database Structure
-craftdocs://open?blockId=EBE16150-C286-43A0-8851-B72F5E0E2C8F&spaceId=9dc35b4b-035f-5c87-9444-c34a9596ce24
+![image](https://github.com/quanbui210/Library-Management/assets/89993167/d2118499-19ab-4a09-82f0-34fd0661eecd)
 
 ### Admin Login
 

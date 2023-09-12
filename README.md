@@ -47,7 +47,7 @@ For the backend code, visit: [Library Management Backend](https://github.com/qua
 ### Deployment:
 
 - Docker
-- Railways
+- Render
 
 ## Key Features
 

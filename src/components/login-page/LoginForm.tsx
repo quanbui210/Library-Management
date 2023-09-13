@@ -75,6 +75,7 @@ const LoginForm = () => {
     }
 
     try {
+      setLoadMsg(true)
       await dispatch(authActions.signupThunk(userToSignup))
       await dispatch(authActions.loginThunk(userToSignup))
     } catch (error) {
